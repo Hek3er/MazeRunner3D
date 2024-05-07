@@ -73,5 +73,6 @@ void	render_map(t_game *game);
 void	init_vector(t_vector2d *vec, int x, int y);
 void	init_hooks(t_game *game);
 void	draw_line(t_vector2d *start, t_vector2d *end, int color, t_game *game); // 5asha t7ayed !!!!!!! TODO
+int		wall_hit(t_game *game, int x, int y);
 
 # endif

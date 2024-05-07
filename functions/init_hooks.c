@@ -14,26 +14,30 @@ int	key_press(int key, t_game *game)
 	t_vector2d	background_size;
 	t_vector2d	line;
 	t_vector2d	center;
+	int			new_x;
+	int			new_y;
 
+	new_x = game->player.x;
+	new_y = game->player.y;
 	if (key == 53) // ESC
 		ft_close(game);
 	if (key == 13) // W
 	{
-		game->player.x += cos(game->player.rotation_angle) * game->player.moving_speed;
-		game->player.y += sin(game->player.rotation_angle) * game->player.moving_speed;
+		new_x += cos(game->player.rotation_angle) * game->player.moving_speed;
+		new_y += sin(game->player.rotation_angle) * game->player.moving_speed;
 	}
 	if (key == 1) // S
 	{
-		game->player.x += cos(game->player.rotation_angle) * -game->player.moving_speed;
-		game->player.y += sin(game->player.rotation_angle) * -game->player.moving_speed;
+		new_x += cos(game->player.rotation_angle) * -game->player.moving_speed;
+		new_y += sin(game->player.rotation_angle) * -game->player.moving_speed;
 	}
 	if (key == 0) // A
 	{
-		game->player.x -= game->player.moving_speed;
+		new_x -= game->player.moving_speed;
 	}
 	if (key == 2) // D
 	{
-		game->player.x += game->player.moving_speed;
+		new_x += game->player.moving_speed;
 	}
 	if (key == 124) // RIGHT_ARROW
 	{
@@ -46,6 +50,11 @@ int	key_press(int key, t_game *game)
 		game->player.rotation_angle -= game->player.rotation_speed;
 		if (game->player.rotation_angle < 0)
 			game->player.rotation_angle += 2 * M_PI;
+	}
+	if (!wall_hit(game, new_x + 5, new_y + 5))
+	{
+		game->player.x = new_x;
+		game->player.y = new_y;
 	}
 	init_vector(&line, game->player.x + 5 + cos(game->player.rotation_angle) * 30, game->player.y + 5 + sin(game->player.rotation_angle) * 30);
 	init_vector(&center, game->player.x + 5, game->player.y + 5);
