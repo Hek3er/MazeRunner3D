@@ -65,6 +65,7 @@ int	key_press(int key, t_game *game)
 	mlx_clear_window(game->mlx_t.mlx_ptr, game->mlx_t.mlx_window);
 	draw_rectangle(&background, &background_size, game->floor_color, game);
 	render_map(game);
+	draw_rays(game);
 	draw_line(&center, &line, 0xFF6666, game);
 	draw_rectangle(&player_pos, &size, 0x99FF99, game);
 	mlx_put_image_to_window(game->mlx_t.mlx_ptr, game->mlx_t.mlx_window, game->mlx_t.img.mlx_img, 0, 0);

@@ -5,6 +5,7 @@
 # include <unistd.h>
 # include <stdlib.h>
 # include <math.h>
+# include <limits.h>
 # include "mlx.h"
 
 typedef struct vector2d
@@ -39,6 +40,34 @@ typedef struct player
 	double	rotation_angle;
 }				t_player;
 
+typedef struct ray
+{
+	int		distance;
+	int 	inter_x;
+	int 	inter_y;
+	int		is_ray_up;
+	int		is_ray_down;
+	int 	is_ray_left;
+	int 	is_ray_right;
+	int		horz_wallx;
+	int		horz_wally;
+	int		vert_wallx;
+	int		vert_wally;
+	int		horzx;
+	int		horzy;
+	int		vertx;
+	int		verty;
+	int		wall_hit_x;
+	int		wall_hit_y;
+	int		is_wall_hit_vert;
+	int		is_wall_hit_horz;
+	int		dx;
+	int		dy;
+	int		distance_horz;
+	int		distance_vert;
+	double	ray_angle;
+}				t_ray;
+
 typedef struct game
 {
 	int			Width;
@@ -46,6 +75,9 @@ typedef struct game
 	char		**map;
 	int			mapx; // how many rows in map
 	int			mapy; // how many columns in map
+	double		fov; // need to change it to int and floor the value
+	double		n_rays; // need to change it to int
+	int			wall_thikness;
 	int			tile_s;
 	int			player_posx; //player position in x relative to map (map[x][y])
 	int			player_posy; //player position in y relative to map (map[x][y])
@@ -74,5 +106,8 @@ void	init_vector(t_vector2d *vec, int x, int y);
 void	init_hooks(t_game *game);
 void	draw_line(t_vector2d *start, t_vector2d *end, int color, t_game *game); // 5asha t7ayed !!!!!!! TODO
 int		wall_hit(t_game *game, int x, int y);
+void	init_param(t_game *game);
+void	init_map(t_game *game); // parsing
+void	draw_rays(t_game *game); // need to remove i guess
 
 # endif
