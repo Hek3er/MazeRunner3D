@@ -17,32 +17,22 @@ static void	init_mlx(t_game *game)
 	game->mlx_t.img.img_data = mlx_get_data_addr(game->mlx_t.img.mlx_img, &game->mlx_t.img.bpp, &game->mlx_t.img.len, &game->mlx_t.img.endian);
 }
 
-static void	handle_orientation(t_game *game)
-{
-	if (game->orientation == 'S')
-		game->player.rotation_angle = M_PI / 2;
-	if (game->orientation == 'N')
-		game->player.rotation_angle = -M_PI /2;
-	if (game->orientation == 'W')
-		game->player.rotation_angle = M_PI;
-	if (game->orientation == 'E')
-		game->player.rotation_angle = (2 * M_PI);
-}
-
-void	init_param(t_game *game)
+void	init_param(t_game *game, t_cast *cast)
 {
 	// init game screen res
 	init_map(game);
-	game->Width = game->mapx * game->tile_s; // maybe need to change because y represents rows
-	game->Height = game->mapy * game->tile_s;
+	game->Width = 1200;
+	game->Height = 900;
+	// game->Width = game->mapx * game->tile_s; // maybe need to change because y represents rows
+	// game->Height = game->mapy * game->tile_s;
 	printf("width : %d, height : %d\n", game->Width, game->Height);
-	game->player.x = game->player_posx * game->tile_s + (game->tile_s / 2) - 5;
-	game->player.y = game->player_posy * game->tile_s + (game->tile_s / 2) - 5;
-	game->player.moving_speed = 5;
-	handle_orientation(game);
-	game->player.rotation_speed = 2 * (M_PI / 180);
-	game->fov = 60 * (M_PI / 180);
-	game->wall_thikness = 10;
-	game->n_rays = floor(game->Width / game->wall_thikness);
+	game->player.x = game->player_posx * game->tile_s;
+	game->player.y = game->player_posy * game->tile_s;
+	game->player.moving_speed  = 5;
+	cast->hit = 0;
+	cast->dirX = -1;
+	cast->dirY = 0;
+	cast->planeX = 0;
+	cast->planeY = 0.65; // FOV
 	init_mlx(game);
 }

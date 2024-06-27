@@ -16,7 +16,7 @@ void draw_line(t_vector2d *start, t_vector2d *end, int color, t_game *game)
 
     while (x != end->x || y != end->y)
     {
-        draw_pixel(x, y, &game->mlx_t.img, color);
+        draw_pixel(x, y, game, color);
 
         int err2 = 2 * err;
 
@@ -34,5 +34,5 @@ void draw_line(t_vector2d *start, t_vector2d *end, int color, t_game *game)
     }
 
     // Draw the last pixel
-    draw_pixel(end->x, end->y, &game->mlx_t.img, color);
+    draw_pixel(end->x, end->y, game, color);
 }

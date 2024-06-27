@@ -1,5 +1,5 @@
 CC = cc
-CFLAGS = -Wall -Werror -Wextra -g -fsanitize=address
+CFLAGS =  -Wall -Werror -Wextra -g -fsanitize=address
 MLXFLAGS = -framework OpenGL -framework AppKit #-lmlx
 NAME = Cube3d
 SRC = cube3d.c functions/ft_strdup.c functions/ft_exit.c functions/ft_strlen.c functions/ft_write.c functions/draw_pixel.c \
@@ -11,7 +11,7 @@ all : $(NAME)
 
 $(NAME) : $(OSRC)
 	@echo "compiling.."
-	@$(CC) $(CFLAGS) $(MLXFLAGS) $(OSRC) ./lib/libmlx.a -o $(NAME) #remove ./lib/libmlx.a 
+	@$(CC) $(CFLAGS) $(MLXFLAGS) $(OSRC) ./lib/libmlx.a -o $(NAME) #remove ./lib/libmlx.a
 %.o : %.c ./includes/cube3d.h
 	@$(CC) $(CFLAGS) -c $< -o $@
 

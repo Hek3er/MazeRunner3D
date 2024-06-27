@@ -12,6 +12,7 @@ void	render_map(t_game *game)
 	dimensions.x = game->tile_s - 1;
 	dimensions.y = game->tile_s - 1;
 	y = 0;
+	printf("here\n");
 	while (game->map[y])
 	{
 		x = 0;

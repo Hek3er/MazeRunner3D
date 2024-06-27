@@ -8,66 +8,52 @@ int	ft_close(t_game *game)
 
 int	key_press(int key, t_game *game)
 {
-	t_vector2d	player_pos;
-	t_vector2d	size;
-	t_vector2d	background;
-	t_vector2d	background_size;
-	t_vector2d	line;
-	t_vector2d	center;
-	int			new_x;
-	int			new_y;
-
-	new_x = game->player.x;
-	new_y = game->player.y;
 	if (key == 53) // ESC
 		ft_close(game);
 	if (key == 13) // W
 	{
-		new_x += cos(game->player.rotation_angle) * game->player.moving_speed;
-		new_y += sin(game->player.rotation_angle) * game->player.moving_speed;
+		game->player.x += game->cast.dirX * 2;
+		game->player.y += game->cast.dirY * 2;
 	}
 	if (key == 1) // S
 	{
-		new_x += cos(game->player.rotation_angle) * -game->player.moving_speed;
-		new_y += sin(game->player.rotation_angle) * -game->player.moving_speed;
+		game->player.x -= game->cast.dirX * 2;
+		game->player.y -= game->cast.dirY * 2;
 	}
 	if (key == 0) // A
 	{
-		new_x -= game->player.moving_speed;
+		game->player.x -= game->cast.planeX * 2;
+		game->player.y -= game->cast.planeY * 2;
 	}
 	if (key == 2) // D
 	{
-		new_x += game->player.moving_speed;
+		game->player.x += game->cast.planeX * 2;
+		game->player.y += game->cast.planeY * 2;
 	}
+	double rotSpeed = 0.2;
 	if (key == 124) // RIGHT_ARROW
 	{
-		game->player.rotation_angle += game->player.rotation_speed;
-		if (game->player.rotation_angle < 0)
-			game->player.rotation_angle -= 2 * M_PI;
+		double oldDirX = game->cast.dirX;
+		game->cast.dirX = game->cast.dirX * cos(-rotSpeed) - game->cast.dirY * sin(-rotSpeed);
+		game->cast.dirY = oldDirX * sin(-rotSpeed) + game->cast.dirY * cos(-rotSpeed);
+		double oldplaneX = game->cast.planeX;
+		game->cast.planeX = game->cast.planeX * cos(-rotSpeed) - game->cast.planeY * sin(-rotSpeed);
+		game->cast.planeY = oldplaneX * sin(-rotSpeed) + game->cast.planeY * cos(-rotSpeed);
 	}
 	if (key == 123) // LEFT_ARROW
 	{
-		game->player.rotation_angle -= game->player.rotation_speed;
-		if (game->player.rotation_angle < 0)
-			game->player.rotation_angle += 2 * M_PI;
+		double oldDirX = game->cast.dirX;
+		game->cast.dirX = game->cast.dirX * cos(rotSpeed) - game->cast.dirY * sin(rotSpeed);
+		game->cast.dirY = oldDirX * sin(rotSpeed) + game->cast.dirY * cos(rotSpeed);
+		double oldplaneX = game->cast.planeX;
+		game->cast.planeX = game->cast.planeX * cos(rotSpeed) - game->cast.planeY * sin(rotSpeed);
+		game->cast.planeY = oldplaneX * sin(rotSpeed) + game->cast.planeY * cos(rotSpeed);
 	}
-	if (!wall_hit(game, new_x + 5, new_y + 5))
-	{
-		game->player.x = new_x;
-		game->player.y = new_y;
-	}
-	init_vector(&line, game->player.x + 5 + cos(game->player.rotation_angle) * 30, game->player.y + 5 + sin(game->player.rotation_angle) * 30);
-	init_vector(&center, game->player.x + 5, game->player.y + 5);
-	init_vector(&player_pos, game->player.x, game->player.y);
-	init_vector(&size, 10, 10);
-	init_vector(&background_size, game->Width, game->Height);
-	init_vector(&background, 0, 0);
+	// render_map(game);
 	mlx_clear_window(game->mlx_t.mlx_ptr, game->mlx_t.mlx_window);
-	draw_rectangle(&background, &background_size, game->floor_color, game);
-	render_map(game);
-	draw_rays(game);
-	draw_line(&center, &line, 0xFF6666, game);
-	draw_rectangle(&player_pos, &size, 0x99FF99, game);
+	int color = 0x171717;
+	draw_rectangle(&(t_vector2d){0, 0}, &(t_vector2d){game->Width, game->Height}, color, game);
+	casting(game, &game->cast);
 	mlx_put_image_to_window(game->mlx_t.mlx_ptr, game->mlx_t.mlx_window, game->mlx_t.img.mlx_img, 0, 0);
 	return 0;
 }
