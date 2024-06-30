@@ -1,24 +1,31 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_write.c                                         :+:      :+:    :+:   */
+/*   draw_cube.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: azainabi <azainabi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/06/30 04:56:27 by azainabi          #+#    #+#             */
-/*   Updated: 2024/06/30 04:56:28 by azainabi         ###   ########.fr       */
+/*   Created: 2024/06/30 04:42:22 by azainabi          #+#    #+#             */
+/*   Updated: 2024/06/30 04:42:23 by azainabi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/cube3d.h"
 
-void	ft_write(char *str, int fd)
+void	draw_cube(t_vector2d *init_pos, int lenght, int color, t_game *game)
 {
-	int	i;
+	int	x;
+	int	y;
 
-	i = 0;
-	while (str[i])
+	x = init_pos->x;
+	while (x < lenght + init_pos->x)
 	{
-		write(fd, &str[i], 1);
+		y = init_pos->y;
+		while (y < lenght + init_pos->y)
+		{
+			draw_pixel(x, y, game, color);
+			y++;
+		}
+		x++;
 	}
 }

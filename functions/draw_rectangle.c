@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   draw_rectangle.c                                   :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: azainabi <azainabi@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2024/06/30 04:56:18 by azainabi          #+#    #+#             */
+/*   Updated: 2024/06/30 04:56:19 by azainabi         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "../includes/cube3d.h"
 
 void	draw_rectangle(t_vector2d *init_pos, t_vector2d *dimensions, int color, t_game *game)

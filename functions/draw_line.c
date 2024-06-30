@@ -1,6 +1,16 @@
-#include"../includes/cube3d.h"
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   draw_line.c                                        :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: azainabi <azainabi@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2024/06/30 04:56:10 by azainabi          #+#    #+#             */
+/*   Updated: 2024/06/30 04:56:13 by azainabi         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
 
-// 5asni nfham had l9lawi wa5a maghadich n7tajo
+#include"../includes/cube3d.h"
 
 void draw_vert_line(t_vector2d *start, int lenght, int color, t_game *game)
 {
