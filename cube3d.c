@@ -22,12 +22,12 @@ void	init_map(t_game *game)
 	// get_map_length and width
 	game->mapx = 12; // get player cords and replace it with 0
 	game->mapy = 8;
-	game->tile_s = 64;
+	// game->tile_s = 1;
 	game->orientation = 'N';
-	game->player_posx = 5;
-	game->player_posy = 6;
-	game->ciel_color = convert_rgb_to_int(0, 5, 102);
-	game->floor_color = convert_rgb_to_int(0, 51, 102);// replace values with the ones in map
+	game->player_posx = 6;
+	game->player_posy = 5;
+	game->ciel_color = convert_rgb_to_int(135, 206, 235);
+	game->floor_color = convert_rgb_to_int(244, 164, 96);// replace values with the ones in map
 }
 
 void	casting(t_game *game, t_cast *cast)
@@ -39,8 +39,8 @@ void	casting(t_game *game, t_cast *cast)
 	x = 0;
 	while (x < game->Width)
 	{
-		cast->mapX = (int)(game->player.x / game->tile_s);
-		cast->mapY = (int)(game->player.y / game->tile_s);
+		cast->mapX = (int)(game->player.x);
+		cast->mapY = (int)(game->player.y);
 		cast->camX = 2 * x / (double)game->Width - 1;
 		cast->raydirX = cast->dirX + cast->planeX * cast->camX;
 		cast->raydirY = cast->dirY + cast->planeY * cast->camX;
@@ -55,22 +55,22 @@ void	casting(t_game *game, t_cast *cast)
 		if (cast->raydirX < 0)
 		{
 			cast->stepx = -1;
-			cast->sidedistX = ((game->player.x / game->tile_s) - cast->mapX) * cast->deltaX;
+			cast->sidedistX = (game->player.x - cast->mapX) * cast->deltaX;
 		}
 		else
 		{
 			cast->stepx = 1;
-			cast->sidedistX = (cast->mapX + 1 - (game->player.x / game->tile_s)) * cast->deltaX;
+			cast->sidedistX = (cast->mapX + 1 - game->player.x) * cast->deltaX;
 		}
 		if (cast->raydirY < 0)
 		{
 			cast->stepy = -1;
-			cast->sidedistY = ((game->player.y / game->tile_s) - cast->mapY) * cast->deltaY;
+			cast->sidedistY = (game->player.y - cast->mapY) * cast->deltaY;
 		}
 		else
 		{
 			cast->stepy = 1;
-			cast->sidedistY = (cast->mapY + 1 - (game->player.y / game->tile_s)) * cast->deltaY;
+			cast->sidedistY = (cast->mapY + 1 - game->player.y) * cast->deltaY;
 		}
 		cast->hit = 0;
 		while (cast->hit == 0)
@@ -87,7 +87,8 @@ void	casting(t_game *game, t_cast *cast)
 				cast->mapY += cast->stepy;
 				cast->side = 1;
 			}
-			if (game->map[cast->mapY][cast->mapX] == '1')
+			// if (game->map[cast->mapY][cast->mapX] == '1')
+			if (game->map[cast->mapX][cast->mapY] == '1')
 				cast->hit = 1;
 		}
 		if (cast->side == 0)
@@ -104,7 +105,9 @@ void	casting(t_game *game, t_cast *cast)
 		if (end.y >= game->Height)
 			end.y = game->Height - 1;
 		// printf("start.x : %d, start.y : %d, end.x : %d, end.y : %d\n", start.x, start.y, end.x, end.y);
-		draw_line(&start, &end, 0xFFFFFF, game);
+		draw_line(&(t_vector2d){x, 0}, &start, game->ciel_color, game);
+		draw_line(&(t_vector2d){x, end.y}, &(t_vector2d){x, game->Height}, game->floor_color, game);
+		draw_line(&start, &end, 0xFFFACD , game);
 		x++;
 	}
 }
@@ -119,6 +122,7 @@ int main(int ac, char **av)
 	int color = 0x171717;
 	draw_rectangle(&(t_vector2d){0, 0}, &(t_vector2d){game.Width, game.Height}, color, &game);
 	casting(&game, &game.cast);
+	draw_rectangle(&(t_vector2d){game.Width /2  - 5, game.Height /2  - 5}, &(t_vector2d){10, 10}, 0xFF0000, &game);
 	mlx_put_image_to_window(game.mlx_t.mlx_ptr, game.mlx_t.mlx_window, game.mlx_t.img.mlx_img, 0, 0);
 	init_hooks(&game);
 	mlx_loop(game.mlx_t.mlx_ptr);

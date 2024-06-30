@@ -12,23 +12,31 @@ int	key_press(int key, t_game *game)
 		ft_close(game);
 	if (key == 13) // W
 	{
-		game->player.x += game->cast.dirX * 2;
-		game->player.y += game->cast.dirY * 2;
+		if (game->map[(int){game->player.x + game->cast.dirX * 0.2}][(int){game->player.y}] == '0')
+			game->player.x += game->cast.dirX * 0.2;
+		if (game->map[(int)(game->player.x)][(int)(game->player.y + game->cast.dirY * 0.2)] == '0')
+			game->player.y += game->cast.dirY * 0.2;
 	}
 	if (key == 1) // S
 	{
-		game->player.x -= game->cast.dirX * 2;
-		game->player.y -= game->cast.dirY * 2;
+		if (game->map[(int){game->player.x - game->cast.dirX * 0.2}][(int){game->player.y}] == '0')
+			game->player.x -= game->cast.dirX * 0.2;
+		if (game->map[(int)(game->player.x)][(int)(game->player.y - game->cast.dirY * 0.2)] == '0')
+			game->player.y -= game->cast.dirY * 0.2;
 	}
 	if (key == 0) // A
 	{
-		game->player.x -= game->cast.planeX * 2;
-		game->player.y -= game->cast.planeY * 2;
+		if (game->map[(int){game->player.x - game->cast.planeX * 0.2}][(int){game->player.y}] == '0')
+			game->player.x -= game->cast.planeX * 0.2;
+		if (game->map[(int)(game->player.x)][(int)(game->player.y - game->cast.planeY * 0.2)] == '0')
+			game->player.y -= game->cast.planeY * 0.2;
 	}
 	if (key == 2) // D
 	{
-		game->player.x += game->cast.planeX * 2;
-		game->player.y += game->cast.planeY * 2;
+		if (game->map[(int){game->player.x + game->cast.planeX * 0.2}][(int){game->player.y}] == '0')
+			game->player.x += game->cast.planeX * 0.2;
+		if (game->map[(int)(game->player.x)][(int)(game->player.y + game->cast.planeY * 0.2)] == '0')
+			game->player.y += game->cast.planeY * 0.2;
 	}
 	double rotSpeed = 0.2;
 	if (key == 124) // RIGHT_ARROW
@@ -54,6 +62,7 @@ int	key_press(int key, t_game *game)
 	int color = 0x171717;
 	draw_rectangle(&(t_vector2d){0, 0}, &(t_vector2d){game->Width, game->Height}, color, game);
 	casting(game, &game->cast);
+	draw_rectangle(&(t_vector2d){game->Width /2  - 5, game->Height /2  - 5}, &(t_vector2d){10, 10}, 0xFF0000, game);
 	mlx_put_image_to_window(game->mlx_t.mlx_ptr, game->mlx_t.mlx_window, game->mlx_t.img.mlx_img, 0, 0);
 	return 0;
 }

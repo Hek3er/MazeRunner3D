@@ -6,7 +6,7 @@
 	# include <stdlib.h>
 	# include <math.h>
 	# include <limits.h>
-	# include "mlx.h"
+	# include <mlx.h>
 
 	typedef struct vector2d
 	{
