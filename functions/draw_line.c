@@ -32,8 +32,6 @@ void draw_line(t_vector2d *start, t_vector2d *end, int color, t_game *game)
 			y += sy;
 		}
 	}
-	
-	while ()
 	// Draw the last pixel
 	draw_pixel(end->x, end->y, game, color);
 }
