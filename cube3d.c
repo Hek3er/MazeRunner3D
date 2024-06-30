@@ -104,10 +104,9 @@ void	casting(t_game *game, t_cast *cast)
 		end.y = cast->lineheight / 2 + game->Height / 2;
 		if (end.y >= game->Height)
 			end.y = game->Height - 1;
-		// printf("start.x : %d, start.y : %d, end.x : %d, end.y : %d\n", start.x, start.y, end.x, end.y);
-		draw_line(&(t_vector2d){x, 0}, &start, game->ciel_color, game);
-		draw_line(&(t_vector2d){x, end.y}, &(t_vector2d){x, game->Height}, game->floor_color, game);
-		draw_line(&start, &end, 0xFFFACD , game);
+		draw_vert_line(&(t_vector2d){x, 0}, (game->Height - start.y), game->ciel_color, game);
+		draw_vert_line(&(t_vector2d){x, end.y}, (game->Height - end.y), game->floor_color, game);
+		draw_vert_line(&start, cast->lineheight, 0xFFFACD, game);
 		x++;
 	}
 }
