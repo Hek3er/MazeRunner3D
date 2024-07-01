@@ -6,7 +6,7 @@
 /*   By: azainabi <azainabi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/30 04:56:46 by azainabi          #+#    #+#             */
-/*   Updated: 2024/06/30 04:56:47 by azainabi         ###   ########.fr       */
+/*   Updated: 2024/07/01 05:00:31 by azainabi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,12 +34,12 @@ void	init_map(t_game *game)
 	// get_map_length and width
 	game->mapx = 12; // get player cords and replace it with 0
 	game->mapy = 8;
-	// game->tile_s = 1;
-	game->orientation = 'N';
+	game->tile_s = 16;
+	game->orientation = 'S';
 	game->player_posx = 6;
 	game->player_posy = 5;
-	game->ciel_color = convert_rgb_to_int(135, 206, 235);
-	game->floor_color = convert_rgb_to_int(244, 164, 96);// replace values with the ones in map
+	game->ciel_color = convert_rgb_to_int(38, 38, 38);
+	game->floor_color = convert_rgb_to_int(112, 112, 112);// replace values with the ones in map
 }
 
 void	casting(t_game *game, t_cast *cast)
@@ -99,7 +99,6 @@ void	casting(t_game *game, t_cast *cast)
 				cast->mapY += cast->stepy;
 				cast->side = 1;
 			}
-			// if (game->map[cast->mapY][cast->mapX] == '1')
 			if (game->map[cast->mapX][cast->mapY] == '1')
 				cast->hit = 1;
 		}
@@ -118,9 +117,15 @@ void	casting(t_game *game, t_cast *cast)
 			end.y = game->Height - 1;
 		draw_vert_line(&(t_vector2d){x, 0}, (game->Height - start.y), game->ciel_color, game);
 		draw_vert_line(&(t_vector2d){x, end.y}, (game->Height - end.y), game->floor_color, game);
-		draw_vert_line(&start, cast->lineheight, 0xFFFACD, game);
+		draw_vert_line(&start, cast->lineheight, 0x000094, game);
 		x++;
 	}
+}
+
+int main_loop(t_game *game)
+{
+    update_game(game);
+    return 0;
 }
 
 int main(int ac, char **av)
@@ -129,12 +134,11 @@ int main(int ac, char **av)
 	t_game	game;
 
 	init_param(&game, &game.cast);
-	// render_map(&game);
-	int color = 0x171717;
-	draw_rectangle(&(t_vector2d){0, 0}, &(t_vector2d){game.Width, game.Height}, color, &game);
 	casting(&game, &game.cast);
-	draw_rectangle(&(t_vector2d){game.Width /2  - 5, game.Height /2  - 5}, &(t_vector2d){10, 10}, 0xFF0000, &game);
+	render_map(&game);
 	mlx_put_image_to_window(game.mlx_t.mlx_ptr, game.mlx_t.mlx_window, game.mlx_t.img.mlx_img, 0, 0);
+	draw_gun(&game, "1-x.xpm");
 	init_hooks(&game);
+	mlx_loop_hook(game.mlx_t.mlx_ptr, main_loop, &game);
 	mlx_loop(game.mlx_t.mlx_ptr);
 }

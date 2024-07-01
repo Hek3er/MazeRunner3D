@@ -6,7 +6,7 @@
 /*   By: azainabi <azainabi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/30 04:56:30 by azainabi          #+#    #+#             */
-/*   Updated: 2024/06/30 04:56:31 by azainabi         ###   ########.fr       */
+/*   Updated: 2024/07/01 02:12:16 by azainabi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,14 +69,41 @@ int	key_press(int key, t_game *game)
 		game->cast.planeX = game->cast.planeX * cos(rotSpeed) - game->cast.planeY * sin(rotSpeed);
 		game->cast.planeY = oldplaneX * sin(rotSpeed) + game->cast.planeY * cos(rotSpeed);
 	}
-	// render_map(game);
-	mlx_clear_window(game->mlx_t.mlx_ptr, game->mlx_t.mlx_window);
-	int color = 0x171717;
-	draw_rectangle(&(t_vector2d){0, 0}, &(t_vector2d){game->Width, game->Height}, color, game);
-	casting(game, &game->cast);
-	draw_rectangle(&(t_vector2d){game->Width /2  - 5, game->Height /2  - 5}, &(t_vector2d){10, 10}, 0xFF0000, game);
-	mlx_put_image_to_window(game->mlx_t.mlx_ptr, game->mlx_t.mlx_window, game->mlx_t.img.mlx_img, 0, 0);
+	if (key == 49)
+	{
+		game->gun_anim = 1;
+		game->gun_frame = 0;
+		game->gun_timer = 0;
+	}
 	return 0;
+}
+
+void	update_game(t_game *game)
+{
+	static char	*paths[] = {"1-x.xpm", "2-x.xpm", "3-x.xpm", "4-x.xpm", "5-x.xpm"};
+
+	if (game->gun_anim)
+	{
+		game->gun_timer++;
+		if (game->gun_timer >= 5)
+		{
+			game->gun_timer = 0;
+			game->gun_frame++;
+			if (game->gun_frame > 4)
+			{
+				game->gun_anim = 0;
+				game->gun_frame = 0;
+			}
+		}
+	}
+	mlx_clear_window(game->mlx_t.mlx_ptr, game->mlx_t.mlx_window);
+	casting(game, &game->cast);
+	render_map(game);
+	mlx_put_image_to_window(game->mlx_t.mlx_ptr, game->mlx_t.mlx_window, game->mlx_t.img.mlx_img, 0, 0);
+	if (game->gun_anim)
+		draw_gun(game, paths[game->gun_frame]);
+	else
+		draw_gun(game, "1-x.xpm");
 }
 
 void	init_hooks(t_game *game)

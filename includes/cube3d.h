@@ -6,7 +6,7 @@
 /*   By: azainabi <azainabi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/30 04:56:48 by azainabi          #+#    #+#             */
-/*   Updated: 2024/06/30 04:57:02 by azainabi         ###   ########.fr       */
+/*   Updated: 2024/07/01 04:58:50 by azainabi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,8 +16,12 @@
 # include <unistd.h>
 # include <stdlib.h>
 # include <math.h>
+# include <time.h>
 # include <limits.h>
 # include <mlx.h>
+
+# define FOV 66
+
 typedef struct vector2d
 {
 	int	x;
@@ -25,6 +29,8 @@ typedef struct vector2d
 }				t_vector2d;
 typedef struct image
 {
+	int		width;
+	int		height;
 	void	*mlx_img;
 	char	*img_data;
 	int		bpp;
@@ -36,15 +42,17 @@ typedef struct mlx
 	void	*mlx_ptr;
 	void	*mlx_window;
 	t_img	img;
+	t_img	texture;
+	t_img	texture2;
 }				t_mlx;
 typedef struct player
 {
 	double		x; //player position in x relative to screen (x, y)
 	double		y; //player position in y relative to screen (x, y)
 	int			moving_speed;
-	int			moving_dir;
+	// int			moving_dir;
 	double		rotation_speed;
-	double		rotation_angle;
+	// double		rotation_angle;
 }				t_player;
 typedef struct cast
 {
@@ -88,9 +96,14 @@ typedef struct game
 	char		*ea_texture;
 	int			ciel_color;
 	int			floor_color;
+	int			gun_anim;
 	t_mlx		mlx_t;
 	t_player	player;
 	t_cast		cast;
+
+	int gun_frame;
+    int gun_timer;
+
 }               t_game;
 //.Functions
 int		convert_rgb_to_int(int r, int g, int b);
@@ -99,7 +112,7 @@ char	*ft_strdup(char *str);
 void	ft_write(char *str, int fd);
 void	ft_exit(char *str, int code);
 void	draw_pixel(int x, int y, t_game *game, int color);
-void	draw_rectangle(t_vector2d *init_pos, t_vector2d *dimensions, int color, t_game *game);
+void	draw_cube(t_vector2d *init_pos, int lenght, int color, t_game *game);
 void	render_map(t_game *game);
 void	init_vector(t_vector2d *vec, int x, int y);
 void	init_hooks(t_game *game);
@@ -108,4 +121,8 @@ int		wall_hit(t_game *game, int x, int y);
 void	init_param(t_game *game, t_cast *cast);
 void	init_map(t_game *game); // parsing
 void	casting(t_game *game, t_cast *cast);
+void	draw_gun(t_game *game, char *path);
+
+void update_game(t_game *game);
+
 # endif
