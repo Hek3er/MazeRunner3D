@@ -85,7 +85,7 @@ void	update_game(t_game *game)
 	if (game->gun_anim)
 	{
 		game->gun_timer++;
-		if (game->gun_timer >= 5)
+		if (game->gun_timer >= 3)
 		{
 			game->gun_timer = 0;
 			game->gun_frame++;

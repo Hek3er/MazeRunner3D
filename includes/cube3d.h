@@ -18,7 +18,7 @@
 # include <math.h>
 # include <time.h>
 # include <limits.h>
-# include <mlx.h>
+# include "mlx.h"
 
 # define FOV 66
 
@@ -43,7 +43,7 @@ typedef struct mlx
 	void	*mlx_window;
 	t_img	img;
 	t_img	texture;
-	t_img	texture2;
+	t_img	texture_wall;
 }				t_mlx;
 typedef struct player
 {
@@ -68,12 +68,16 @@ typedef struct cast
 	double	sidedistX;
 	double	sidedistY;
 	double	walldist;
+	double	wallX;
+	double	step;
+	double	texpos;
 	int		stepx;
 	int		stepy;
 	int		side;
 	int		hit;
 	int		mapX;
 	int		mapY;
+	int		texX;
 	int		lineheight;
 }				t_cast;
 typedef struct game
@@ -87,8 +91,8 @@ typedef struct game
 	double		n_rays; // need to change it to int
 	int			wall_thikness;
 	int			tile_s;
-	int			player_posx; //player position in x relative to map (map[x][y])
-	int			player_posy; //player position in y relative to map (map[x][y])
+	double			player_posx; //player position in x relative to map (map[x][y])
+	double			player_posy; //player position in y relative to map (map[x][y])
 	char		orientation;
 	char		*no_texture;
 	char		*so_texture;
@@ -97,6 +101,10 @@ typedef struct game
 	int			ciel_color;
 	int			floor_color;
 	int			gun_anim;
+	int			s_color;
+	int			start_draw;
+	int			end_draw;
+	int			x;
 	t_mlx		mlx_t;
 	t_player	player;
 	t_cast		cast;
@@ -116,7 +124,7 @@ void	draw_cube(t_vector2d *init_pos, int lenght, int color, t_game *game);
 void	render_map(t_game *game);
 void	init_vector(t_vector2d *vec, int x, int y);
 void	init_hooks(t_game *game);
-void 	draw_vert_line(t_vector2d *start, int lenght, int color, t_game *game);
+void 	draw_vert_line(t_game *game);
 int		wall_hit(t_game *game, int x, int y);
 void	init_param(t_game *game, t_cast *cast);
 void	init_map(t_game *game); // parsing
@@ -124,5 +132,7 @@ void	casting(t_game *game, t_cast *cast);
 void	draw_gun(t_game *game, char *path);
 
 void update_game(t_game *game);
+void	draw_wall_t(t_game *game, char *path);
+void	init_texture(t_game *game, t_cast *cast);
 
 # endif

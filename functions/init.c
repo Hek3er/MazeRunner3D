@@ -24,6 +24,18 @@ void	draw_gun(t_game *game, char *path)
 	mlx_put_image_to_window(game->mlx_t.mlx_ptr, game->mlx_t.mlx_window, game->mlx_t.texture.mlx_img, game->Width / 2 - game->mlx_t.texture.width / 2, game->Height - game->mlx_t.texture.height);
 }
 
+void	draw_wall_t(t_game *game, char *path)
+{
+	game->mlx_t.texture_wall.mlx_img = mlx_xpm_file_to_image(game->mlx_t.mlx_ptr, path, &game->mlx_t.texture_wall.width, &game->mlx_t.texture_wall.height);
+	if (!game->mlx_t.texture_wall.mlx_img)
+	{
+		mlx_destroy_window(game->mlx_t.mlx_ptr, game->mlx_t.mlx_window);
+		ft_exit("mxl failed to init image\n", 1);
+	}
+	game->mlx_t.texture_wall.img_data = mlx_get_data_addr(game->mlx_t.texture_wall.mlx_img, &game->mlx_t.texture_wall.bpp, &game->mlx_t.texture_wall.len, &game->mlx_t.texture_wall.endian);
+	// mlx_put_image_to_window(game->mlx_t.mlx_ptr, game->mlx_t.mlx_window, game->mlx_t.texture_wall.mlx_img, game->Width / 2 - game->mlx_t.texture_wall.width / 2, game->Height - game->mlx_t.texture_wall.height);
+}
+
 static void	init_mlx(t_game *game)
 {
 	game->mlx_t.mlx_ptr = mlx_init();
@@ -82,8 +94,8 @@ void	init_param(t_game *game, t_cast *cast)
 {
 	// init game screen res
 	init_map(game);
-	game->Width = 800;
-	game->Height = 600;
+	game->Width = 1200;
+	game->Height = 900;
 	printf("width : %d, height : %d\n", game->Width, game->Height);
 	game->gun_anim = 0;
 	game->player.x = game->player_posx;

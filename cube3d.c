@@ -36,19 +36,34 @@ void	init_map(t_game *game)
 	game->mapy = 8;
 	game->tile_s = 16;
 	game->orientation = 'S';
-	game->player_posx = 6;
-	game->player_posy = 5;
+	game->player_posx = 6 + 0.5;
+	game->player_posy = 5 + 0.5;
 	game->ciel_color = convert_rgb_to_int(38, 38, 38);
 	game->floor_color = convert_rgb_to_int(112, 112, 112);// replace values with the ones in map
+}
+
+void	init_texture(t_game *game, t_cast *cast)
+{
+		if (cast->side == 0)
+			cast->wallX = game->player.y + cast->walldist * cast->raydirY;
+		else
+			cast->wallX = game->player.x + cast->walldist * cast->raydirX;
+		cast->wallX -= floor(cast->wallX);
+		cast->texX = (int)(cast->wallX * (double)(game->mlx_t.texture_wall.width));
+		if (cast->side == 0 && cast->raydirX > 0)
+			cast->texX = game->mlx_t.texture_wall.width - cast->texX - 1;
+		if (cast->side == 1 && cast->raydirY < 0)
+			cast->texX = game->mlx_t.texture_wall.width - cast->texX - 1;
+		cast->step = (1.0 * game->mlx_t.texture_wall.height) / cast->lineheight;
+		cast->texpos = (game->start_draw - game->Height / 2 + cast->lineheight / 2) * cast->step;
 }
 
 void	casting(t_game *game, t_cast *cast)
 {
 	int	x;
-	t_vector2d	start;
-	t_vector2d	end;
 
 	x = 0;
+	draw_wall_t(game, "tex.xpm");
 	while (x < game->Width)
 	{
 		cast->mapX = (int)(game->player.x);
@@ -107,17 +122,14 @@ void	casting(t_game *game, t_cast *cast)
 		else
 			cast->walldist = cast->sidedistY - cast->deltaY;
 		cast->lineheight = (int)(game->Height / cast->walldist);
-		start.x = x;
-		start.y = -cast->lineheight / 2 + game->Height / 2;
-		if (start.y < 0)
-			start.y = 0;
-		end.x = x;
-		end.y = cast->lineheight / 2 + game->Height / 2;
-		if (end.y >= game->Height)
-			end.y = game->Height - 1;
-		draw_vert_line(&(t_vector2d){x, 0}, (game->Height - start.y), game->ciel_color, game);
-		draw_vert_line(&(t_vector2d){x, end.y}, (game->Height - end.y), game->floor_color, game);
-		draw_vert_line(&start, cast->lineheight, 0x000094, game);
+		game->start_draw = -(cast->lineheight / 2) + game->Height / 2;
+		if (game->start_draw < 0)
+			game->start_draw = 0;
+		game->end_draw = cast->lineheight / 2 + game->Height / 2;
+		if (game->end_draw >= game->Height)
+			game->end_draw = game->Height - 1;
+		game->x = x;
+		draw_vert_line(game);
 		x++;
 	}
 }
