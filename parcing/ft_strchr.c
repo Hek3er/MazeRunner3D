@@ -1,23 +1,35 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strlen.c                                        :+:      :+:    :+:   */
+/*   ft_strchr.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: sel-jett <sel-jett@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/06/30 04:56:25 by azainabi          #+#    #+#             */
-/*   Updated: 2024/07/07 13:19:35 by sel-jett         ###   ########.fr       */
+/*   Created: 2024/07/07 14:31:56 by sel-jett          #+#    #+#             */
+/*   Updated: 2024/07/07 16:44:30 by sel-jett         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-// #include "../includes/cube3d.h"
+#include "../includes/cube3d.h"
 
-int	ft_strlen(char *str)
+void	ft_strchr(const char *s, t_game *maps)
 {
 	int	i;
 
 	i = 0;
-	while (str[i])
+	while (s[i])
+	{
+		if (s[i] == 'N' || s[i] == 'S' || s[i] == 'E' || s[i] == 'W')
+		{
+			(maps->nbs_of_players)++;
+			maps->player_posx = i;
+			maps->player_posy = maps->Height;
+		}
+		else if (s[i] != '1' && s[i] != '0')
+		{
+			write(2, "Error!!\n", 8);
+			my_malloc(0, 0);
+		}
 		i++;
-	return (i);
+	}
 }

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cube3d.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: azainabi <azainabi@student.42.fr>          +#+  +:+       +#+        */
+/*   By: sel-jett <sel-jett@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/30 04:56:48 by azainabi          #+#    #+#             */
-/*   Updated: 2024/07/01 04:58:50 by azainabi         ###   ########.fr       */
+/*   Updated: 2024/07/07 16:09:21 by sel-jett         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,7 @@
 # include <time.h>
 # include <limits.h>
 # include "mlx.h"
+# include "get_next_line.h"
 
 # define FOV 66
 
@@ -54,6 +55,13 @@ typedef struct player
 	double		rotation_speed;
 	// double		rotation_angle;
 }				t_player;
+
+typedef struct s_data
+{
+	void			*data;
+	struct s_data	*next;
+}	t_data;
+
 typedef struct cast
 {
 	double	dirX;
@@ -91,6 +99,7 @@ typedef struct game
 	double		n_rays; // need to change it to int
 	int			wall_thikness;
 	int			tile_s;
+	int			nbs_of_players;
 	double			player_posx; //player position in x relative to map (map[x][y])
 	double			player_posy; //player position in y relative to map (map[x][y])
 	char		orientation;
@@ -114,8 +123,23 @@ typedef struct game
 
 }               t_game;
 //.Functions
+
+//Parsing
+void	ft_check_args(int ac, char **av);
+void	*my_malloc(size_t size, int mode);
+int		ft_checker(char *line);
+int		ft_search(char *str);
+void	ft_strchr(const char *s, t_game *maps);
+int		ft_countt(char *line);
+void	ft_error_zero(void);
+char	*ft_parser(char *av);
+char	**ft_split(char const *s, char c);
+char	*ft_check_map(char *av, t_game *maps);
+size_t	ft_strlcpy(char *dst, const char *src, size_t dstsize);
+
+//Raycasting
 int		convert_rgb_to_int(int r, int g, int b);
-int		ft_strlen(char *str);
+// int		ft_strlen(char *str);
 char	*ft_strdup(char *str);
 void	ft_write(char *str, int fd);
 void	ft_exit(char *str, int code);
@@ -126,12 +150,12 @@ void	init_vector(t_vector2d *vec, int x, int y);
 void	init_hooks(t_game *game);
 void 	draw_vert_line(t_game *game);
 int		wall_hit(t_game *game, int x, int y);
-void	init_param(t_game *game, t_cast *cast);
+void	init_param(t_game *game, t_cast *cast, char *av);
 void	init_map(t_game *game); // parsing
 void	casting(t_game *game, t_cast *cast);
 void	draw_gun(t_game *game, char *path);
 
-void update_game(t_game *game);
+void	update_game(t_game *game);
 void	draw_wall_t(t_game *game, char *path);
 void	init_texture(t_game *game, t_cast *cast);
 

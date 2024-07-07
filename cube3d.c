@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cube3d.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: azainabi <azainabi@student.42.fr>          +#+  +:+       +#+        */
+/*   By: sel-jett <sel-jett@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/30 04:56:46 by azainabi          #+#    #+#             */
-/*   Updated: 2024/07/01 05:00:31 by azainabi         ###   ########.fr       */
+/*   Updated: 2024/07/07 17:19:00 by sel-jett         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,27 +19,30 @@
 void	init_map(t_game *game)
 {
 	// init_map
-	game->map = malloc(sizeof(char *) * 9);
-	if (!game->map)
-		return ;
-	game->map[0] = ft_strdup("111111111111");
-	game->map[1] = ft_strdup("100001000001");
-	game->map[2] = ft_strdup("100001000001");
-	game->map[3] = ft_strdup("100000100001");
-	game->map[4] = ft_strdup("100000000001");
-	game->map[5] = ft_strdup("101000000101");
-	game->map[6] = ft_strdup("100000000101");
-	game->map[7] = ft_strdup("111111111111");
-	game->map[8] = NULL;
+	game->map = NULL;
+	// if (!game->map)
+	// 	return ;
+	// game->map[0] = ft_strdup("111111111111");
+	// game->map[1] = ft_strdup("100001000001");
+	// game->map[2] = ft_strdup("100001000001");
+	// game->map[3] = ft_strdup("100000100001");
+	// game->map[4] = ft_strdup("100000000001");
+	// game->map[5] = ft_strdup("101000000101");
+	// game->map[6] = ft_strdup("100000000101");
+	// game->map[7] = ft_strdup("111111111111");
+	// game->map[8] = NULL;
 	// get_map_length and width
-	game->mapx = 12; // get player cords and replace it with 0
-	game->mapy = 8;
+	game->mapx = 0; // get player cords and replace it with 0
+	game->mapy = 0;
+	game->Width = 0;
+	game->Height = 0;
 	game->tile_s = 16;
 	game->orientation = 'S';
-	game->player_posx = 6 + 0.5;
-	game->player_posy = 5 + 0.5;
+	game->player_posx = 0;
+	game->player_posy = 0;
+	game->nbs_of_players = 0;
 	game->ciel_color = convert_rgb_to_int(38, 38, 38);
-	game->floor_color = convert_rgb_to_int(112, 112, 112);// replace values with the ones in map
+	game->floor_color = convert_rgb_to_int(112, 112, 112);
 }
 
 void	init_texture(t_game *game, t_cast *cast)
@@ -114,6 +117,8 @@ void	casting(t_game *game, t_cast *cast)
 				cast->mapY += cast->stepy;
 				cast->side = 1;
 			}
+			// printf("ppppppppppp : %c\n", game->map[cast->mapX][cast->mapY]);
+			// exit(1);
 			if (game->map[cast->mapX][cast->mapY] == '1')
 				cast->hit = 1;
 		}
@@ -145,7 +150,14 @@ int main(int ac, char **av)
 	(void)ac;(void)av;
 	t_game	game;
 
-	init_param(&game, &game.cast);
+	ft_check_args(ac, av);
+	init_param(&game, &game.cast, *(av + 1));
+	// while (*(game.map))
+	// {
+	// 	puts(*(game.map));
+	// 	(game.map)++;
+	// }
+	// exit(0);
 	casting(&game, &game.cast);
 	render_map(&game);
 	mlx_put_image_to_window(game.mlx_t.mlx_ptr, game.mlx_t.mlx_window, game.mlx_t.img.mlx_img, 0, 0);

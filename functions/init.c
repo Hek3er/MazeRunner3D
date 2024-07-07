@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   init.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: azainabi <azainabi@student.42.fr>          +#+  +:+       +#+        */
+/*   By: sel-jett <sel-jett@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/30 04:56:00 by azainabi          #+#    #+#             */
-/*   Updated: 2024/07/01 05:01:14 by azainabi         ###   ########.fr       */
+/*   Updated: 2024/07/07 17:08:34 by sel-jett         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,6 +39,7 @@ void	draw_wall_t(t_game *game, char *path)
 static void	init_mlx(t_game *game)
 {
 	game->mlx_t.mlx_ptr = mlx_init();
+	// puts(game->mlx_t.mlx_ptr);
 	if (!game->mlx_t.mlx_ptr)
 		ft_exit("mlx failed to init\n", 1);
 	game->mlx_t.mlx_window = mlx_new_window(game->mlx_t.mlx_ptr, game->Width, game->Height, "Cube3d");
@@ -51,6 +52,7 @@ static void	init_mlx(t_game *game)
 		ft_exit("mxl failed to init image\n", 1);
 	}
 	game->mlx_t.img.img_data = mlx_get_data_addr(game->mlx_t.img.mlx_img, &game->mlx_t.img.bpp, &game->mlx_t.img.len, &game->mlx_t.img.endian);
+	// exit(1);
 }
 
 double	get_fov(double	angle)
@@ -90,12 +92,12 @@ void	handle_directions(t_game *game)
 	}
 }
 
-void	init_param(t_game *game, t_cast *cast)
+void	init_param(t_game *game, t_cast *cast, char *av)
 {
 	// init game screen res
 	init_map(game);
-	game->Width = 1200;
-	game->Height = 900;
+	game->map = ft_split(ft_check_map(av, game), '\n');
+	puts("Holaaaa");
 	printf("width : %d, height : %d\n", game->Width, game->Height);
 	game->gun_anim = 0;
 	game->player.x = game->player_posx;
