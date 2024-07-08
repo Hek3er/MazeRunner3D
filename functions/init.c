@@ -98,9 +98,6 @@ void	init_param(t_game *game, t_cast *cast)
 	game->Height = 900;
 	printf("width : %d, height : %d\n", game->Width, game->Height);
 	game->gun_anim = 0;
-	game->player.x = game->player_posx;
-	game->player.y = game->player_posy;
-	game->player.moving_speed  = 5;
 	cast->hit = 0;
 	handle_directions(game);
 	init_mlx(game);

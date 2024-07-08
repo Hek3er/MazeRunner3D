@@ -45,15 +45,7 @@ typedef struct mlx
 	t_img	texture;
 	t_img	texture_wall;
 }				t_mlx;
-typedef struct player
-{
-	double		x; //player position in x relative to screen (x, y)
-	double		y; //player position in y relative to screen (x, y)
-	int			moving_speed;
-	// int			moving_dir;
-	double		rotation_speed;
-	// double		rotation_angle;
-}				t_player;
+
 typedef struct cast
 {
 	double	dirX;
@@ -87,12 +79,9 @@ typedef struct game
 	char		**map;
 	int			mapx; // how many rows in map
 	int			mapy; // how many columns in map
-	double		fov; // need to change it to int and floor the value
-	double		n_rays; // need to change it to int
-	int			wall_thikness;
 	int			tile_s;
-	double			player_posx; //player position in x relative to map (map[x][y])
-	double			player_posy; //player position in y relative to map (map[x][y])
+	double		player_posx; //player position in x relative to map (map[x][y])
+	double		player_posy; //player position in y relative to map (map[x][y])
 	char		orientation;
 	char		*no_texture;
 	char		*so_texture;
@@ -101,12 +90,10 @@ typedef struct game
 	int			ciel_color;
 	int			floor_color;
 	int			gun_anim;
-	int			s_color;
 	int			start_draw;
 	int			end_draw;
 	int			x;
 	t_mlx		mlx_t;
-	t_player	player;
 	t_cast		cast;
 
 	int gun_frame;

@@ -26,7 +26,7 @@ void	init_map(t_game *game)
 	game->map[1] = ft_strdup("100001000001");
 	game->map[2] = ft_strdup("100001000001");
 	game->map[3] = ft_strdup("100000100001");
-	game->map[4] = ft_strdup("100000000001");
+	game->map[4] = ft_strdup("10000P000001");
 	game->map[5] = ft_strdup("101000000101");
 	game->map[6] = ft_strdup("100000000101");
 	game->map[7] = ft_strdup("111111111111");
@@ -45,9 +45,9 @@ void	init_map(t_game *game)
 void	init_texture(t_game *game, t_cast *cast)
 {
 		if (cast->side == 0)
-			cast->wallX = game->player.y + cast->walldist * cast->raydirY;
+			cast->wallX = game->player_posy + cast->walldist * cast->raydirY;
 		else
-			cast->wallX = game->player.x + cast->walldist * cast->raydirX;
+			cast->wallX = game->player_posx + cast->walldist * cast->raydirX;
 		cast->wallX -= floor(cast->wallX);
 		cast->texX = (int)(cast->wallX * (double)(game->mlx_t.texture_wall.width));
 		if (cast->side == 0 && cast->raydirX > 0)
@@ -66,8 +66,8 @@ void	casting(t_game *game, t_cast *cast)
 	draw_wall_t(game, "tex.xpm");
 	while (x < game->Width)
 	{
-		cast->mapX = (int)(game->player.x);
-		cast->mapY = (int)(game->player.y);
+		cast->mapX = (int)(game->player_posx);
+		cast->mapY = (int)(game->player_posy);
 		cast->camX = 2 * x / (double)game->Width - 1;
 		cast->raydirX = cast->dirX + cast->planeX * cast->camX;
 		cast->raydirY = cast->dirY + cast->planeY * cast->camX;
@@ -82,22 +82,22 @@ void	casting(t_game *game, t_cast *cast)
 		if (cast->raydirX < 0)
 		{
 			cast->stepx = -1;
-			cast->sidedistX = (game->player.x - cast->mapX) * cast->deltaX;
+			cast->sidedistX = (game->player_posx - cast->mapX) * cast->deltaX;
 		}
 		else
 		{
 			cast->stepx = 1;
-			cast->sidedistX = (cast->mapX + 1 - game->player.x) * cast->deltaX;
+			cast->sidedistX = (cast->mapX + 1 - game->player_posx) * cast->deltaX;
 		}
 		if (cast->raydirY < 0)
 		{
 			cast->stepy = -1;
-			cast->sidedistY = (game->player.y - cast->mapY) * cast->deltaY;
+			cast->sidedistY = (game->player_posy - cast->mapY) * cast->deltaY;
 		}
 		else
 		{
 			cast->stepy = 1;
-			cast->sidedistY = (cast->mapY + 1 - game->player.y) * cast->deltaY;
+			cast->sidedistY = (cast->mapY + 1 - game->player_posy) * cast->deltaY;
 		}
 		cast->hit = 0;
 		while (cast->hit == 0)
@@ -121,7 +121,7 @@ void	casting(t_game *game, t_cast *cast)
 			cast->walldist = cast->sidedistX - cast->deltaX;
 		else
 			cast->walldist = cast->sidedistY - cast->deltaY;
-		cast->lineheight = (int)(game->Height / cast->walldist);
+		cast->lineheight = (int)(0.4 * game->Height / cast->walldist);
 		game->start_draw = -(cast->lineheight / 2) + game->Height / 2;
 		if (game->start_draw < 0)
 			game->start_draw = 0;

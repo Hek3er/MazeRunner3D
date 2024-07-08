@@ -24,31 +24,31 @@ int	key_press(int key, t_game *game)
 		ft_close(game);
 	if (key == 13) // W
 	{
-		if (game->map[(int){game->player.x + game->cast.dirX * 0.2}][(int){game->player.y}] == '0')
-			game->player.x += game->cast.dirX * 0.2;
-		if (game->map[(int)(game->player.x)][(int)(game->player.y + game->cast.dirY * 0.2)] == '0')
-			game->player.y += game->cast.dirY * 0.2;
+		if (game->map[(int){game->player_posx + game->cast.dirX * 0.2}][(int){game->player_posy}] != '1')
+			game->player_posx += game->cast.dirX * 0.2;
+		if (game->map[(int)(game->player_posx)][(int)(game->player_posy + game->cast.dirY * 0.2)] != '1')
+			game->player_posy += game->cast.dirY * 0.2;
 	}
 	if (key == 1) // S
 	{
-		if (game->map[(int){game->player.x - game->cast.dirX * 0.2}][(int){game->player.y}] == '0')
-			game->player.x -= game->cast.dirX * 0.2;
-		if (game->map[(int)(game->player.x)][(int)(game->player.y - game->cast.dirY * 0.2)] == '0')
-			game->player.y -= game->cast.dirY * 0.2;
+		if (game->map[(int){game->player_posx - game->cast.dirX * 0.2}][(int){game->player_posy}] != '1')
+			game->player_posx -= game->cast.dirX * 0.2;
+		if (game->map[(int)(game->player_posx)][(int)(game->player_posy - game->cast.dirY * 0.2)] != '1')
+			game->player_posy -= game->cast.dirY * 0.2;
 	}
 	if (key == 0) // A
 	{
-		if (game->map[(int){game->player.x - game->cast.planeX * 0.2}][(int){game->player.y}] == '0')
-			game->player.x -= game->cast.planeX * 0.2;
-		if (game->map[(int)(game->player.x)][(int)(game->player.y - game->cast.planeY * 0.2)] == '0')
-			game->player.y -= game->cast.planeY * 0.2;
+		if (game->map[(int){game->player_posx - game->cast.planeX * 0.2}][(int){game->player_posy}] != '1')
+			game->player_posx -= game->cast.planeX * 0.2;
+		if (game->map[(int)(game->player_posx)][(int)(game->player_posy - game->cast.planeY * 0.2)] != '1')
+			game->player_posy -= game->cast.planeY * 0.2;
 	}
 	if (key == 2) // D
 	{
-		if (game->map[(int){game->player.x + game->cast.planeX * 0.2}][(int){game->player.y}] == '0')
-			game->player.x += game->cast.planeX * 0.2;
-		if (game->map[(int)(game->player.x)][(int)(game->player.y + game->cast.planeY * 0.2)] == '0')
-			game->player.y += game->cast.planeY * 0.2;
+		if (game->map[(int){game->player_posx + game->cast.planeX * 0.2}][(int){game->player_posy}] != '1')
+			game->player_posx += game->cast.planeX * 0.2;
+		if (game->map[(int)(game->player_posx)][(int)(game->player_posy + game->cast.planeY * 0.2)] != '1')
+			game->player_posy += game->cast.planeY * 0.2;
 	}
 	double rotSpeed = 0.2;
 	if (key == 124) // RIGHT_ARROW
