@@ -4,7 +4,11 @@ MLXFLAGS = -framework OpenGL -framework AppKit #-lmlx
 NAME = Cube3d
 SRC = cube3d.c functions/ft_strdup.c functions/ft_exit.c functions/ft_strlen.c functions/ft_write.c functions/draw_pixel.c \
 	  functions/render_map.c functions/draw_cube.c functions/init_vector.c functions/convert_rgb_to_int.c functions/init_hooks.c \
-	  functions/draw_line.c  functions/init.c
+	  functions/draw_line.c  functions/init.c parcing/get_next_line.c parcing/get_next_line_utils.c parcing/my_malloc.c \
+	  parcing/parcing.c parcing/utils.c parcing/ft_split.c parcing/ft_strlcpy.c parcing/ft_strncpm.c \
+	  parcing/ft_isdigit.c parcing/ft_floor_color.c parcing/ft_atoi.c parcing/ft_strjoin_char.c \
+	  parcing/ft_read_map.c parcing/ft_strdup.c parcing/ft_strcmp.c parcing/ft_copy_map.c parcing/ft_check_zeros.c
+
 OSRC = $(SRC:.c=.o)
 
 all : $(NAME)
@@ -12,7 +16,8 @@ all : $(NAME)
 $(NAME) : $(OSRC)
 	@echo "compiling.."
 	@$(CC) $(CFLAGS) $(MLXFLAGS) $(OSRC) ./lib/libmlx.a -o $(NAME) #remove ./lib/libmlx.a
-%.o : %.c ./includes/cube3d.h
+
+%.o : %.c ./includes/cube3d.h ./includes/get_next_line.h
 	@$(CC) $(CFLAGS) -c $< -o $@
 
 clean:

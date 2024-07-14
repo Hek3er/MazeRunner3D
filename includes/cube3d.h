@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cube3d.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: azainabi <azainabi@student.42.fr>          +#+  +:+       +#+        */
+/*   By: sel-jett <sel-jett@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/30 04:56:48 by azainabi          #+#    #+#             */
-/*   Updated: 2024/07/01 04:58:50 by azainabi         ###   ########.fr       */
+/*   Updated: 2024/07/14 22:22:17 by sel-jett         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,7 @@
 # include <time.h>
 # include <limits.h>
 # include "mlx.h"
+# include "get_next_line.h"
 
 # define FOV 66
 
@@ -27,6 +28,13 @@ typedef struct vector2d
 	int	x;
 	int	y;
 }				t_vector2d;
+
+typedef struct s_data
+{
+	void			*data;
+	struct s_data	*next;
+}	t_data;
+
 typedef struct image
 {
 	int		width;
@@ -74,6 +82,8 @@ typedef struct cast
 }				t_cast;
 typedef struct game
 {
+	int			fd; // added by salah
+	char		*line; // added by salah
 	int			Width;
 	int			Height;
 	char		**map;
@@ -100,10 +110,35 @@ typedef struct game
     int gun_timer;
 
 }               t_game;
+
+//parcing
+
+int		ft_isdigit(int c);
+char	*ft_strjoin_char(char const *s1, char s2);
+int		ft_atoi(const char *str);
+int		ft_ciel_color(char *char_color);
+void	*my_malloc(size_t size, int mode);
+void	ft_error_zero(void);
+// void	ft_check_args(int ac, char **av);
+void	ft_check_args(int ac, char **av);
+int		ft_search(char *str);
+size_t	ft_strlcpy(char *dst, const char *src, size_t dstsize);
+char	**ft_split(char const *s, char c);
+void	ft_strcpy(char *dest, char *src);
+int		ft_strncmp(const char *s1, const char *s2, size_t n);
+// char	**ft_read_map(int fd, char *line, t_game *map);
+int		ft_read_map(int fd, char *line, t_game *maps);
+int		ft_strcmp(char *s1, char *s2);
+char	*ft_strdup(const char *s1);
+void	ft_copy_map(char *av, t_game *maps);
+void	player_check(char **map);
+int		check_firstline(char *line);
+void	ft_check_zeros(char **map);
+
 //.Functions
 int		convert_rgb_to_int(int r, int g, int b);
 int		ft_strlen(char *str);
-char	*ft_strdup(char *str);
+// char	*ft_strdup(char *str);
 void	ft_write(char *str, int fd);
 void	ft_exit(char *str, int code);
 void	draw_pixel(int x, int y, t_game *game, int color);
