@@ -6,7 +6,7 @@
 /*   By: sel-jett <sel-jett@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/30 04:56:48 by azainabi          #+#    #+#             */
-/*   Updated: 2024/07/14 22:22:17 by sel-jett         ###   ########.fr       */
+/*   Updated: 2024/07/14 22:39:44 by sel-jett         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -90,6 +90,7 @@ typedef struct game
 	int			mapx; // how many rows in map
 	int			mapy; // how many columns in map
 	int			tile_s;
+	int			number_of_players;
 	double		player_posx; //player position in x relative to map (map[x][y])
 	double		player_posy; //player position in y relative to map (map[x][y])
 	char		orientation;
@@ -112,7 +113,9 @@ typedef struct game
 }               t_game;
 
 //parcing
-
+void	ft_init_map(t_game *maps);
+int		ft_textures(t_game *maps, char *av);
+void	print_map(char **map);
 int		ft_isdigit(int c);
 char	*ft_strjoin_char(char const *s1, char s2);
 int		ft_atoi(const char *str);
@@ -137,7 +140,7 @@ void	ft_check_zeros(char **map);
 
 //.Functions
 int		convert_rgb_to_int(int r, int g, int b);
-int		ft_strlen(char *str);
+// int		ft_strlen(char *str);
 // char	*ft_strdup(char *str);
 void	ft_write(char *str, int fd);
 void	ft_exit(char *str, int code);

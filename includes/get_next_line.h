@@ -6,7 +6,7 @@
 /*   By: sel-jett <sel-jett@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/14 11:09:21 by sel-jett          #+#    #+#             */
-/*   Updated: 2023/11/15 20:51:34 by sel-jett         ###   ########.fr       */
+/*   Updated: 2024/07/14 22:38:20 by sel-jett         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@
 #  define BUFFER_SIZE 42
 # endif
 
-size_t	ft_strlen(char *str);
+size_t	ft_strlen(const char *str);
 char	*my_strcpy(char *s1, char *s2, char *str);
 char	*ft_strjoin(char *s1, char *s2);
 char	*ft_read_all(int fd, char *str);

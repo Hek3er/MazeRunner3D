@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cube3d.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: azainabi <azainabi@student.42.fr>          +#+  +:+       +#+        */
+/*   By: sel-jett <sel-jett@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/30 04:56:46 by azainabi          #+#    #+#             */
-/*   Updated: 2024/07/01 05:00:31 by azainabi         ###   ########.fr       */
+/*   Updated: 2024/07/14 22:42:16 by sel-jett         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,7 +63,7 @@ void	casting(t_game *game, t_cast *cast)
 	int	x;
 
 	x = 0;
-	draw_wall_t(game, "tex.xpm");
+	draw_wall_t(game, "./textures/tex.xpm");
 	while (x < game->Width)
 	{
 		cast->mapX = (int)(game->player_posx);
@@ -142,15 +142,32 @@ int main_loop(t_game *game)
 
 int main(int ac, char **av)
 {
-	(void)ac;(void)av;
-	t_game	game;
+	t_game	maps;
 
-	init_param(&game, &game.cast);
-	casting(&game, &game.cast);
-	render_map(&game);
-	mlx_put_image_to_window(game.mlx_t.mlx_ptr, game.mlx_t.mlx_window, game.mlx_t.img.mlx_img, 0, 0);
-	draw_gun(&game, "1-x.xpm");
-	init_hooks(&game);
-	mlx_loop_hook(game.mlx_t.mlx_ptr, main_loop, &game);
-	mlx_loop(game.mlx_t.mlx_ptr);
+	ft_check_args(ac, av);
+	ft_init_map(&maps);
+	ft_textures(&maps, av[1]);
+	if (ft_read_map(maps.fd, maps.line, &maps) == 1)
+		ft_copy_map(av[1], &maps);
+	(!maps.no_texture || !maps.so_texture || !maps.we_texture || \
+	!maps.ea_texture) && \
+		(write(2, "Textures doesn't exist\n", ft_strlen("Textures doesn't exist\n")), \
+		my_malloc(0, 0), 0);
+	while (*(maps.map))
+	{
+		puts(*(maps.map));
+		(maps.map)++;
+	}
+		printf("-----> ore: %c\n", maps.orientation);
+		printf("-----> player_posx: %f\n", maps.player_posx);
+		printf("-----> player_posy: %f\n", maps.player_posy);
+
+	init_param(&maps, &maps.cast);
+	casting(&maps, &maps.cast);
+	render_map(&maps);
+	mlx_put_image_to_window(maps.mlx_t.mlx_ptr, maps.mlx_t.mlx_window, maps.mlx_t.img.mlx_img, 0, 0);
+	draw_gun(&maps, "./textures/1-x.xpm");
+	init_hooks(&maps);
+	mlx_loop_hook(maps.mlx_t.mlx_ptr, main_loop, &maps);
+	mlx_loop(maps.mlx_t.mlx_ptr);
 }

@@ -6,7 +6,7 @@
 /*   By: sel-jett <sel-jett@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/03 21:29:42 by sel-jett          #+#    #+#             */
-/*   Updated: 2024/07/14 22:27:46 by sel-jett         ###   ########.fr       */
+/*   Updated: 2024/07/14 22:36:14 by sel-jett         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,25 +78,25 @@ int	ft_textures(t_game *maps, char *av)
 }
 
 
-int	main(int ac, char **av)
-{
-	t_game	maps;
+// int	parcing(int ac, char **av)
+// {
+// 	t_game	maps;
 
-	ft_check_args(ac, av);
-	ft_init_map(&maps);
-	ft_textures(&maps, av[1]);
-	if (ft_read_map(maps.fd, maps.line, &maps) == 1)
-		ft_copy_map(av[1], &maps);
-	(!maps.no_texture || !maps.so_texture || !maps.we_texture || \
-	!maps.ea_texture) && \
-		(write(2, "Textures doesn't exist\n", ft_strlen("Textures doesn't exist\n")), \
-		my_malloc(0, 0), 0);
-	while (*(maps.map))
-	{
-		puts(*(maps.map));
-		(maps.map)++;
-	}
-		printf("-----> ore: %c\n", maps.orientation);
-		printf("-----> player_posx: %f\n", maps.player_posx);
-		printf("-----> player_posy: %f\n", maps.player_posy);
-}
+// 	ft_check_args(ac, av);
+// 	ft_init_map(&maps);
+// 	ft_textures(&maps, av[1]);
+// 	if (ft_read_map(maps.fd, maps.line, &maps) == 1)
+// 		ft_copy_map(av[1], &maps);
+// 	(!maps.no_texture || !maps.so_texture || !maps.we_texture || \
+// 	!maps.ea_texture) && \
+// 		(write(2, "Textures doesn't exist\n", ft_strlen("Textures doesn't exist\n")), \
+// 		my_malloc(0, 0), 0);
+// 	while (*(maps.map))
+// 	{
+// 		puts(*(maps.map));
+// 		(maps.map)++;
+// 	}
+// 		printf("-----> ore: %c\n", maps.orientation);
+// 		printf("-----> player_posx: %f\n", maps.player_posx);
+// 		printf("-----> player_posy: %f\n", maps.player_posy);
+// }

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   init_hooks.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: azainabi <azainabi@student.42.fr>          +#+  +:+       +#+        */
+/*   By: sel-jett <sel-jett@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/30 04:56:30 by azainabi          #+#    #+#             */
-/*   Updated: 2024/07/01 02:12:16 by azainabi         ###   ########.fr       */
+/*   Updated: 2024/07/14 22:42:46 by sel-jett         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,7 +80,7 @@ int	key_press(int key, t_game *game)
 
 void	update_game(t_game *game)
 {
-	static char	*paths[] = {"1-x.xpm", "2-x.xpm", "3-x.xpm", "4-x.xpm", "5-x.xpm"};
+	static char	*paths[] = {"./textures/1-x.xpm", "./textures/2-x.xpm", "./textures/3-x.xpm", "./textures/4-x.xpm", "./textures/5-x.xpm"};
 
 	if (game->gun_anim)
 	{
@@ -103,7 +103,7 @@ void	update_game(t_game *game)
 	if (game->gun_anim)
 		draw_gun(game, paths[game->gun_frame]);
 	else
-		draw_gun(game, "1-x.xpm");
+		draw_gun(game, "./textures/1-x.xpm");
 }
 
 void	init_hooks(t_game *game)
