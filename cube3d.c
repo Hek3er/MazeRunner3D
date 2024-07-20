@@ -6,7 +6,7 @@
 /*   By: azainabi <azainabi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/30 04:56:46 by azainabi          #+#    #+#             */
-/*   Updated: 2024/07/20 14:38:30 by azainabi         ###   ########.fr       */
+/*   Updated: 2024/07/20 16:13:11 by azainabi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -162,7 +162,7 @@ int main(int ac, char **av)
 	render_map(&maps);
 	mlx_put_image_to_window(maps.mlx_t.mlx_ptr, maps.mlx_t.mlx_window, maps.mlx_t.img.mlx_img, 0, 0);
 	draw_gun(&maps, "./textures/1-x.xpm");
-	init_hooks(&maps);
+	// init_hooks(&maps);
 	mlx_loop_hook(maps.mlx_t.mlx_ptr, main_loop, &maps);
 	mlx_loop(maps.mlx_t.mlx_ptr);
 }
