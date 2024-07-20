@@ -6,7 +6,7 @@
 /*   By: azainabi <azainabi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/30 04:56:00 by azainabi          #+#    #+#             */
-/*   Updated: 2024/07/01 05:01:14 by azainabi         ###   ########.fr       */
+/*   Updated: 2024/07/20 14:42:01 by azainabi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -93,11 +93,21 @@ void	handle_directions(t_game *game)
 void	init_param(t_game *game, t_cast *cast)
 {
 	// init game screen res
-	init_map(game);
+	// init_map(game);
 	game->Width = 1200;
 	game->Height = 900;
 	printf("width : %d, height : %d\n", game->Width, game->Height);
 	game->gun_anim = 0;
+	game->move_w = 0;
+	game->move_s = 0;
+	game->move_a = 0;
+	game->move_d = 0;
+	game->move_right = 0;
+	game->move_left = 0;
+	game->space_hit = 0;
+	game->move_speed = 0.2;
+	game->rotating_speed = 0.11;
+	game->wall_height = 0.7;
 	cast->hit = 0;
 	handle_directions(game);
 	init_mlx(game);

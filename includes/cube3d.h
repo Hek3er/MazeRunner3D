@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cube3d.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: sel-jett <sel-jett@student.42.fr>          +#+  +:+       +#+        */
+/*   By: azainabi <azainabi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/30 04:56:48 by azainabi          #+#    #+#             */
-/*   Updated: 2024/07/14 22:39:44 by sel-jett         ###   ########.fr       */
+/*   Updated: 2024/07/20 14:38:07 by azainabi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,15 @@
 # include "get_next_line.h"
 
 # define FOV 66
+
+# define ESC 53
+# define KEY_W 13
+# define KEY_S 1
+# define KEY_A 0
+# define KEY_D 2
+# define KEY_RIGHT 124
+# define KEY_LEFT 123
+# define KEY_SPACE 49
 
 typedef struct vector2d
 {
@@ -93,6 +102,9 @@ typedef struct game
 	int			number_of_players;
 	double		player_posx; //player position in x relative to map (map[x][y])
 	double		player_posy; //player position in y relative to map (map[x][y])
+	double		move_speed;
+	double		rotating_speed;
+	double		wall_height;
 	char		orientation;
 	char		*no_texture;
 	char		*so_texture;
@@ -104,6 +116,13 @@ typedef struct game
 	int			start_draw;
 	int			end_draw;
 	int			x;
+	int			move_w;
+	int			move_s;
+	int			move_a;
+	int			move_d;
+	int			move_right;
+	int			move_left;
+	int			space_hit;
 	t_mlx		mlx_t;
 	t_cast		cast;
 

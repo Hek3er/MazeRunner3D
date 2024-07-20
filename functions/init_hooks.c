@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   init_hooks.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: sel-jett <sel-jett@student.42.fr>          +#+  +:+       +#+        */
+/*   By: azainabi <azainabi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/30 04:56:30 by azainabi          #+#    #+#             */
-/*   Updated: 2024/07/14 22:42:46 by sel-jett         ###   ########.fr       */
+/*   Updated: 2024/07/20 14:36:50 by azainabi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,63 +18,99 @@ int	ft_close(t_game *game)
 	exit(0);
 }
 
-int	key_press(int key, t_game *game)
+void	move(t_game *game)
 {
-	if (key == 53) // ESC
-		ft_close(game);
-	if (key == 13) // W
+	if (game->move_w)
 	{
-		if (game->map[(int){game->player_posx + game->cast.dirX * 0.2}][(int){game->player_posy}] != '1')
-			game->player_posx += game->cast.dirX * 0.2;
-		if (game->map[(int)(game->player_posx)][(int)(game->player_posy + game->cast.dirY * 0.2)] != '1')
-			game->player_posy += game->cast.dirY * 0.2;
+		if (game->map[(int){game->player_posx + game->cast.dirX * game->move_speed}][(int){game->player_posy}] != '1')
+			game->player_posx += game->cast.dirX * game->move_speed;
+		if (game->map[(int)(game->player_posx)][(int)(game->player_posy + game->cast.dirY * game->move_speed)] != '1')
+			game->player_posy += game->cast.dirY * game->move_speed;
 	}
-	if (key == 1) // S
+	if (game->move_s)
 	{
-		if (game->map[(int){game->player_posx - game->cast.dirX * 0.2}][(int){game->player_posy}] != '1')
-			game->player_posx -= game->cast.dirX * 0.2;
-		if (game->map[(int)(game->player_posx)][(int)(game->player_posy - game->cast.dirY * 0.2)] != '1')
-			game->player_posy -= game->cast.dirY * 0.2;
+		if (game->map[(int){game->player_posx - game->cast.dirX * game->move_speed}][(int){game->player_posy}] != '1')
+			game->player_posx -= game->cast.dirX * game->move_speed;
+		if (game->map[(int)(game->player_posx)][(int)(game->player_posy - game->cast.dirY * game->move_speed)] != '1')
+			game->player_posy -= game->cast.dirY * game->move_speed;
 	}
-	if (key == 0) // A
+	if (game->move_a)
 	{
-		if (game->map[(int){game->player_posx - game->cast.planeX * 0.2}][(int){game->player_posy}] != '1')
-			game->player_posx -= game->cast.planeX * 0.2;
-		if (game->map[(int)(game->player_posx)][(int)(game->player_posy - game->cast.planeY * 0.2)] != '1')
-			game->player_posy -= game->cast.planeY * 0.2;
+		if (game->map[(int){game->player_posx - game->cast.planeX * game->move_speed}][(int){game->player_posy}] != '1')
+			game->player_posx -= game->cast.planeX * game->move_speed;
+		if (game->map[(int)(game->player_posx)][(int)(game->player_posy - game->cast.planeY * game->move_speed)] != '1')
+			game->player_posy -= game->cast.planeY * game->move_speed;
 	}
-	if (key == 2) // D
+	if (game->move_d)
 	{
-		if (game->map[(int){game->player_posx + game->cast.planeX * 0.2}][(int){game->player_posy}] != '1')
-			game->player_posx += game->cast.planeX * 0.2;
-		if (game->map[(int)(game->player_posx)][(int)(game->player_posy + game->cast.planeY * 0.2)] != '1')
-			game->player_posy += game->cast.planeY * 0.2;
+		if (game->map[(int){game->player_posx + game->cast.planeX * game->move_speed}][(int){game->player_posy}] != '1')
+			game->player_posx += game->cast.planeX * game->move_speed;
+		if (game->map[(int)(game->player_posx)][(int)(game->player_posy + game->cast.planeY * game->move_speed)] != '1')
+			game->player_posy += game->cast.planeY * game->move_speed;
 	}
-	double rotSpeed = 0.2;
-	if (key == 124) // RIGHT_ARROW
+	if (game->move_right)
 	{
 		double oldDirX = game->cast.dirX;
-		game->cast.dirX = game->cast.dirX * cos(-rotSpeed) - game->cast.dirY * sin(-rotSpeed);
-		game->cast.dirY = oldDirX * sin(-rotSpeed) + game->cast.dirY * cos(-rotSpeed);
+		game->cast.dirX = game->cast.dirX * cos(-game->rotating_speed) - game->cast.dirY * sin(-game->rotating_speed);
+		game->cast.dirY = oldDirX * sin(-game->rotating_speed) + game->cast.dirY * cos(-game->rotating_speed);
 		double oldplaneX = game->cast.planeX;
-		game->cast.planeX = game->cast.planeX * cos(-rotSpeed) - game->cast.planeY * sin(-rotSpeed);
-		game->cast.planeY = oldplaneX * sin(-rotSpeed) + game->cast.planeY * cos(-rotSpeed);
+		game->cast.planeX = game->cast.planeX * cos(-game->rotating_speed) - game->cast.planeY * sin(-game->rotating_speed);
+		game->cast.planeY = oldplaneX * sin(-game->rotating_speed) + game->cast.planeY * cos(-game->rotating_speed);
 	}
-	if (key == 123) // LEFT_ARROW
+	if (game->move_left)
 	{
 		double oldDirX = game->cast.dirX;
-		game->cast.dirX = game->cast.dirX * cos(rotSpeed) - game->cast.dirY * sin(rotSpeed);
-		game->cast.dirY = oldDirX * sin(rotSpeed) + game->cast.dirY * cos(rotSpeed);
+		game->cast.dirX = game->cast.dirX * cos(game->rotating_speed) - game->cast.dirY * sin(game->rotating_speed);
+		game->cast.dirY = oldDirX * sin(game->rotating_speed) + game->cast.dirY * cos(game->rotating_speed);
 		double oldplaneX = game->cast.planeX;
-		game->cast.planeX = game->cast.planeX * cos(rotSpeed) - game->cast.planeY * sin(rotSpeed);
-		game->cast.planeY = oldplaneX * sin(rotSpeed) + game->cast.planeY * cos(rotSpeed);
+		game->cast.planeX = game->cast.planeX * cos(game->rotating_speed) - game->cast.planeY * sin(game->rotating_speed);
+		game->cast.planeY = oldplaneX * sin(game->rotating_speed) + game->cast.planeY * cos(game->rotating_speed);
 	}
-	if (key == 49)
+	if (game->space_hit)
 	{
 		game->gun_anim = 1;
 		game->gun_frame = 0;
 		game->gun_timer = 0;
 	}
+}
+
+int	key_press(int key, t_game *game)
+{
+	if (key == ESC)
+		ft_close(game);
+	if (key == KEY_W)
+		game->move_w = 1;
+	if (key == KEY_S)
+		game->move_s = 1;
+	if (key == KEY_A)
+		game->move_a = 1;
+	if (key == KEY_D)
+		game->move_d = 1;
+	if (key == KEY_RIGHT)
+		game->move_right = 1;
+	if (key == KEY_LEFT)
+		game->move_left = 1;
+	if (key == KEY_SPACE)
+		game->space_hit = 1;
+	return 0;
+}
+
+int	key_release(int key, t_game *game)
+{
+	if (key == KEY_W)
+		game->move_w = 0;
+	if (key == KEY_S)
+		game->move_s = 0;
+	if (key == KEY_A)
+		game->move_a = 0;
+	if (key == KEY_D)
+		game->move_d = 0;
+	if (key == KEY_RIGHT)
+		game->move_right = 0;
+	if (key == KEY_LEFT)
+		game->move_left = 0;
+	if (key == KEY_SPACE)
+		game->space_hit = 0;
 	return 0;
 }
 
@@ -97,6 +133,7 @@ void	update_game(t_game *game)
 		}
 	}
 	mlx_clear_window(game->mlx_t.mlx_ptr, game->mlx_t.mlx_window);
+	move(game);
 	casting(game, &game->cast);
 	render_map(game);
 	mlx_put_image_to_window(game->mlx_t.mlx_ptr, game->mlx_t.mlx_window, game->mlx_t.img.mlx_img, 0, 0);
@@ -109,5 +146,6 @@ void	update_game(t_game *game)
 void	init_hooks(t_game *game)
 {
 	mlx_hook(game->mlx_t.mlx_window, 2, 0, key_press, game);
+	mlx_hook(game->mlx_t.mlx_window, 3, 0, key_release, game);
 	mlx_hook(game->mlx_t.mlx_window, 17, 0, ft_close, game);
 }
