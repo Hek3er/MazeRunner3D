@@ -6,7 +6,7 @@
 /*   By: azainabi <azainabi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/30 04:56:46 by azainabi          #+#    #+#             */
-/*   Updated: 2024/07/21 20:25:10 by azainabi         ###   ########.fr       */
+/*   Updated: 2024/08/30 09:15:50 by azainabi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,19 +42,45 @@
 // 	game->floor_color = convert_rgb_to_int(112, 112, 112);// replace values with the ones in map
 // }
 
-void	init_texture(t_game *game, t_cast *cast)
+int is_near_d_wall(t_game *maps)
 {
+    int x = maps->player_posx;
+    int y = maps->player_posy;
+
+    if ((x > 0 && maps->map[x - 1][y] == 'D') ||             // Up
+        (x < maps->Height - 1 && maps->map[x + 1][y] == 'D') ||  // Down
+        (y > 0 && maps->map[x][y - 1] == 'D') ||             // Left
+        (y < maps->Width - 1 && maps->map[x][y + 1] == 'D') ) // Right
+    {
+        return 1;
+    }
+
+    return 0;
+}
+
+void	init_texture(t_game *game, t_cast *cast)
+{		
+		// printf("distance to center is : %f\n", cast->distance_to_center);
+		game->index = 0;
 		if (cast->side == 0)
 			cast->wallX = game->player_posy + cast->walldist * cast->raydirY;
 		else
 			cast->wallX = game->player_posx + cast->walldist * cast->raydirX;
+			// printf("center x = %d, door x : %d\n", cast->centerX, game->doorX);
+			// printf("center y = %d, door y : %d\n", cast->centerY, game->doorY);
+		// printf("cast->wallX = %d, game->doorX = %d\n", (int)(cast->wallX), game->doorX);
+		if (game->map[cast->mapX][cast->mapY] == 'D') {
+			game->index = 1;
+			// game->doorWidth = (int)(game->Height / cast->walldist);
+			// printf("doorX = %f\n", cast->doorX);
+		}
 		cast->wallX -= floor(cast->wallX);
-		cast->texX = (int)(cast->wallX * (double)(game->mlx_t.texture_wall.width));
-		if (cast->side == 0 && cast->raydirX > 0)
-			cast->texX = game->mlx_t.texture_wall.width - cast->texX - 1;
-		if (cast->side == 1 && cast->raydirY < 0)
-			cast->texX = game->mlx_t.texture_wall.width - cast->texX - 1;
-		cast->step = (1.0 * game->mlx_t.texture_wall.height) / cast->lineheight;
+		cast->texX = (int)(cast->wallX * (double)(game->mlx_t.texture_wall[game->index].width));
+		if (cast->side == 0 && cast->raydirX < 0)
+			cast->texX = game->mlx_t.texture_wall[game->index].width - cast->texX - 1;
+		if (cast->side == 1 && cast->raydirY > 0)
+			cast->texX = game->mlx_t.texture_wall[game->index].width - cast->texX - 1;
+		cast->step = (1.0 * game->mlx_t.texture_wall[game->index].height) / cast->lineheight;
 		cast->texpos = (game->start_draw - game->Height / 2 + cast->lineheight / 2) * cast->step;
 }
 
@@ -63,13 +89,18 @@ void	casting(t_game *game, t_cast *cast)
 	int	x;
 
 	x = 0;
-	draw_wall_t(game, "./textures/tex.xpm");
+	draw_wall_t(game, "./textures/tex.xpm", 0);
+	draw_wall_t(game, "./textures/door.xpm", 1);
 	while (x < game->Width)
 	{
+		cast->flag_center = 0;
 		cast->mapX = (int)(game->player_posx);
 		cast->mapY = (int)(game->player_posy);
 		cast->camX = 2 * x / (double)game->Width - 1;
+		if (cast->camX == 0)
+			cast->flag_center = 1;
 		cast->raydirX = cast->dirX + cast->planeX * cast->camX;
+		// printf("raydirX : %f, dirX = : %f , planeX  : %f, camX = %f\n", cast->raydirX, cast->dirX, cast->planeX, cast->camX);
 		cast->raydirY = cast->dirY + cast->planeY * cast->camX;
 		if (cast->raydirX == 0)
 			cast->deltaX = UINT64_MAX;
@@ -114,22 +145,30 @@ void	casting(t_game *game, t_cast *cast)
 				cast->mapY += cast->stepy;
 				cast->side = 1;
 			}
-			if (game->map[cast->mapX][cast->mapY] == '1')
+			if (game->map[cast->mapX][cast->mapY] == '1' || game->map[cast->mapX][cast->mapY] =='D')
 				cast->hit = 1;
 		}
 		if (cast->side == 0)
 			cast->walldist = cast->sidedistX - cast->deltaX;
 		else
 			cast->walldist = cast->sidedistY - cast->deltaY;
+		if (cast->flag_center)
+		{
+			cast->centerX = cast->mapX;
+			cast->centerY = cast->mapY;
+			cast->flag_center = 0;
+		}
 		cast->lineheight = (int)(game->wall_height * game->Height / cast->walldist);
 		game->start_draw = -(cast->lineheight / 2) + game->Height / 2;
 		if (game->start_draw < 0)
 			game->start_draw = 0;
+		printf("move_up : %d\n", game->move_up);
 		game->end_draw = cast->lineheight / 2 + game->Height / 2;
 		if (game->end_draw >= game->Height)
 			game->end_draw = game->Height - 1;
 		game->x = x;
 		draw_vert_line(game);
+		// exit(1);
 		x++;
 	}
 }
@@ -157,12 +196,14 @@ int main(int ac, char **av)
 		printf("-----> mapx : %d, mapy : %d\n", maps.mapx, maps.mapy);
 		printf("-----> player_posx: %f\n", maps.player_posx);
 		printf("-----> player_posy: %f\n", maps.player_posy);
-
+	
 	maps.player_posx += 0.5;
 	maps.player_posy += 0.5;
 	init_param(&maps, &maps.cast);
 	casting(&maps, &maps.cast);
-	render_map(&maps);
+	// render_map(&maps);
+	// if (maps.map[maps.cast.centerX][maps.cast.centerY] == maps.map[maps.doorX][maps.doorY])
+		draw_cube(&(t_vector2d){(maps.Width / 2 -5) , (maps.Height / 2 - 5)}, 10, 0xFF0000, &maps);
 	mlx_put_image_to_window(maps.mlx_t.mlx_ptr, maps.mlx_t.mlx_window, maps.mlx_t.img.mlx_img, 0, 0);
 	draw_gun(&maps, "./textures/1-x.xpm");
 	init_hooks(&maps);

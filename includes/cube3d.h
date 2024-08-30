@@ -6,7 +6,7 @@
 /*   By: azainabi <azainabi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/30 04:56:48 by azainabi          #+#    #+#             */
-/*   Updated: 2024/07/20 14:38:07 by azainabi         ###   ########.fr       */
+/*   Updated: 2024/08/30 09:12:15 by azainabi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,6 +31,10 @@
 # define KEY_RIGHT 124
 # define KEY_LEFT 123
 # define KEY_SPACE 49
+# define KEY_O 31
+# define KEY_C 8
+# define KEY_UP 126
+# define KEY_DOWN 125
 
 typedef struct vector2d
 {
@@ -60,7 +64,7 @@ typedef struct mlx
 	void	*mlx_window;
 	t_img	img;
 	t_img	texture;
-	t_img	texture_wall;
+	t_img	texture_wall[2];
 }				t_mlx;
 
 typedef struct cast
@@ -87,10 +91,15 @@ typedef struct cast
 	int		mapX;
 	int		mapY;
 	int		texX;
+	int		flag_center;
+	double	distance_to_center;
+	int		centerX;
+	int		centerY;
 	int		lineheight;
 }				t_cast;
 typedef struct game
 {
+	int			index;
 	int			fd; // added by salah
 	char		*line; // added by salah
 	int			Width;
@@ -113,6 +122,11 @@ typedef struct game
 	int			ciel_color;
 	int			floor_color;
 	int			gun_anim;
+	int			door_anim;
+	int			door_close_anim;
+	int			door_time; // maybe remove
+	int			door_move;
+	int			door_close_move;
 	int			start_draw;
 	int			end_draw;
 	int			x;
@@ -123,6 +137,18 @@ typedef struct game
 	int			move_right;
 	int			move_left;
 	int			space_hit;
+	int			key_o;
+	int			key_c;
+	int			key_up;
+	int			key_down;
+	int			doorX;
+	int			doorY;
+	int			doorWidth;
+	int 		flag;
+	int			closed;
+	int			door_health;
+	int			move_up;
+	int			move_down;
 	t_mlx		mlx_t;
 	t_cast		cast;
 
@@ -132,6 +158,7 @@ typedef struct game
 }               t_game;
 
 //parcing
+int is_near_d_wall(t_game *maps);
 void	ft_init_map(t_game *maps);
 int		ft_textures(t_game *maps, char *av);
 void	print_map(char **map);
@@ -176,7 +203,7 @@ void	casting(t_game *game, t_cast *cast);
 void	draw_gun(t_game *game, char *path);
 
 void update_game(t_game *game);
-void	draw_wall_t(t_game *game, char *path);
+void	draw_wall_t(t_game *game, char *path, int i);
 void	init_texture(t_game *game, t_cast *cast);
 
 # endif

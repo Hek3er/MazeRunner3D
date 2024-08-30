@@ -6,7 +6,7 @@
 /*   By: azainabi <azainabi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/30 04:56:00 by azainabi          #+#    #+#             */
-/*   Updated: 2024/07/20 14:42:01 by azainabi         ###   ########.fr       */
+/*   Updated: 2024/08/30 09:14:30 by azainabi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,15 +24,15 @@ void	draw_gun(t_game *game, char *path)
 	mlx_put_image_to_window(game->mlx_t.mlx_ptr, game->mlx_t.mlx_window, game->mlx_t.texture.mlx_img, game->Width / 2 - game->mlx_t.texture.width / 2, game->Height - game->mlx_t.texture.height);
 }
 
-void	draw_wall_t(t_game *game, char *path)
+void	draw_wall_t(t_game *game, char *path, int i)
 {
-	game->mlx_t.texture_wall.mlx_img = mlx_xpm_file_to_image(game->mlx_t.mlx_ptr, path, &game->mlx_t.texture_wall.width, &game->mlx_t.texture_wall.height);
-	if (!game->mlx_t.texture_wall.mlx_img)
+	game->mlx_t.texture_wall[i].mlx_img = mlx_xpm_file_to_image(game->mlx_t.mlx_ptr, path, &game->mlx_t.texture_wall[i].width, &game->mlx_t.texture_wall[i].height);
+	if (!game->mlx_t.texture_wall[i].mlx_img)
 	{
 		mlx_destroy_window(game->mlx_t.mlx_ptr, game->mlx_t.mlx_window);
 		ft_exit("mxl failed to init image\n", 1);
 	}
-	game->mlx_t.texture_wall.img_data = mlx_get_data_addr(game->mlx_t.texture_wall.mlx_img, &game->mlx_t.texture_wall.bpp, &game->mlx_t.texture_wall.len, &game->mlx_t.texture_wall.endian);
+	game->mlx_t.texture_wall[i].img_data = mlx_get_data_addr(game->mlx_t.texture_wall[i].mlx_img, &game->mlx_t.texture_wall[i].bpp, &game->mlx_t.texture_wall[i].len, &game->mlx_t.texture_wall[i].endian);
 	// mlx_put_image_to_window(game->mlx_t.mlx_ptr, game->mlx_t.mlx_window, game->mlx_t.texture_wall.mlx_img, game->Width / 2 - game->mlx_t.texture_wall.width / 2, game->Height - game->mlx_t.texture_wall.height);
 }
 
@@ -56,35 +56,36 @@ static void	init_mlx(t_game *game)
 double	get_fov(double	angle)
 {
 	return (tan((angle / 2) * (M_PI / 180)));
+	// return ((void)angle,1);
 }
 
 void	handle_directions(t_game *game)
 {
-	if (game->orientation == 'E')
+	if (game->orientation == 'W')
 	{
 		game->cast.dirX = -1;
 		game->cast.dirY = 0;
 		game->cast.planeX = 0;
-		game->cast.planeY = get_fov(FOV);
+		game->cast.planeY = -get_fov(FOV);
 	}
-	if (game->orientation == 'W')
+	if (game->orientation == 'E')
 	{
 		game->cast.dirX = 1;
 		game->cast.dirY = 0;
 		game->cast.planeX = 0;
-		game->cast.planeY = -get_fov(FOV);
+		game->cast.planeY = get_fov(FOV);
 	}
 	if (game->orientation == 'N')
 	{
 		game->cast.dirX = 0;
-		game->cast.dirY = 1;
+		game->cast.dirY = -1;
 		game->cast.planeX = get_fov(FOV);
 		game->cast.planeY = 0;
 	}
 	if (game->orientation == 'S')
 	{
 		game->cast.dirX = 0;
-		game->cast.dirY = -1;
+		game->cast.dirY = 1;
 		game->cast.planeX = -get_fov(FOV);
 		game->cast.planeY = 0;
 	}
@@ -106,9 +107,24 @@ void	init_param(t_game *game, t_cast *cast)
 	game->move_left = 0;
 	game->space_hit = 0;
 	game->move_speed = 0.2;
-	game->rotating_speed = 0.11;
-	game->wall_height = 0.7;
+	game->rotating_speed = 0.1;
+	game->wall_height = 1;
 	cast->hit = 0;
+	game->doorX = 2;
+	game->doorY = 3;
+	game->index = 0;
+	game->door_anim = 0;
+	game->door_move = 0;
+	game->door_close_move = 0;
+	game->door_close_anim = 0;
+	game->flag = 0;
+	game->closed = 1;
+	game->key_o = 0;
+	game->door_health = 5;
+	game->move_up = 0;
+	game->key_down = 0;
+	game->key_up = 0;
+	// cast->flag_center = 0;
 	handle_directions(game);
 	init_mlx(game);
 }

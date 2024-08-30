@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_check_zeros.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: sel-jett <sel-jett@student.42.fr>          +#+  +:+       +#+        */
+/*   By: azainabi <azainabi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/12 02:10:21 by sel-jett          #+#    #+#             */
-/*   Updated: 2024/07/14 22:29:07 by sel-jett         ###   ########.fr       */
+/*   Updated: 2024/08/30 02:40:13 by azainabi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,20 +14,20 @@
 
 void	is_not_player(char **map, int i, int j)
 {
-	if ((map[i][j - 1] != '0' && map[i][j - 1] != '1' && \
+	if ((map[i][j - 1] != '0' && (map[i][j - 1] != '1') && \
 		map[i][j - 1] != 'S' && map[i][j - 1] != 'N' && \
-		map[i][j - 1] != 'W' && map[i][j - 1] != 'E') || \
+		map[i][j - 1] != 'W' && map[i][j - 1] != 'E' && map[i][j - 1] != 'D') || \
 		(map[i - 1][j] != '0' && map[i - 1][j] != '1' && \
 		map[i - 1][j] != 'S' && map[i - 1][j] != 'N' && \
-		map[i - 1][j] != 'W' && map[i - 1][j] != 'E') || \
+		map[i - 1][j] != 'W' && map[i - 1][j] != 'E' && map[i - 1][j] != 'D') || \
 		(map[i][j + 1] != '0' && map[i][j + 1] != '1' && \
 		map[i][j + 1] != 'S' && map[i][j + 1] != 'N' && \
-		map[i][j + 1] != 'W' && map[i][j + 1] != 'E') || \
+		map[i][j + 1] != 'W' && map[i][j + 1] != 'E' && map[i][j + 1] != 'D') || \
 		(map[i + 1][j] != '0' && map[i + 1][j] != '1' && \
 		map[i + 1][j] != 'S' && map[i + 1][j] != 'N' && \
-		map[i + 1][j] != 'W' && map[i + 1][j] != 'E'))
+		map[i + 1][j] != 'W' && map[i + 1][j] != 'E' && map[i + 1][j] != 'D'))
 	{
-		puts(map[i]);
+		puts(map[i]); // remove this
 		printf("... %d|%d\n", i, j);
 		(1) && (write(2, "error map\n", 10), my_malloc(0, 0));
 	}
