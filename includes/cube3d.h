@@ -6,7 +6,7 @@
 /*   By: azainabi <azainabi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/30 04:56:48 by azainabi          #+#    #+#             */
-/*   Updated: 2024/10/01 02:31:52 by azainabi         ###   ########.fr       */
+/*   Updated: 2024/10/01 02:45:22 by azainabi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,7 +64,7 @@ typedef struct mlx
 	void	*mlx_window;
 	t_img	img;
 	t_img	texture;
-	t_img	texture_wall[2];
+	t_img	texture_wall[5];
 }				t_mlx;
 
 typedef struct cast

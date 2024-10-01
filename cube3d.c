@@ -6,7 +6,7 @@
 /*   By: azainabi <azainabi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/30 04:56:46 by azainabi          #+#    #+#             */
-/*   Updated: 2024/10/01 02:32:11 by azainabi         ###   ########.fr       */
+/*   Updated: 2024/10/01 02:48:15 by azainabi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,33 +14,6 @@
 #include "includes/mlx.h"
 #include <math.h>
 #include <stdint.h>
-
-// function needs to be replaced in parsing
-// void	init_map(t_game *game)
-// {
-// 	// init_map
-// 	game->map = malloc(sizeof(char *) * 9);
-// 	if (!game->map)
-// 		return ;
-// 	game->map[0] = ft_strdup("111111111111");
-// 	game->map[1] = ft_strdup("100001000001");
-// 	game->map[2] = ft_strdup("100001000001");
-// 	game->map[3] = ft_strdup("100000100001");
-// 	game->map[4] = ft_strdup("10000P000001");
-// 	game->map[5] = ft_strdup("101000000101");
-// 	game->map[6] = ft_strdup("100000000101");
-// 	game->map[7] = ft_strdup("111111111111");
-// 	game->map[8] = NULL;
-// 	// get_map_length and width
-// 	game->mapx = 12; // get player cords and replace it with 0
-// 	game->mapy = 8;
-// 	game->tile_s = 16;
-// 	game->orientation = 'S';
-// 	game->player_posx = 6 + 0.5;
-// 	game->player_posy = 5 + 0.5;
-// 	game->ciel_color = convert_rgb_to_int(38, 38, 38);
-// 	game->floor_color = convert_rgb_to_int(112, 112, 112);// replace values with the ones in map
-// }
 
 void	Get_d_cord(t_game *maps)
 {
@@ -87,7 +60,15 @@ int is_near_d_wall(t_game *maps)
 
 void	init_texture(t_game *game, t_cast *cast)
 {		
-		game->index = 0;
+		// game->index = 0;
+		if (cast->side == 1 && cast->raydirY > 0)
+			game->index = 0; // north i guess
+		if (cast->side == 1 && cast->raydirY < 0)
+			game->index = 2;
+		if (cast->side == 0 && cast->raydirX > 0)
+			game->index = 3;
+		if (cast->side == 0 && cast->raydirX < 0)
+			game->index = 4;
 		if (cast->side == 0)
 			cast->wallX = game->player_posy + cast->walldist * cast->raydirY;
 		else
@@ -112,6 +93,9 @@ void	casting(t_game *game, t_cast *cast)
 	x = 0;
 	draw_wall_t(game, "./textures/tex.xpm", 0);
 	draw_wall_t(game, "./textures/door.xpm", 1);
+	draw_wall_t(game, "./textures/tex2.xpm", 2);
+	draw_wall_t(game, "./textures/tex3.xpm", 3);
+	draw_wall_t(game, "./textures/42.xpm", 4);
 	while (x < game->Width)
 	{
 		cast->flag_center = 0;

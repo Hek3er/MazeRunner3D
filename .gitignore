@@ -1,2 +1,4 @@
 Cube3d
 **/*.o
+.DS_Store
+.vscode
