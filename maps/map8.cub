@@ -1,7 +1,7 @@
-EA     assets/textures/dragonballea.png
-NO     assets/textures/dragonballno.png
-SO     assets/textures/dragonballso.png
-WE     assets/textures/dragonballwe.png
+EA     textures/east.xpm
+NO     textures/north.xpm
+SO     textures/south.xpm
+WE     textures/west.xpm
 
 F 255,255,255
 C 255,150,0

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cube3d.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: sel-jett <sel-jett@student.42.fr>          +#+  +:+       +#+        */
+/*   By: azainabi <azainabi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/30 04:56:46 by azainabi          #+#    #+#             */
-/*   Updated: 2024/10/01 15:54:08 by sel-jett         ###   ########.fr       */
+/*   Updated: 2024/10/01 19:57:26 by azainabi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,11 +64,11 @@ void	init_texture(t_game *game, t_cast *cast)
 		if (cast->side == 1 && cast->raydirY > 0)
 			game->index = 0; // north i guess
 		if (cast->side == 1 && cast->raydirY < 0)
-			game->index = 2;
+			game->index = 2; // south
 		if (cast->side == 0 && cast->raydirX > 0)
-			game->index = 3;
+			game->index = 3; // west
 		if (cast->side == 0 && cast->raydirX < 0)
-			game->index = 4;
+			game->index = 4; // east
 		if (cast->side == 0)
 			cast->wallX = game->player_posy + cast->walldist * cast->raydirY;
 		else
@@ -91,11 +91,11 @@ void	casting(t_game *game, t_cast *cast)
 	int	x;
 
 	x = 0;
-	draw_wall_t(game, "./textures/tex.xpm", 0);
+	draw_wall_t(game, game->no_texture, 0);
 	draw_wall_t(game, "./textures/door.xpm", 1);
-	draw_wall_t(game, "./textures/tex2.xpm", 2);
-	draw_wall_t(game, "./textures/tex3.xpm", 3);
-	draw_wall_t(game, "./textures/42.xpm", 4);
+	draw_wall_t(game, game->so_texture, 2);
+	draw_wall_t(game, game->we_texture, 3);
+	draw_wall_t(game, game->ea_texture, 4);
 	while (x < game->Width)
 	{
 		cast->flag_center = 0;

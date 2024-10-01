@@ -2,10 +2,10 @@
 C 0,0,0
 F 0,0,0
 
-EA assets/textures/brickwall.png
-NO assets/textures/brickwall.png
-SO assets/textures/brickwall.png
-WE assets/textures/brickwall.png
+EA textures/east.xpm
+NO textures/north.xpm
+SO textures/south.xpm
+WE textures/west.xpm
 
 
 1111111111111111111111111111111111111111

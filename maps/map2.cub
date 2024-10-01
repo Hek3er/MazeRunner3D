@@ -1,7 +1,7 @@
-EA assets/textures/3d.png
-NO assets/textures/zellige.png
-SO assets/textures/poker.png
-WE assets/textures/egypt.png
+EA textures/east.xpm
+NO textures/north.xpm
+SO textures/south.xpm
+WE textures/west.xpm
 
 
 F 20,20,20

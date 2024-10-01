@@ -1,7 +1,7 @@
-EA assets/textures/dragonball.png
-NO assets/textures/dragonball.png
-SO assets/textures/dragonball.png
-WE assets/textures/dragonball.png
+EA textures/east.xpm
+NO textures/north.xpm
+SO textures/south.xpm
+WE textures/west.xpm
 
 
 F 1,1,1

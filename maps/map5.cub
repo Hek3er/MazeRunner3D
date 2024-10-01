@@ -1,7 +1,7 @@
-NO assets/textures/memes.png
-EA assets/textures/memes.png
-WE assets/textures/memes.png
-SO assets/textures/memes.png
+NO textures/north.xpm
+EA textures/east.xpm
+WE textures/west.xpm
+SO textures/south.xpm
 
 
 C 255,255,255

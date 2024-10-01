@@ -1,7 +1,7 @@
-EA assets/textures/3d_2.png
-NO assets/textures/3d_2.png
-SO assets/textures/3d_2.png
-WE assets/textures/3d_2.png
+EA textures/east.xpm
+NO textures/north.xpm
+SO textures/south.xpm
+WE textures/west.xpm
 
 
 F 28,28,28
