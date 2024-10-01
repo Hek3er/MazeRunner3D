@@ -6,7 +6,7 @@
 /*   By: sel-jett <sel-jett@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/03 21:29:42 by sel-jett          #+#    #+#             */
-/*   Updated: 2024/07/14 22:36:14 by sel-jett         ###   ########.fr       */
+/*   Updated: 2024/10/01 16:20:54 by sel-jett         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,6 +47,48 @@ void	print_map(char **map)
 	my_malloc(0, 0);
 }
 
+void	ft_error_texture(void)
+{
+	write(2, "Invalid Textures !!\n", ft_strlen("Invalid Textures !!\n"));
+	my_malloc(0, 0);
+}
+
+char *path_of_texture(char *line)
+{
+	int i = 0;
+	int save_first_index = 0;
+	
+	int check = 0;
+	while (line[i])
+	{
+		if (!check && line[i] >= 33)
+		{
+			save_first_index = i;
+			check++;
+		}
+		else if (line[i] >= 33)
+			check++;
+		else if (check && line[i] < 33)
+			return (ft_error_texture(), NULL);
+		i++;
+	}
+	return (line + save_first_index);
+}
+
+int path_of_texture_name(char *line, char *texture_name)
+{
+	int i = 0;
+	int save_first_index = 0;
+	
+	int check = 0;
+	while (line[i] && line[i] < 33)
+		i++;
+	if (line[i] && !ft_strncmp(texture_name, (const char *)(line + i), 2))
+		return (i);
+	return (-1);
+}
+
+
 int	ft_textures(t_game *maps, char *av)
 {
 	int		fd;
@@ -57,18 +99,18 @@ int	ft_textures(t_game *maps, char *av)
 	line = get_next_line(fd);
 	while (line)
 	{
-		if (!ft_strncmp("NO", (const char *)line, 2))
-			maps->no_texture = line + 2;
-		else if (!ft_strncmp("SO", (const char *)line, 2))
-			maps->so_texture = line + 2;
-		else if (!ft_strncmp("WE", (const char *)line, 2))
-			maps->we_texture = line + 2;
-		else if (!ft_strncmp("EA", (const char *)line, 2))
-			maps->ea_texture = line + 2;
+		if (path_of_texture_name(line, "NO") >= 0)
+			maps->no_texture = path_of_texture(line + path_of_texture_name(line, "NO") + 2);
+		else if (path_of_texture_name(line, "SO") >= 0)
+			maps->so_texture = path_of_texture(line + path_of_texture_name(line, "SO") + 2);
+		else if (path_of_texture_name(line, "WE") >= 0)
+			maps->we_texture = path_of_texture(line + path_of_texture_name(line, "WE") + 2);
+		else if (path_of_texture_name(line, "EA") >= 0)
+			maps->ea_texture = path_of_texture(line + path_of_texture_name(line, "EA") + 2);
 		else if (!ft_strncmp("C", (const char *)line, 1))
-			maps->ciel_color = ft_ciel_color(line + 2);
+			maps->ciel_color = ft_ciel_color(path_of_texture(line + 2));
 		else if (!ft_strncmp("F", (const char *)line, 1))
-			maps->floor_color = ft_ciel_color(line + 2);
+			maps->floor_color = ft_ciel_color(path_of_texture(line + 2));
 		else if (maps->no_texture && maps->we_texture && maps->ea_texture && \
 			maps->so_texture  && maps->floor_color != -1 && maps->ciel_color != -1)
 			return (maps->fd = fd, maps->line = line, fd);
@@ -76,27 +118,3 @@ int	ft_textures(t_game *maps, char *av)
 	}
 	return (-1);
 }
-
-
-// int	parcing(int ac, char **av)
-// {
-// 	t_game	maps;
-
-// 	ft_check_args(ac, av);
-// 	ft_init_map(&maps);
-// 	ft_textures(&maps, av[1]);
-// 	if (ft_read_map(maps.fd, maps.line, &maps) == 1)
-// 		ft_copy_map(av[1], &maps);
-// 	(!maps.no_texture || !maps.so_texture || !maps.we_texture || \
-// 	!maps.ea_texture) && \
-// 		(write(2, "Textures doesn't exist\n", ft_strlen("Textures doesn't exist\n")), \
-// 		my_malloc(0, 0), 0);
-// 	while (*(maps.map))
-// 	{
-// 		puts(*(maps.map));
-// 		(maps.map)++;
-// 	}
-// 		printf("-----> ore: %c\n", maps.orientation);
-// 		printf("-----> player_posx: %f\n", maps.player_posx);
-// 		printf("-----> player_posy: %f\n", maps.player_posy);
-// }

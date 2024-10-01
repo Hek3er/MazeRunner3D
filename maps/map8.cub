@@ -1,7 +1,7 @@
-EA assets/textures/dragonball.png
-NO assets/textures/dragonball.png
-SO assets/textures/dragonball.png
-WE assets/textures/dragonball.png
+EA     assets/textures/dragonballea.png
+NO     assets/textures/dragonballno.png
+SO     assets/textures/dragonballso.png
+WE     assets/textures/dragonballwe.png
 
 
 F 255,255,255

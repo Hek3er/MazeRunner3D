@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cube3d.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: azainabi <azainabi@student.42.fr>          +#+  +:+       +#+        */
+/*   By: sel-jett <sel-jett@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/30 04:56:46 by azainabi          #+#    #+#             */
-/*   Updated: 2024/10/01 02:48:15 by azainabi         ###   ########.fr       */
+/*   Updated: 2024/10/01 15:54:08 by sel-jett         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -215,6 +215,10 @@ int main(int ac, char **av)
 		printf("-----> mapx : %d, mapy : %d\n", maps.mapx, maps.mapy);
 		printf("-----> player_posx: %f\n", maps.player_posx);
 		printf("-----> player_posy: %f\n", maps.player_posy);
+		printf("-----> no_texture: %s\n", maps.no_texture);
+		printf("-----> so_texture: %s\n", maps.so_texture);
+		printf("-----> we_texture: %s\n", maps.we_texture);
+		printf("-----> ea_texture: %s\n", maps.ea_texture);
 	
 	maps.player_posx += 0.5;
 	maps.player_posy += 0.5;
