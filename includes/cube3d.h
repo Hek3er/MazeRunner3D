@@ -6,7 +6,7 @@
 /*   By: azainabi <azainabi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/30 04:56:48 by azainabi          #+#    #+#             */
-/*   Updated: 2024/10/01 01:59:03 by azainabi         ###   ########.fr       */
+/*   Updated: 2024/10/01 02:31:52 by azainabi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -140,10 +140,7 @@ typedef struct game
 	int			key_down;
 	int			doorX;
 	int			doorY;
-	int			doorWidth;
-	int 		door_key;
 	int			closed;
-	int			door_health;
 	int			move_up;
 	int			move_down;
 	t_mlx		mlx_t;
@@ -186,13 +183,12 @@ void	ft_check_zeros(char **map);
 //.Functions
 void	draw_rectangle(int init_posx, int init_poy, int dimensionsx, int dimensionsy, int color, t_game *game);
 int		convert_rgb_to_int(int r, int g, int b);
+double	get_fov(double angle);
 // int		ft_strlen(char *str);
 // char	*ft_strdup(char *str);
 void	ft_write(char *str, int fd);
 void	ft_exit(char *str, int code);
 void	draw_pixel(int x, int y, t_game *game, int color);
-void	draw_cube(t_vector2d *init_pos, int lenght, int color, t_game *game);
-void	render_map(t_game *game);
 void	init_vector(t_vector2d *vec, int x, int y);
 void	init_hooks(t_game *game);
 void 	draw_vert_line(t_game *game);
@@ -201,8 +197,8 @@ void	init_param(t_game *game, t_cast *cast);
 void	init_map(t_game *game); // parsing
 void	casting(t_game *game, t_cast *cast);
 void	draw_gun(t_game *game, char *path);
-
-void update_game(t_game *game);
+void	handle_directions(t_game *game);
+void 	update_game(t_game *game);
 void	draw_wall_t(t_game *game, char *path, int i);
 void	init_texture(t_game *game, t_cast *cast);
 

@@ -6,7 +6,7 @@
 /*   By: azainabi <azainabi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/30 04:56:46 by azainabi          #+#    #+#             */
-/*   Updated: 2024/10/01 01:58:11 by azainabi         ###   ########.fr       */
+/*   Updated: 2024/10/01 02:32:11 by azainabi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -87,19 +87,13 @@ int is_near_d_wall(t_game *maps)
 
 void	init_texture(t_game *game, t_cast *cast)
 {		
-		// printf("distance to center is : %f\n", cast->distance_to_center);
 		game->index = 0;
 		if (cast->side == 0)
 			cast->wallX = game->player_posy + cast->walldist * cast->raydirY;
 		else
 			cast->wallX = game->player_posx + cast->walldist * cast->raydirX;
-			// printf("center x = %d, door x : %d\n", cast->centerX, game->doorX);
-			// printf("center y = %d, door y : %d\n", cast->centerY, game->doorY);
-		// printf("cast->wallX = %d, game->doorX = %d\n", (int)(cast->wallX), game->doorX);
 		if (game->map[cast->mapX][cast->mapY] == 'D') {
 			game->index = 1;
-			// game->doorWidth = (int)(game->Height / cast->walldist);
-			// printf("doorX = %f\n", cast->doorX);
 		}
 		cast->wallX -= floor(cast->wallX);
 		cast->texX = (int)(cast->wallX * (double)(game->mlx_t.texture_wall[game->index].width));
@@ -244,9 +238,6 @@ int main(int ac, char **av)
 	maps.mapy1 = get_longest_line_length(maps.map);
 	init_param(&maps, &maps.cast);
 	casting(&maps, &maps.cast);
-	// render_map(&maps);
-	// if (maps.map[maps.cast.centerX][maps.cast.centerY] == maps.map[maps.doorX][maps.doorY])
-		draw_cube(&(t_vector2d){(maps.Width / 2 -5) , (maps.Height / 2 - 5)}, 10, 0xFF0000, &maps);
 	mlx_put_image_to_window(maps.mlx_t.mlx_ptr, maps.mlx_t.mlx_window, maps.mlx_t.img.mlx_img, 0, 0);
 	draw_gun(&maps, "./textures/1-x.xpm");
 	init_hooks(&maps);

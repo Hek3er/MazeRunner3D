@@ -6,15 +6,19 @@
 /*   By: azainabi <azainabi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/30 04:56:10 by azainabi          #+#    #+#             */
-/*   Updated: 2024/08/30 09:18:59 by azainabi         ###   ########.fr       */
+/*   Updated: 2024/10/01 02:36:47 by azainabi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include"../includes/cube3d.h"
+#include "../includes/cube3d.h"
 
-int extract_color(t_game *game, int texX, int texY) {
-	char *c;
-	int offset = (texY * game->mlx_t.texture_wall[game->index].len) + (texX * (game->mlx_t.texture_wall[game->index].bpp / 8));
+int	extract_color(t_game *game, int texX, int texY)
+{
+	char		*c;
+	int			offset;
+
+	offset = (texY * game->mlx_t.texture_wall[game->index].len) \
+	+ (texX * (game->mlx_t.texture_wall[game->index].bpp / 8));
 	c = game->mlx_t.texture_wall[game->index].img_data + offset;
 	if (game->mlx_t.texture_wall[game->index].endian == 0)
 		return ((((unsigned char)c[2]) << 16)
@@ -34,6 +38,7 @@ void	draw_cieling(t_game *game)
 		y++;
 	}
 }
+
 void	draw_floor(t_game *game)
 {
 	int	y;
@@ -46,11 +51,11 @@ void	draw_floor(t_game *game)
 	}
 }
 
-void draw_vert_line(t_game *game)
+void	draw_vert_line(t_game *game)
 {
 	int	i;
 	int	y;
-	int tmp;
+	int	tmp;
 	int	texy;
 	int	tex_color;
 
@@ -60,28 +65,14 @@ void draw_vert_line(t_game *game)
 	draw_cieling(game);
 	while (i < game->end_draw - game->start_draw)
 	{
-		// int tempy = (int)game->cast.texpos & (game->mlx_t.texture_wall[0].height - 1);
-		// int tempcolor = extract_color(game, game->cast.texX, tempy);
-		texy = (int)game->cast.texpos & (game->mlx_t.texture_wall[game->index].height - 1);
+		texy = (int)game->cast.texpos & \
+		(game->mlx_t.texture_wall[game->index].height - 1);
 		game->cast.texpos += game->cast.step;
 		tex_color = extract_color(game, game->cast.texX, texy);
-		if (game->index == 1) {
+		if (game->index == 1)
 			draw_pixel(game->x, y + game->move_up, game, tex_color);
-			// if (game->door_move > 0 && game->door_anim) {
-			// 	draw_pixel(game->x, y, game, 0xFFFFFF);
-			// 	for (int r = game->start_draw - game->door_move; r < game->start_draw; r++) {
-			// 		draw_pixel(game->x, r, game, game->ciel_color);
-			// 	}
-			// }
-			// // printf("close : %d\n", game->door_close_anim);
-			// if (game->door_close_anim) {
-			// 	// printf("here\n");
-			// 	draw_pixel(game->x, y + game->door_close_move, game, 0xFFFFFF);	
-			// }
-		}
-		else {
+		else
 			draw_pixel(game->x, y + game->move_up, game, tex_color);
-		}
 		y++;
 		i++;
 	}

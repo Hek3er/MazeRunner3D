@@ -6,7 +6,7 @@
 /*   By: azainabi <azainabi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/30 04:56:30 by azainabi          #+#    #+#             */
-/*   Updated: 2024/10/01 01:59:48 by azainabi         ###   ########.fr       */
+/*   Updated: 2024/10/01 02:17:04 by azainabi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -303,9 +303,6 @@ void	update_game(t_game *game)
 	mlx_clear_window(game->mlx_t.mlx_ptr, game->mlx_t.mlx_window);
 	move(game);
 	casting(game, &game->cast);
-	// render_map(game);
-	// if (game->map[game->cast.centerX][game->cast.centerY] == game->map[game->doorX][game->doorY])
-		draw_cube(&(t_vector2d){(game->Width / 2 -5) , (game->Height / 2 - 5)}, 10, 0xFF0000, game);
 	draw_minimap(game);
 	mlx_put_image_to_window(game->mlx_t.mlx_ptr, game->mlx_t.mlx_window, game->mlx_t.img.mlx_img, 0, 0);
 	if (game->gun_anim)
