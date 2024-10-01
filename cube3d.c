@@ -6,7 +6,7 @@
 /*   By: azainabi <azainabi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/30 04:56:46 by azainabi          #+#    #+#             */
-/*   Updated: 2024/08/30 09:15:50 by azainabi         ###   ########.fr       */
+/*   Updated: 2024/10/01 01:58:11 by azainabi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,15 +42,42 @@
 // 	game->floor_color = convert_rgb_to_int(112, 112, 112);// replace values with the ones in map
 // }
 
+void	Get_d_cord(t_game *maps)
+{
+	int x = maps->player_posx;
+    int y = maps->player_posy;
+
+	if ((x > 0 && (maps->map[x - 1][y] == 'D' || maps->map[x - 1][y] == 'O'))) {
+		maps->doorX = x - 1;
+		maps->doorY = y;
+	}
+	if (x < maps->Height - 1 && (maps->map[x + 1][y] == 'D' || maps->map[x + 1][y] == 'O')) {
+		maps->doorX = x + 1;
+		maps->doorY = y;
+	}
+	if (y > 0 && (maps->map[x][y - 1] == 'D' || maps->map[x][y - 1] == 'O')) {
+		maps->doorX = x;
+		maps->doorY = y - 1;
+	}
+	if (y < maps->Width - 1 && (maps->map[x][y + 1] == 'D' || maps->map[x][y + 1] == 'O')) {
+		maps->doorX = x;
+		maps->doorY = y + 1;
+	}
+}
+
 int is_near_d_wall(t_game *maps)
 {
     int x = maps->player_posx;
     int y = maps->player_posy;
 
-    if ((x > 0 && maps->map[x - 1][y] == 'D') ||             // Up
-        (x < maps->Height - 1 && maps->map[x + 1][y] == 'D') ||  // Down
-        (y > 0 && maps->map[x][y - 1] == 'D') ||             // Left
-        (y < maps->Width - 1 && maps->map[x][y + 1] == 'D') ) // Right
+    if ((x > 0 && maps->map[x - 1][y] == 'D') ||
+	    (x > 0 && maps->map[x - 1][y] == 'O') ||      // Up
+        (x < maps->Height - 1 && maps->map[x + 1][y] == 'D') ||
+		(x < maps->Height - 1 && maps->map[x + 1][y] == 'O') ||  // Down
+        (y > 0 && maps->map[x][y - 1] == 'D') ||
+		(y > 0 && maps->map[x][y - 1] == 'O') ||    // Left
+        (y < maps->Width - 1 && maps->map[x][y + 1] == 'D') ||
+		(y < maps->Width - 1 && maps->map[x][y + 1] == 'O')) // Right
     {
         return 1;
     }
@@ -162,7 +189,7 @@ void	casting(t_game *game, t_cast *cast)
 		game->start_draw = -(cast->lineheight / 2) + game->Height / 2;
 		if (game->start_draw < 0)
 			game->start_draw = 0;
-		printf("move_up : %d\n", game->move_up);
+		// printf("move_up : %d\n", game->move_up);
 		game->end_draw = cast->lineheight / 2 + game->Height / 2;
 		if (game->end_draw >= game->Height)
 			game->end_draw = game->Height - 1;
@@ -171,6 +198,20 @@ void	casting(t_game *game, t_cast *cast)
 		// exit(1);
 		x++;
 	}
+}
+
+size_t get_longest_line_length(char **map) {
+    size_t max_length = 0;
+    if (map == NULL) {
+        return 0;
+    }
+    for (size_t i = 0; map[i] != NULL; i++) {
+        size_t len = ft_strlen(map[i]);
+        if (len > max_length) {
+            max_length = len;
+        }
+    }
+    return max_length;
 }
 
 int main_loop(t_game *game)
@@ -199,6 +240,8 @@ int main(int ac, char **av)
 	
 	maps.player_posx += 0.5;
 	maps.player_posy += 0.5;
+	maps.mapx1 = maps.Height;
+	maps.mapy1 = get_longest_line_length(maps.map);
 	init_param(&maps, &maps.cast);
 	casting(&maps, &maps.cast);
 	// render_map(&maps);

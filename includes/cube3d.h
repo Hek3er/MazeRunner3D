@@ -6,7 +6,7 @@
 /*   By: azainabi <azainabi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/30 04:56:48 by azainabi          #+#    #+#             */
-/*   Updated: 2024/08/30 09:12:15 by azainabi         ###   ########.fr       */
+/*   Updated: 2024/10/01 01:59:03 by azainabi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -107,6 +107,8 @@ typedef struct game
 	char		**map;
 	int			mapx; // how many rows in map
 	int			mapy; // how many columns in map
+	int			mapx1; // how many rows in map
+	int			mapy1; // how many columns in map
 	int			tile_s;
 	int			number_of_players;
 	double		player_posx; //player position in x relative to map (map[x][y])
@@ -122,11 +124,6 @@ typedef struct game
 	int			ciel_color;
 	int			floor_color;
 	int			gun_anim;
-	int			door_anim;
-	int			door_close_anim;
-	int			door_time; // maybe remove
-	int			door_move;
-	int			door_close_move;
 	int			start_draw;
 	int			end_draw;
 	int			x;
@@ -144,7 +141,7 @@ typedef struct game
 	int			doorX;
 	int			doorY;
 	int			doorWidth;
-	int 		flag;
+	int 		door_key;
 	int			closed;
 	int			door_health;
 	int			move_up;
@@ -158,7 +155,9 @@ typedef struct game
 }               t_game;
 
 //parcing
-int is_near_d_wall(t_game *maps);
+char	*ft_strchr(const char *s, int c);
+void	Get_d_cord(t_game *maps);
+int 	is_near_d_wall(t_game *maps);
 void	ft_init_map(t_game *maps);
 int		ft_textures(t_game *maps, char *av);
 void	print_map(char **map);
@@ -185,6 +184,7 @@ int		check_firstline(char *line);
 void	ft_check_zeros(char **map);
 
 //.Functions
+void	draw_rectangle(int init_posx, int init_poy, int dimensionsx, int dimensionsy, int color, t_game *game);
 int		convert_rgb_to_int(int r, int g, int b);
 // int		ft_strlen(char *str);
 // char	*ft_strdup(char *str);

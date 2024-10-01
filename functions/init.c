@@ -6,7 +6,7 @@
 /*   By: azainabi <azainabi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/30 04:56:00 by azainabi          #+#    #+#             */
-/*   Updated: 2024/08/30 09:14:30 by azainabi         ###   ########.fr       */
+/*   Updated: 2024/10/01 02:00:08 by azainabi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -108,16 +108,12 @@ void	init_param(t_game *game, t_cast *cast)
 	game->space_hit = 0;
 	game->move_speed = 0.2;
 	game->rotating_speed = 0.1;
-	game->wall_height = 1;
+	game->wall_height = 0.7;
 	cast->hit = 0;
-	game->doorX = 2;
-	game->doorY = 3;
+	game->doorX = 0;
+	game->doorY = 0;
 	game->index = 0;
-	game->door_anim = 0;
-	game->door_move = 0;
-	game->door_close_move = 0;
-	game->door_close_anim = 0;
-	game->flag = 0;
+	// game->door_flag = 0;
 	game->closed = 1;
 	game->key_o = 0;
 	game->door_health = 5;

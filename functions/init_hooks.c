@@ -6,7 +6,7 @@
 /*   By: azainabi <azainabi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/30 04:56:30 by azainabi          #+#    #+#             */
-/*   Updated: 2024/08/30 09:46:23 by azainabi         ###   ########.fr       */
+/*   Updated: 2024/10/01 01:59:48 by azainabi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,30 +22,30 @@ void	move(t_game *game)
 {
 	if (game->move_w)
 	{
-		if (game->map[(int){game->player_posx + game->cast.dirX * game->move_speed}][(int){game->player_posy}] == '0')
+		if (ft_strchr("0O", game->map[(int){game->player_posx + game->cast.dirX * game->move_speed}][(int){game->player_posy}]) != NULL)
 			game->player_posx += game->cast.dirX * game->move_speed;
-		if (game->map[(int)(game->player_posx)][(int)(game->player_posy + game->cast.dirY * game->move_speed)] == '0')
+		if (ft_strchr("0O", game->map[(int)(game->player_posx)][(int)(game->player_posy + game->cast.dirY * game->move_speed)]) != NULL)
 			game->player_posy += game->cast.dirY * game->move_speed;
 	}
 	if (game->move_s)
 	{
-		if (game->map[(int){game->player_posx - game->cast.dirX * game->move_speed}][(int){game->player_posy}] == '0')
+		if (ft_strchr("0O", game->map[(int){game->player_posx - game->cast.dirX * game->move_speed}][(int){game->player_posy}]) != NULL)
 			game->player_posx -= game->cast.dirX * game->move_speed;
-		if (game->map[(int)(game->player_posx)][(int)(game->player_posy - game->cast.dirY * game->move_speed)] == '0')
+		if (ft_strchr("0O", game->map[(int)(game->player_posx)][(int)(game->player_posy - game->cast.dirY * game->move_speed)]) != NULL)
 			game->player_posy -= game->cast.dirY * game->move_speed;
 	}
 	if (game->move_a)
 	{
-		if (game->map[(int){game->player_posx - game->cast.planeX * game->move_speed}][(int){game->player_posy}] == '0')
+		if (ft_strchr("0O", game->map[(int){game->player_posx - game->cast.planeX * game->move_speed}][(int){game->player_posy}]) != NULL)
 			game->player_posx -= game->cast.planeX * game->move_speed;
-		if (game->map[(int)(game->player_posx)][(int)(game->player_posy - game->cast.planeY * game->move_speed)] == '0')
+		if (ft_strchr("0O", game->map[(int)(game->player_posx)][(int)(game->player_posy - game->cast.planeY * game->move_speed)]) != NULL)
 			game->player_posy -= game->cast.planeY * game->move_speed;
 	}
 	if (game->move_d)
 	{
-		if (game->map[(int){game->player_posx + game->cast.planeX * game->move_speed}][(int){game->player_posy}] == '0')
+		if (ft_strchr("0O", game->map[(int){game->player_posx + game->cast.planeX * game->move_speed}][(int){game->player_posy}]) != NULL)
 			game->player_posx += game->cast.planeX * game->move_speed;
-		if (game->map[(int)(game->player_posx)][(int)(game->player_posy + game->cast.planeY * game->move_speed)] == '0')
+		if (ft_strchr("0O", game->map[(int)(game->player_posx)][(int)(game->player_posy + game->cast.planeY * game->move_speed)]) != NULL)
 			game->player_posy += game->cast.planeY * game->move_speed;
 	}
 	if (game->move_right)
@@ -74,10 +74,17 @@ void	move(t_game *game)
 	}
 	if (game->key_o)
 	{
-		game->door_anim = 1;
-		game->door_time = 0;
-		game->door_move = 0;
-		// game->closed = 0;
+		// Get_d_cord(game);
+		// if (game->closed == 0)
+		// {
+		// 	game->closed = 1;
+		// 	game->map[game->doorX][game->doorY] = 'D';
+		// }
+		// else
+		// {
+		// 	game->closed = 0;
+		// 	game->map[game->doorX][game->doorY] = '0';
+		// }
 	}
 	if (game->key_up) {
 		game->move_up-=4;
@@ -106,7 +113,17 @@ int	key_press(int key, t_game *game)
 	if (key == KEY_SPACE)
 		game->space_hit = 1;
 	if (key == KEY_O && is_near_d_wall(game)) {
-		printf("clicked\n");
+		Get_d_cord(game);
+		if (game->closed == 0)
+		{
+			game->closed = 1;
+			game->map[game->doorX][game->doorY] = 'D';
+		}
+		else
+		{
+			game->closed = 0;
+			game->map[game->doorX][game->doorY] = 'O';
+		}
 		game->key_o = 1;
 	}
 	if (key == KEY_UP )
@@ -141,20 +158,130 @@ int	key_release(int key, t_game *game)
 	return 0;
 }
 
+void draw_line(int x0, int y0, int x1, int y1, int color, t_game *game)
+{
+    int dx = abs(x1 - x0);
+    int dy = -abs(y1 - y0);
+    int sx = x0 < x1 ? 1 : -1;
+    int sy = y0 < y1 ? 1 : -1;
+    int err = dx + dy;
+    int e2;
+
+    while (1)
+    {
+        draw_pixel(x0, y0, game, color);
+        if (x0 == x1 && y0 == y1)
+            break;
+        e2 = 2 * err;
+        if (e2 >= dy)
+        {
+            err += dy;
+            x0 += sx;
+        }
+        if (e2 <= dx)
+        {
+            err += dx;
+            y0 += sy;
+        }
+    }
+}
+
+void draw_minimap(t_game *game)
+{
+    for (int y = 10; y < 10 + 200; y++)
+    {
+        for (int x = 10; x < 10 + 200; x++)
+        {
+            draw_pixel(x, y, game, 0x222222); 
+        }
+    }
+    int viewport_size = 20;
+    int half_viewport = viewport_size / 2;
+
+    int start_i = (int)game->player_posx - half_viewport;
+    int end_i = (int)game->player_posx + half_viewport;
+    int start_j = (int)game->player_posy - half_viewport;
+    int end_j = (int)game->player_posy + half_viewport;
+
+    if (start_i < 0) {
+        start_i = 0;
+    }
+    if (end_i > game->mapx1) {
+        end_i = game->mapx1;
+    }
+    if (start_j < 0) {
+        start_j = 0;
+    }
+    if (end_j > game->mapy1) {
+        end_j = game->mapy1;
+    }
+
+    int viewport_width = end_j - start_j;
+    int viewport_height = end_i - start_i;
+
+    double scale_x = (double)200 / (double)viewport_width;
+    double scale_y = (double)200 / (double)viewport_height;
+
+    for (int i = start_i; i < end_i; i++)
+    {
+        for (int j = start_j; j < end_j; j++)
+        {
+            char cell = game->map[i][j];
+
+            if (cell == '1' || cell =='D' || cell == 'O')
+            {
+                double x = 10 + ((j - start_j) * scale_x);
+                double y = 10 + ((i - start_i) * scale_y);
+                int width = (int)(scale_x + 1.0);
+                int height = (int)(scale_y + 1.0);
+				if (cell == 'D') {
+                	draw_rectangle((int)x, (int)y, width, height, 0xFF0000, game);
+				} else if (cell == 'O') {
+                	draw_rectangle((int)x, (int)y, width, height, 0x00FF00, game);
+				} else {
+                	draw_rectangle((int)x, (int)y, width, height, 0xFFFFFF, game);
+				}
+            }
+        }
+    }
+
+    double player_map_x = game->player_posy;
+    double player_map_y = game->player_posx;
+
+    double player_minimap_x = 10 + ((player_map_x - start_j) * scale_x);
+    double player_minimap_y = 10 + ((player_map_y - start_i) * scale_y);
+
+    int player_size = 5;
+    draw_rectangle(
+        (int)(player_minimap_x - player_size / 2),
+        (int)(player_minimap_y - player_size / 2),
+        player_size,
+        player_size,
+        0xFF0000,
+        game
+    );
+
+    double dir_x = game->cast.dirY;
+    double dir_y = game->cast.dirX;
+    double dir_length = 10.0;
+
+    double line_end_x = player_minimap_x + (dir_x * dir_length);
+    double line_end_y = player_minimap_y + (dir_y * dir_length);
+
+    draw_line(
+        (int)player_minimap_x,
+        (int)player_minimap_y,
+        (int)line_end_x,
+        (int)line_end_y,
+        0xFFFF00,
+        game
+    );
+}
+
+
 void	update_game(t_game *game)
 {
 	static char	*paths[] = {"./textures/1-x.xpm", "./textures/2-x.xpm", "./textures/3-x.xpm", "./textures/4-x.xpm", "./textures/5-x.xpm"};
-
-	if (game->flag) {
-		game->door_time++;
-		if (game->door_time > 120) {
-			game->flag = 0;
-			game->door_time = 0;
-			game->map[game->doorX][game->doorY] = 'D';
-			// game->door_close_anim = 1;
-			// game->closed = 1;
-		}
-	}
 
 	if (game->gun_anim)
 	{
@@ -165,43 +292,21 @@ void	update_game(t_game *game)
 			game->gun_frame++;
 			if (game->gun_frame > 4)
 			{
-				game->door_health--;
 				game->gun_anim = 0;
 				game->gun_frame = 0;
 			}
 		}
 	}
-	if (game->door_anim == 1 || !game->door_health)
-	{
-		// game->door_move+=10;
-		// if (game->door_move >= game->cast.lineheight / 2)
-		// {
-			game->map[game->doorX][game->doorY] = '0';
-			game->door_anim = 0;
-			game->flag = 1;
-			// game->closed = 0;
-		// 	game->door_move = 0;
-		// }
-	}
-	// if (game->door_close_anim)
-	// {
-	// 	printf("closing\n");
-	// 	game->map[game->doorX][game->doorY] = 'D';
-	// 	game->door_close_anim = 0;
-	// 	// game->door_close_move += 10;
-	// 	// if (game->door_close_move >= game->cast.lineheight / 2)
-	// 	// {
-	// 	// 	printf("Done Closing\n");
-	// 	// 	game->door_anim = 0;
-	// 	// 	game->door_close_anim = 0;
-	// 	// }
-	// }
+
+
+
 	mlx_clear_window(game->mlx_t.mlx_ptr, game->mlx_t.mlx_window);
 	move(game);
 	casting(game, &game->cast);
 	// render_map(game);
 	// if (game->map[game->cast.centerX][game->cast.centerY] == game->map[game->doorX][game->doorY])
 		draw_cube(&(t_vector2d){(game->Width / 2 -5) , (game->Height / 2 - 5)}, 10, 0xFF0000, game);
+	draw_minimap(game);
 	mlx_put_image_to_window(game->mlx_t.mlx_ptr, game->mlx_t.mlx_window, game->mlx_t.img.mlx_img, 0, 0);
 	if (game->gun_anim)
 		draw_gun(game, paths[game->gun_frame]);
