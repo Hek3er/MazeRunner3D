@@ -6,7 +6,7 @@
 /*   By: sel-jett <sel-jett@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/03 21:29:42 by sel-jett          #+#    #+#             */
-/*   Updated: 2024/10/01 16:20:54 by sel-jett         ###   ########.fr       */
+/*   Updated: 2024/10/01 16:31:20 by sel-jett         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -88,6 +88,18 @@ int path_of_texture_name(char *line, char *texture_name)
 	return (-1);
 }
 
+int path_of_ciel_name(char *line, char *texture_name)
+{
+	int i = 0;
+	int save_first_index = 0;
+	
+	int check = 0;
+	while (line[i] && line[i] < 33)
+		i++;
+	if (line[i] && !ft_strncmp(texture_name, (const char *)(line + i), 1))
+		return (i);
+	return (-1);
+}
 
 int	ft_textures(t_game *maps, char *av)
 {
@@ -107,10 +119,10 @@ int	ft_textures(t_game *maps, char *av)
 			maps->we_texture = path_of_texture(line + path_of_texture_name(line, "WE") + 2);
 		else if (path_of_texture_name(line, "EA") >= 0)
 			maps->ea_texture = path_of_texture(line + path_of_texture_name(line, "EA") + 2);
-		else if (!ft_strncmp("C", (const char *)line, 1))
-			maps->ciel_color = ft_ciel_color(path_of_texture(line + 2));
-		else if (!ft_strncmp("F", (const char *)line, 1))
-			maps->floor_color = ft_ciel_color(path_of_texture(line + 2));
+		else if (path_of_ciel_name(line, "C") >= 0)
+			maps->ciel_color = ft_ciel_color(path_of_texture(line + 1 + path_of_ciel_name(line, "C")));
+		else if (path_of_ciel_name(line, "F") >= 0)
+			maps->floor_color = ft_ciel_color(path_of_texture(line + 1 + path_of_ciel_name(line, "F")));
 		else if (maps->no_texture && maps->we_texture && maps->ea_texture && \
 			maps->so_texture  && maps->floor_color != -1 && maps->ciel_color != -1)
 			return (maps->fd = fd, maps->line = line, fd);
