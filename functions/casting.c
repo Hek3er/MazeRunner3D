@@ -6,20 +6,11 @@
 /*   By: azainabi <azainabi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/12 12:11:46 by azainabi          #+#    #+#             */
-/*   Updated: 2024/10/12 12:24:36 by azainabi         ###   ########.fr       */
+/*   Updated: 2024/10/12 12:29:29 by azainabi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/cube3d.h"
-
-static void set_wall_t(t_game *game) 
-{
-	draw_wall_t(game, game->no_texture, 0);
-	draw_wall_t(game, "./textures/door.xpm", 1);
-	draw_wall_t(game, game->so_texture, 2);
-	draw_wall_t(game, game->we_texture, 3);
-	draw_wall_t(game, game->ea_texture, 4);
-}
 
 static void	initial_calculation(t_game *game, t_cast *cast, int x)
 {
@@ -94,7 +85,8 @@ static void	check_collision(t_game *game, t_cast *cast)
 		cast->mapY += cast->stepy;
 		cast->side = 1;
 	}
-	if (game->map[cast->mapX][cast->mapY] == '1' || game->map[cast->mapX][cast->mapY] =='D')
+	if (game->map[cast->mapX][cast->mapY] == '1' \
+	|| game->map[cast->mapX][cast->mapY] == 'D')
 		cast->hit = 1;
 }
 
