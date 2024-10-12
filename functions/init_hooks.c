@@ -6,7 +6,7 @@
 /*   By: azainabi <azainabi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/30 04:56:30 by azainabi          #+#    #+#             */
-/*   Updated: 2024/10/01 02:17:04 by azainabi         ###   ########.fr       */
+/*   Updated: 2024/10/12 12:01:25 by azainabi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,7 +74,7 @@ void	move(t_game *game)
 	}
 	if (game->key_o)
 	{
-		// Get_d_cord(game);
+		// get_d_cord(game);
 		// if (game->closed == 0)
 		// {
 		// 	game->closed = 1;
@@ -112,8 +112,8 @@ int	key_press(int key, t_game *game)
 		game->move_left = 1;
 	if (key == KEY_SPACE)
 		game->space_hit = 1;
-	if (key == KEY_O && is_near_d_wall(game)) {
-		Get_d_cord(game);
+	if (key == KEY_O && is_near_door(game)) {
+		get_d_cord(game);
 		if (game->closed == 0)
 		{
 			game->closed = 1;
@@ -309,7 +309,7 @@ void	update_game(t_game *game)
 		draw_gun(game, paths[game->gun_frame]);
 	else
 		draw_gun(game, "./textures/1-x.xpm");
-	if (is_near_d_wall(game)) {
+	if (is_near_door(game)) {
 		mlx_string_put(game->mlx_t.mlx_ptr, game->mlx_t.mlx_window, game->Width / 2, game->Height / 2, 0xff0000, "Door here");
 	}
 }
