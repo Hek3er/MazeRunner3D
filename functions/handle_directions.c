@@ -6,7 +6,7 @@
 /*   By: azainabi <azainabi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/01 02:29:20 by azainabi          #+#    #+#             */
-/*   Updated: 2024/10/01 02:29:43 by azainabi         ###   ########.fr       */
+/*   Updated: 2024/10/12 12:32:35 by azainabi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,17 +16,17 @@ static void	handle_north_south(t_game *game)
 {
 	if (game->orientation == 'N')
 	{
-		game->cast.dirX = 0;
-		game->cast.dirY = -1;
-		game->cast.planeX = get_fov(FOV);
-		game->cast.planeY = 0;
+		game->cast.dirx = 0;
+		game->cast.diry = -1;
+		game->cast.planex = get_fov(FOV);
+		game->cast.planey = 0;
 	}
 	if (game->orientation == 'S')
 	{
-		game->cast.dirX = 0;
-		game->cast.dirY = 1;
-		game->cast.planeX = -get_fov(FOV);
-		game->cast.planeY = 0;
+		game->cast.dirx = 0;
+		game->cast.diry = 1;
+		game->cast.planex = -get_fov(FOV);
+		game->cast.planey = 0;
 	}
 }
 
@@ -34,17 +34,17 @@ void	handle_directions(t_game *game)
 {
 	if (game->orientation == 'W')
 	{
-		game->cast.dirX = -1;
-		game->cast.dirY = 0;
-		game->cast.planeX = 0;
-		game->cast.planeY = -get_fov(FOV);
+		game->cast.dirx = -1;
+		game->cast.diry = 0;
+		game->cast.planex = 0;
+		game->cast.planey = -get_fov(FOV);
 	}
 	if (game->orientation == 'E')
 	{
-		game->cast.dirX = 1;
-		game->cast.dirY = 0;
-		game->cast.planeX = 0;
-		game->cast.planeY = get_fov(FOV);
+		game->cast.dirx = 1;
+		game->cast.diry = 0;
+		game->cast.planex = 0;
+		game->cast.planey = get_fov(FOV);
 	}
 	if (game->orientation == 'N' || game->orientation == 'S')
 	{

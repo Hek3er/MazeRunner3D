@@ -6,7 +6,7 @@
 /*   By: azainabi <azainabi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/30 04:56:30 by azainabi          #+#    #+#             */
-/*   Updated: 2024/10/12 12:01:25 by azainabi         ###   ########.fr       */
+/*   Updated: 2024/10/12 12:35:57 by azainabi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,49 +22,49 @@ void	move(t_game *game)
 {
 	if (game->move_w)
 	{
-		if (ft_strchr("0O", game->map[(int){game->player_posx + game->cast.dirX * game->move_speed}][(int){game->player_posy}]) != NULL)
-			game->player_posx += game->cast.dirX * game->move_speed;
-		if (ft_strchr("0O", game->map[(int)(game->player_posx)][(int)(game->player_posy + game->cast.dirY * game->move_speed)]) != NULL)
-			game->player_posy += game->cast.dirY * game->move_speed;
+		if (ft_strchr("0O", game->map[(int){game->player_posx + game->cast.dirx * game->move_speed}][(int){game->player_posy}]) != NULL)
+			game->player_posx += game->cast.dirx * game->move_speed;
+		if (ft_strchr("0O", game->map[(int)(game->player_posx)][(int)(game->player_posy + game->cast.diry * game->move_speed)]) != NULL)
+			game->player_posy += game->cast.diry * game->move_speed;
 	}
 	if (game->move_s)
 	{
-		if (ft_strchr("0O", game->map[(int){game->player_posx - game->cast.dirX * game->move_speed}][(int){game->player_posy}]) != NULL)
-			game->player_posx -= game->cast.dirX * game->move_speed;
-		if (ft_strchr("0O", game->map[(int)(game->player_posx)][(int)(game->player_posy - game->cast.dirY * game->move_speed)]) != NULL)
-			game->player_posy -= game->cast.dirY * game->move_speed;
+		if (ft_strchr("0O", game->map[(int){game->player_posx - game->cast.dirx * game->move_speed}][(int){game->player_posy}]) != NULL)
+			game->player_posx -= game->cast.dirx * game->move_speed;
+		if (ft_strchr("0O", game->map[(int)(game->player_posx)][(int)(game->player_posy - game->cast.diry * game->move_speed)]) != NULL)
+			game->player_posy -= game->cast.diry * game->move_speed;
 	}
 	if (game->move_a)
 	{
-		if (ft_strchr("0O", game->map[(int){game->player_posx - game->cast.planeX * game->move_speed}][(int){game->player_posy}]) != NULL)
-			game->player_posx -= game->cast.planeX * game->move_speed;
-		if (ft_strchr("0O", game->map[(int)(game->player_posx)][(int)(game->player_posy - game->cast.planeY * game->move_speed)]) != NULL)
-			game->player_posy -= game->cast.planeY * game->move_speed;
+		if (ft_strchr("0O", game->map[(int){game->player_posx - game->cast.planex * game->move_speed}][(int){game->player_posy}]) != NULL)
+			game->player_posx -= game->cast.planex * game->move_speed;
+		if (ft_strchr("0O", game->map[(int)(game->player_posx)][(int)(game->player_posy - game->cast.planey * game->move_speed)]) != NULL)
+			game->player_posy -= game->cast.planey * game->move_speed;
 	}
 	if (game->move_d)
 	{
-		if (ft_strchr("0O", game->map[(int){game->player_posx + game->cast.planeX * game->move_speed}][(int){game->player_posy}]) != NULL)
-			game->player_posx += game->cast.planeX * game->move_speed;
-		if (ft_strchr("0O", game->map[(int)(game->player_posx)][(int)(game->player_posy + game->cast.planeY * game->move_speed)]) != NULL)
-			game->player_posy += game->cast.planeY * game->move_speed;
+		if (ft_strchr("0O", game->map[(int){game->player_posx + game->cast.planex * game->move_speed}][(int){game->player_posy}]) != NULL)
+			game->player_posx += game->cast.planex * game->move_speed;
+		if (ft_strchr("0O", game->map[(int)(game->player_posx)][(int)(game->player_posy + game->cast.planey * game->move_speed)]) != NULL)
+			game->player_posy += game->cast.planey * game->move_speed;
 	}
 	if (game->move_right)
 	{
-		double oldDirX = game->cast.dirX;
-		game->cast.dirX = game->cast.dirX * cos(game->rotating_speed) - game->cast.dirY * sin(game->rotating_speed);
-		game->cast.dirY = oldDirX * sin(game->rotating_speed) + game->cast.dirY * cos(game->rotating_speed);
-		double oldplaneX = game->cast.planeX;
-		game->cast.planeX = game->cast.planeX * cos(game->rotating_speed) - game->cast.planeY * sin(game->rotating_speed);
-		game->cast.planeY = oldplaneX * sin(game->rotating_speed) + game->cast.planeY * cos(game->rotating_speed);
+		double oldDirX = game->cast.dirx;
+		game->cast.dirx = game->cast.dirx * cos(game->rotating_speed) - game->cast.diry * sin(game->rotating_speed);
+		game->cast.diry = oldDirX * sin(game->rotating_speed) + game->cast.diry * cos(game->rotating_speed);
+		double oldplaneX = game->cast.planex;
+		game->cast.planex = game->cast.planex * cos(game->rotating_speed) - game->cast.planey * sin(game->rotating_speed);
+		game->cast.planey = oldplaneX * sin(game->rotating_speed) + game->cast.planey * cos(game->rotating_speed);
 	}
 	if (game->move_left)
 	{
-		double oldDirX = game->cast.dirX;
-		game->cast.dirX = game->cast.dirX * cos(-game->rotating_speed) - game->cast.dirY * sin(-game->rotating_speed);
-		game->cast.dirY = oldDirX * sin(-game->rotating_speed) + game->cast.dirY * cos(-game->rotating_speed);
-		double oldplaneX = game->cast.planeX;
-		game->cast.planeX = game->cast.planeX * cos(-game->rotating_speed) - game->cast.planeY * sin(-game->rotating_speed);
-		game->cast.planeY = oldplaneX * sin(-game->rotating_speed) + game->cast.planeY * cos(-game->rotating_speed);
+		double oldDirX = game->cast.dirx;
+		game->cast.dirx = game->cast.dirx * cos(-game->rotating_speed) - game->cast.diry * sin(-game->rotating_speed);
+		game->cast.diry = oldDirX * sin(-game->rotating_speed) + game->cast.diry * cos(-game->rotating_speed);
+		double oldplaneX = game->cast.planex;
+		game->cast.planex = game->cast.planex * cos(-game->rotating_speed) - game->cast.planey * sin(-game->rotating_speed);
+		game->cast.planey = oldplaneX * sin(-game->rotating_speed) + game->cast.planey * cos(-game->rotating_speed);
 	}
 	if (game->space_hit)
 	{
@@ -78,12 +78,12 @@ void	move(t_game *game)
 		// if (game->closed == 0)
 		// {
 		// 	game->closed = 1;
-		// 	game->map[game->doorX][game->doorY] = 'D';
+		// 	game->map[game->doorx][game->doory] = 'D';
 		// }
 		// else
 		// {
 		// 	game->closed = 0;
-		// 	game->map[game->doorX][game->doorY] = '0';
+		// 	game->map[game->doorx][game->doory] = '0';
 		// }
 	}
 	if (game->key_up) {
@@ -117,12 +117,12 @@ int	key_press(int key, t_game *game)
 		if (game->closed == 0)
 		{
 			game->closed = 1;
-			game->map[game->doorX][game->doorY] = 'D';
+			game->map[game->doorx][game->doory] = 'D';
 		}
 		else
 		{
 			game->closed = 0;
-			game->map[game->doorX][game->doorY] = 'O';
+			game->map[game->doorx][game->doory] = 'O';
 		}
 		game->key_o = 1;
 	}
@@ -261,8 +261,8 @@ void draw_minimap(t_game *game)
         game
     );
 
-    double dir_x = game->cast.dirY;
-    double dir_y = game->cast.dirX;
+    double dir_x = game->cast.diry;
+    double dir_y = game->cast.dirx;
     double dir_length = 10.0;
 
     double line_end_x = player_minimap_x + (dir_x * dir_length);
@@ -310,7 +310,7 @@ void	update_game(t_game *game)
 	else
 		draw_gun(game, "./textures/1-x.xpm");
 	if (is_near_door(game)) {
-		mlx_string_put(game->mlx_t.mlx_ptr, game->mlx_t.mlx_window, game->Width / 2, game->Height / 2, 0xff0000, "Door here");
+		mlx_string_put(game->mlx_t.mlx_ptr, game->mlx_t.mlx_window, game->width / 2, game->height / 2, 0xff0000, "Door here");
 	}
 }
 

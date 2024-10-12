@@ -6,7 +6,7 @@
 /*   By: azainabi <azainabi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/12 11:57:15 by azainabi          #+#    #+#             */
-/*   Updated: 2024/10/12 12:01:37 by azainabi         ###   ########.fr       */
+/*   Updated: 2024/10/12 12:35:31 by azainabi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,12 +19,12 @@ int is_near_door(t_game *maps)
 
     if ((x > 0 && maps->map[x - 1][y] == 'D') ||
 	    (x > 0 && maps->map[x - 1][y] == 'O') ||
-        (x < maps->Height - 1 && maps->map[x + 1][y] == 'D') ||
-		(x < maps->Height - 1 && maps->map[x + 1][y] == 'O') ||
+        (x < maps->height - 1 && maps->map[x + 1][y] == 'D') ||
+		(x < maps->height - 1 && maps->map[x + 1][y] == 'O') ||
         (y > 0 && maps->map[x][y - 1] == 'D') ||
 		(y > 0 && maps->map[x][y - 1] == 'O') ||
-        (y < maps->Width - 1 && maps->map[x][y + 1] == 'D') ||
-		(y < maps->Width - 1 && maps->map[x][y + 1] == 'O'))
+        (y < maps->width - 1 && maps->map[x][y + 1] == 'D') ||
+		(y < maps->width - 1 && maps->map[x][y + 1] == 'O'))
     {
         return 1;
     }

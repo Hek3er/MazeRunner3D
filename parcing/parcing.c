@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parcing.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: sel-jett <sel-jett@student.42.fr>          +#+  +:+       +#+        */
+/*   By: azainabi <azainabi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/03 21:29:42 by sel-jett          #+#    #+#             */
-/*   Updated: 2024/10/01 16:31:20 by sel-jett         ###   ########.fr       */
+/*   Updated: 2024/10/12 12:35:31 by azainabi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,8 +15,8 @@
 void	ft_init_map(t_game *maps)
 {
 	maps->number_of_players = 0;
-	maps->Width = 0;
-	maps->Height = 0;
+	maps->width = 0;
+	maps->height = 0;
 	maps->map = NULL;
 	maps->mapx = 0;
 	maps->mapy = 0;

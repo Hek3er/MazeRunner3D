@@ -6,7 +6,7 @@
 /*   By: azainabi <azainabi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/30 04:56:46 by azainabi          #+#    #+#             */
-/*   Updated: 2024/10/12 12:26:02 by azainabi         ###   ########.fr       */
+/*   Updated: 2024/10/12 12:35:31 by azainabi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,7 +56,7 @@ int main(int ac, char **av)
 	
 	maps.player_posx += 0.5;
 	maps.player_posy += 0.5;
-	maps.mapx1 = maps.Height;
+	maps.mapx1 = maps.height;
 	maps.mapy1 = get_longest_line_length(maps.map);
 	init_param(&maps, &maps.cast);
 	casting(&maps, &maps.cast);

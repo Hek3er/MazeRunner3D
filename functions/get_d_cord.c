@@ -6,7 +6,7 @@
 /*   By: azainabi <azainabi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/12 11:50:35 by azainabi          #+#    #+#             */
-/*   Updated: 2024/10/12 12:01:25 by azainabi         ###   ########.fr       */
+/*   Updated: 2024/10/12 12:35:57 by azainabi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,8 +14,8 @@
 
 static void set_door_cords(t_game *maps, int x, int y)
 {
-    maps->doorX = x;
-    maps->doorY = y;
+    maps->doorx = x;
+    maps->doory = y;
 }
 
 void	get_d_cord(t_game *maps)
@@ -30,7 +30,7 @@ void	get_d_cord(t_game *maps)
     {
         set_door_cords(maps, x - 1, y);
     }
-	if (x < maps->Height - 1 && \
+	if (x < maps->height - 1 && \
     (maps->map[x + 1][y] == 'D' || maps->map[x + 1][y] == 'O'))
     {
         set_door_cords(maps, x + 1, y);
@@ -40,7 +40,7 @@ void	get_d_cord(t_game *maps)
     {
         set_door_cords(maps, x, y - 1);
     }
-	if (y < maps->Width - 1 && \
+	if (y < maps->width - 1 && \
     (maps->map[x][y + 1] == 'D' || maps->map[x][y + 1] == 'O'))
     {
         set_door_cords(maps, x, y + 1);

@@ -6,19 +6,19 @@
 /*   By: azainabi <azainabi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/30 04:56:10 by azainabi          #+#    #+#             */
-/*   Updated: 2024/10/01 02:36:47 by azainabi         ###   ########.fr       */
+/*   Updated: 2024/10/12 12:35:31 by azainabi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/cube3d.h"
 
-int	extract_color(t_game *game, int texX, int texY)
+int	extract_color(t_game *game, int tex_x, int texY)
 {
 	char		*c;
 	int			offset;
 
 	offset = (texY * game->mlx_t.texture_wall[game->index].len) \
-	+ (texX * (game->mlx_t.texture_wall[game->index].bpp / 8));
+	+ (tex_x * (game->mlx_t.texture_wall[game->index].bpp / 8));
 	c = game->mlx_t.texture_wall[game->index].img_data + offset;
 	if (game->mlx_t.texture_wall[game->index].endian == 0)
 		return ((((unsigned char)c[2]) << 16)
@@ -44,7 +44,7 @@ void	draw_floor(t_game *game)
 	int	y;
 
 	y = game->end_draw;
-	while (y < game->Height)
+	while (y < game->height)
 	{
 		draw_pixel(game->x, y + game->move_up, game, game->floor_color);
 		y++;
@@ -68,7 +68,7 @@ void	draw_vert_line(t_game *game)
 		texy = (int)game->cast.texpos & \
 		(game->mlx_t.texture_wall[game->index].height - 1);
 		game->cast.texpos += game->cast.step;
-		tex_color = extract_color(game, game->cast.texX, texy);
+		tex_color = extract_color(game, game->cast.tex_x, texy);
 		if (game->index == 1)
 			draw_pixel(game->x, y + game->move_up, game, tex_color);
 		else

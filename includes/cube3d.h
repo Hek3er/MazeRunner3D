@@ -6,7 +6,7 @@
 /*   By: azainabi <azainabi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/30 04:56:48 by azainabi          #+#    #+#             */
-/*   Updated: 2024/10/12 12:28:13 by azainabi         ###   ########.fr       */
+/*   Updated: 2024/10/12 12:37:56 by azainabi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,32 +69,30 @@ typedef struct mlx
 
 typedef struct cast
 {
-	double	dirX;
-	double	dirY;
-	double	planeX;
-	double	planeY;
-	double	raydirX;
-	double	raydirY;
-	double	camX;
-	double	deltaX;
-	double	deltaY;
-	double	sidedistX;
-	double	sidedistY;
+	double	dirx;
+	double	diry;
+	double	planex;
+	double	planey;
+	double	raydirx;
+	double	raydiry;
+	double	camx;
+	double	deltax;
+	double	deltay;
+	double	sidedistx;
+	double	sidedisty;
 	double	walldist;
-	double	wallX;
+	double	wallx;
 	double	step;
 	double	texpos;
 	int		stepx;
 	int		stepy;
 	int		side;
 	int		hit;
-	int		mapX;
-	int		mapY;
-	int		texX;
+	int		mapx;
+	int		mapy;
+	int		tex_x;
 	int		flag_center;
 	double	distance_to_center;
-	int		centerX;
-	int		centerY;
 	int		lineheight;
 }				t_cast;
 typedef struct game
@@ -102,8 +100,8 @@ typedef struct game
 	int			index;
 	int			fd; // added by salah
 	char		*line; // added by salah
-	int			Width;
-	int			Height;
+	int			width;
+	int			height;
 	char		**map;
 	int			mapx; // how many rows in map
 	int			mapy; // how many columns in map
@@ -138,22 +136,21 @@ typedef struct game
 	int			key_c;
 	int			key_up;
 	int			key_down;
-	int			doorX;
-	int			doorY;
+	int			doorx;
+	int			doory;
 	int			closed;
 	int			move_up;
 	int			move_down;
 	t_mlx		mlx_t;
 	t_cast		cast;
+	int			gun_frame;
+	int			gun_timer;
 
-	int gun_frame;
-    int gun_timer;
-
-}               t_game;
+}	t_game;
 
 //parcing
 char	*ft_strchr(const char *s, int c);
-int 	is_near_door(t_game *maps);
+int		is_near_door(t_game *maps);
 void	ft_init_map(t_game *maps);
 int		ft_textures(t_game *maps, char *av);
 void	print_map(char **map);
@@ -190,17 +187,17 @@ void	ft_exit(char *str, int code);
 void	draw_pixel(int x, int y, t_game *game, int color);
 void	init_vector(t_vector2d *vec, int x, int y);
 void	init_hooks(t_game *game);
-void 	draw_vert_line(t_game *game);
+void	draw_vert_line(t_game *game);
 int		wall_hit(t_game *game, int x, int y);
 void	init_param(t_game *game, t_cast *cast);
 void	init_map(t_game *game); // parsing
 void	casting(t_game *game, t_cast *cast);
 void	draw_gun(t_game *game, char *path);
 void	handle_directions(t_game *game);
-void 	update_game(t_game *game);
+void	update_game(t_game *game);
 void	draw_wall_t(t_game *game, char *path, int i);
 void	init_texture(t_game *game, t_cast *cast);
 void	get_d_cord(t_game *maps);
-void 	set_wall_t(t_game *game);
+void	set_wall_t(t_game *game);
 
-# endif
+#endif

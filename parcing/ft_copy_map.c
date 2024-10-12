@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_copy_map.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: sel-jett <sel-jett@student.42.fr>          +#+  +:+       +#+        */
+/*   By: azainabi <azainabi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/12 00:07:48 by sel-jett          #+#    #+#             */
-/*   Updated: 2024/07/14 22:29:02 by sel-jett         ###   ########.fr       */
+/*   Updated: 2024/10/12 12:35:31 by azainabi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,8 +75,8 @@ void	ft_copy_map(char *av, t_game *maps)
 		if (check_firstline(new_line) == 1)
 		{
 			i = 0;
-			maps->map = my_malloc((sizeof(char *) * (maps->Height + 1)), 1);
-			while (new_line && i < maps->Height)
+			maps->map = my_malloc((sizeof(char *) * (maps->height + 1)), 1);
+			while (new_line && i < maps->height)
 			{
 				maps->map[i] = ft_strdup(new_line);
 				new_line = get_next_line(fd);

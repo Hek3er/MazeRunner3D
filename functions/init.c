@@ -6,7 +6,7 @@
 /*   By: azainabi <azainabi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/30 04:56:00 by azainabi          #+#    #+#             */
-/*   Updated: 2024/10/01 02:31:08 by azainabi         ###   ########.fr       */
+/*   Updated: 2024/10/12 12:35:57 by azainabi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,8 +25,8 @@ void	draw_gun(t_game *game, char *path)
 	mlx_get_data_addr(game->mlx_t.texture.mlx_img, &game->mlx_t.texture.bpp, \
 	&game->mlx_t.texture.len, &game->mlx_t.texture.endian);
 	mlx_put_image_to_window(game->mlx_t.mlx_ptr, game->mlx_t.mlx_window, \
-	game->mlx_t.texture.mlx_img, game->Width / 2 - game->mlx_t.texture.width \
-	/ 2, game->Height - game->mlx_t.texture.height);
+	game->mlx_t.texture.mlx_img, game->width / 2 - game->mlx_t.texture.width \
+	/ 2, game->height - game->mlx_t.texture.height);
 }
 
 void	draw_wall_t(t_game *game, char *path, int i)
@@ -50,11 +50,11 @@ static void	init_mlx(t_game *game)
 	if (!game->mlx_t.mlx_ptr)
 		ft_exit("mlx failed to init\n", 1);
 	game->mlx_t.mlx_window = mlx_new_window(game->mlx_t.mlx_ptr, \
-	game->Width, game->Height, "Cube3d");
+	game->width, game->height, "Cube3d");
 	if (!game->mlx_t.mlx_window)
 		ft_exit("mlx failed to init window\n", 1);
 	game->mlx_t.img.mlx_img = mlx_new_image(game->mlx_t.mlx_ptr, \
-	game->Width, game->Height);
+	game->width, game->height);
 	if (!game->mlx_t.img.mlx_img)
 	{
 		mlx_destroy_window(game->mlx_t.mlx_ptr, game->mlx_t.mlx_window);
@@ -66,8 +66,8 @@ static void	init_mlx(t_game *game)
 
 void	init_param(t_game *game, t_cast *cast)
 {
-	game->Width = 1200;
-	game->Height = 900;
+	game->width = 1200;
+	game->height = 900;
 	game->gun_anim = 0;
 	game->move_w = 0;
 	game->move_s = 0;
@@ -80,8 +80,8 @@ void	init_param(t_game *game, t_cast *cast)
 	game->rotating_speed = 0.1;
 	game->wall_height = 0.7;
 	cast->hit = 0;
-	game->doorX = 0;
-	game->doorY = 0;
+	game->doorx = 0;
+	game->doory = 0;
 	game->index = 0;
 	game->closed = 1;
 	game->key_o = 0;

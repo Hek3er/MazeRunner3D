@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_read_map.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: sel-jett <sel-jett@student.42.fr>          +#+  +:+       +#+        */
+/*   By: azainabi <azainabi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/10 09:44:21 by sel-jett          #+#    #+#             */
-/*   Updated: 2024/07/14 22:28:50 by sel-jett         ###   ########.fr       */
+/*   Updated: 2024/10/12 12:35:31 by azainabi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -98,6 +98,6 @@ int	ft_read_map(int fd, char *line, t_game *maps)
 		ex_line = line;
 		line = get_next_line(fd);
 	}
-	maps->Height = check;
+	maps->height = check;
 	return (close(fd), check_last_line(ex_line));
 }
