@@ -6,7 +6,7 @@
 /*   By: azainabi <azainabi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/30 04:56:00 by azainabi          #+#    #+#             */
-/*   Updated: 2024/10/12 12:35:57 by azainabi         ###   ########.fr       */
+/*   Updated: 2024/10/15 20:51:17 by azainabi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,8 +66,8 @@ static void	init_mlx(t_game *game)
 
 void	init_param(t_game *game, t_cast *cast)
 {
-	game->width = 1200;
-	game->height = 900;
+	game->width = 1920;
+	game->height = 1280;
 	game->gun_anim = 0;
 	game->move_w = 0;
 	game->move_s = 0;
@@ -77,7 +77,7 @@ void	init_param(t_game *game, t_cast *cast)
 	game->move_left = 0;
 	game->space_hit = 0;
 	game->move_speed = 0.2;
-	game->rotating_speed = 0.1;
+	game->rotating_speed = 0.07;
 	game->wall_height = 0.7;
 	cast->hit = 0;
 	game->doorx = 0;
@@ -88,6 +88,7 @@ void	init_param(t_game *game, t_cast *cast)
 	game->move_up = 0;
 	game->key_down = 0;
 	game->key_up = 0;
+	game->old_mouse_x = 0;
 	handle_directions(game);
 	init_mlx(game);
 }

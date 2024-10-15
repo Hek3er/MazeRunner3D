@@ -6,7 +6,7 @@
 /*   By: azainabi <azainabi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/30 04:56:48 by azainabi          #+#    #+#             */
-/*   Updated: 2024/10/12 12:37:56 by azainabi         ###   ########.fr       */
+/*   Updated: 2024/10/13 19:41:42 by azainabi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -141,6 +141,7 @@ typedef struct game
 	int			closed;
 	int			move_up;
 	int			move_down;
+	int			old_mouse_x;
 	t_mlx		mlx_t;
 	t_cast		cast;
 	int			gun_frame;

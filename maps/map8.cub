@@ -3,8 +3,8 @@
  SO        textures/south.xpm
         WE                              textures/west.xpm
 
-F 255,255,255
-C 255,150,0
+F 210,180,140
+C 75,144,226
 
 11111111111111
 10010000010001

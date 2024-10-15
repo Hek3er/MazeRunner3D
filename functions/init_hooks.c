@@ -6,7 +6,7 @@
 /*   By: azainabi <azainabi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/30 04:56:30 by azainabi          #+#    #+#             */
-/*   Updated: 2024/10/12 12:35:57 by azainabi         ###   ########.fr       */
+/*   Updated: 2024/10/15 23:14:16 by azainabi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,28 @@ int	ft_close(t_game *game)
 	mlx_destroy_window(game->mlx_t.mlx_ptr, game->mlx_t.mlx_window);
 	exit(0);
 }
+
+// void	side_movement(t_game *game, int mouse)
+// {
+// 	if (game->move_right || mouse)
+// 	{
+// 		double oldDirX = game->cast.dirx;
+// 		game->cast.dirx = game->cast.dirx * cos(game->rotating_speed) - game->cast.diry * sin(game->rotating_speed);
+// 		game->cast.diry = oldDirX * sin(game->rotating_speed) + game->cast.diry * cos(game->rotating_speed);
+// 		double oldplaneX = game->cast.planex;
+// 		game->cast.planex = game->cast.planex * cos(game->rotating_speed) - game->cast.planey * sin(game->rotating_speed);
+// 		game->cast.planey = oldplaneX * sin(game->rotating_speed) + game->cast.planey * cos(game->rotating_speed);
+// 	}
+// 	if (game->move_left || mouse)
+// 	{
+// 		double oldDirX = game->cast.dirx;
+// 		game->cast.dirx = game->cast.dirx * cos(-game->rotating_speed) - game->cast.diry * sin(-game->rotating_speed);
+// 		game->cast.diry = oldDirX * sin(-game->rotating_speed) + game->cast.diry * cos(-game->rotating_speed);
+// 		double oldplaneX = game->cast.planex;
+// 		game->cast.planex = game->cast.planex * cos(-game->rotating_speed) - game->cast.planey * sin(-game->rotating_speed);
+// 		game->cast.planey = oldplaneX * sin(-game->rotating_speed) + game->cast.planey * cos(-game->rotating_speed);
+// 	}
+// }
 
 void	move(t_game *game)
 {
@@ -281,7 +303,12 @@ void draw_minimap(t_game *game)
 
 void	update_game(t_game *game)
 {
-	static char	*paths[] = {"./textures/1-x.xpm", "./textures/2-x.xpm", "./textures/3-x.xpm", "./textures/4-x.xpm", "./textures/5-x.xpm"};
+	static char *paths[] = {
+    "./textures/gun/1.xpm",
+    "./textures/gun/2.xpm",
+    "./textures/gun/3.xpm"
+};
+
 
 	if (game->gun_anim)
 	{
@@ -290,7 +317,8 @@ void	update_game(t_game *game)
 		{
 			game->gun_timer = 0;
 			game->gun_frame++;
-			if (game->gun_frame > 4)
+
+			if (game->gun_frame > 2)
 			{
 				game->gun_anim = 0;
 				game->gun_frame = 0;
@@ -308,10 +336,36 @@ void	update_game(t_game *game)
 	if (game->gun_anim)
 		draw_gun(game, paths[game->gun_frame]);
 	else
-		draw_gun(game, "./textures/1-x.xpm");
+		draw_gun(game, "./textures/gun/0.xpm");
 	if (is_near_door(game)) {
 		mlx_string_put(game->mlx_t.mlx_ptr, game->mlx_t.mlx_window, game->width / 2, game->height / 2, 0xff0000, "Door here");
 	}
+}
+
+int	mouse_fn(int x, int y, t_game *game) {
+	if (game->old_mouse_x == 0) {
+		game->old_mouse_x = x;
+	}
+	
+	if (game->old_mouse_x < x) {
+		double oldDirX = game->cast.dirx;
+		game->cast.dirx = game->cast.dirx * cos(game->rotating_speed) - game->cast.diry * sin(game->rotating_speed);
+		game->cast.diry = oldDirX * sin(game->rotating_speed) + game->cast.diry * cos(game->rotating_speed);
+		double oldplaneX = game->cast.planex;
+		game->cast.planex = game->cast.planex * cos(game->rotating_speed) - game->cast.planey * sin(game->rotating_speed);
+		game->cast.planey = oldplaneX * sin(game->rotating_speed) + game->cast.planey * cos(game->rotating_speed);
+		game->old_mouse_x = x;
+	} else if (game->old_mouse_x > x) {
+		double oldDirX = game->cast.dirx;
+		game->cast.dirx = game->cast.dirx * cos(-game->rotating_speed) - game->cast.diry * sin(-game->rotating_speed);
+		game->cast.diry = oldDirX * sin(-game->rotating_speed) + game->cast.diry * cos(-game->rotating_speed);
+		double oldplaneX = game->cast.planex;
+		game->cast.planex = game->cast.planex * cos(-game->rotating_speed) - game->cast.planey * sin(-game->rotating_speed);
+		game->cast.planey = oldplaneX * sin(-game->rotating_speed) + game->cast.planey * cos(-game->rotating_speed);
+		game->old_mouse_x = x;
+	}
+	
+	return 0;
 }
 
 void	init_hooks(t_game *game)
@@ -319,4 +373,5 @@ void	init_hooks(t_game *game)
 	mlx_hook(game->mlx_t.mlx_window, 2, 0, key_press, game);
 	mlx_hook(game->mlx_t.mlx_window, 3, 0, key_release, game);
 	mlx_hook(game->mlx_t.mlx_window, 17, 0, ft_close, game);
+	mlx_hook(game->mlx_t.mlx_window, 6, (1L<<6), mouse_fn, game);
 }
