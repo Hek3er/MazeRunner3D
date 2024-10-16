@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parcing.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: azainabi <azainabi@student.42.fr>          +#+  +:+       +#+        */
+/*   By: sel-jett <sel-jett@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/03 21:29:42 by sel-jett          #+#    #+#             */
-/*   Updated: 2024/10/12 12:35:31 by azainabi         ###   ########.fr       */
+/*   Updated: 2024/10/16 22:19:49 by sel-jett         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -126,6 +126,8 @@ int	ft_textures(t_game *maps, char *av)
 		else if (maps->no_texture && maps->we_texture && maps->ea_texture && \
 			maps->so_texture  && maps->floor_color != -1 && maps->ciel_color != -1)
 			return (maps->fd = fd, maps->line = line, fd);
+		else
+			ft_exit("Error in Textures\n", 1);
 		line = get_next_line(fd);
 	}
 	return (-1);

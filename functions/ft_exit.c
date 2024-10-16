@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_exit.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: azainabi <azainabi@student.42.fr>          +#+  +:+       +#+        */
+/*   By: sel-jett <sel-jett@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/30 04:56:20 by azainabi          #+#    #+#             */
-/*   Updated: 2024/06/30 04:56:21 by azainabi         ###   ########.fr       */
+/*   Updated: 2024/10/16 22:15:37 by sel-jett         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,5 +15,5 @@
 void	ft_exit(char *str, int code)
 {
 	ft_write(str, 2);
-	exit(code);
+	my_malloc(0, 0);
 }
