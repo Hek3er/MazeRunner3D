@@ -6,7 +6,7 @@
 /*   By: sel-jett <sel-jett@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/03 21:29:42 by sel-jett          #+#    #+#             */
-/*   Updated: 2024/10/16 22:19:49 by sel-jett         ###   ########.fr       */
+/*   Updated: 2024/10/17 00:11:42 by sel-jett         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,7 +80,7 @@ int path_of_texture_name(char *line, char *texture_name)
 	int i = 0;
 	int save_first_index = 0;
 	
-	int check = 0;
+	int check = 0; 
 	while (line[i] && line[i] < 33)
 		i++;
 	if (line[i] && !ft_strncmp(texture_name, (const char *)(line + i), 2))
@@ -99,6 +99,34 @@ int path_of_ciel_name(char *line, char *texture_name)
 	if (line[i] && !ft_strncmp(texture_name, (const char *)(line + i), 1))
 		return (i);
 	return (-1);
+}
+
+
+int	ft_contain_map(char *line)
+{
+	int	i;
+
+	i = 0;
+	while (line[i])
+	{
+		if (line[i] == 0 || line[i] == 1)
+			return(1);
+		i++;
+	}
+	return (0);
+}
+
+int ft_return_fd(t_game *maps,char *line)
+{
+	int check;
+	check = 0;
+	check = ((path_of_texture_name(line, "NO") >= 0) * 1 + (path_of_texture_name(line, "EA") >= 0) * 1 + \
+		(path_of_texture_name(line, "SO") >= 0) * 1 + (path_of_texture_name(line, "WE") >= 0) * 1 +\
+		(path_of_ciel_name(line, "C") >= 0) * 1 + (path_of_ciel_name(line, "F") >= 0) * 1 + \
+		(ft_strcmp(line, "\n") == 1) * 1 + (ft_contain_map(line) == 1) * 1);
+	if (check == 0 && line && line[0])
+		ft_exit("Error Textures\n", 1);
+	return (1);
 }
 
 int	ft_textures(t_game *maps, char *av)
@@ -126,8 +154,7 @@ int	ft_textures(t_game *maps, char *av)
 		else if (maps->no_texture && maps->we_texture && maps->ea_texture && \
 			maps->so_texture  && maps->floor_color != -1 && maps->ciel_color != -1)
 			return (maps->fd = fd, maps->line = line, fd);
-		else
-			ft_exit("Error in Textures\n", 1);
+		ft_return_fd(maps, line);
 		line = get_next_line(fd);
 	}
 	return (-1);
