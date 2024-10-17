@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_read_map.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: azainabi <azainabi@student.42.fr>          +#+  +:+       +#+        */
+/*   By: sel-jett <sel-jett@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/10 09:44:21 by sel-jett          #+#    #+#             */
-/*   Updated: 2024/10/12 12:35:31 by azainabi         ###   ########.fr       */
+/*   Updated: 2024/10/17 01:10:14 by sel-jett         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,7 +63,7 @@ int	check_last_line(char *line)
 
 	i = 0;
 	if (!line)
-			(1) && (write(2, "map error\n", 10), my_malloc(0, 0));
+		(1) && (write(2, "map error\n", 10), my_malloc(0, 0));
 	while (line[i])
 	{
 		if (line[i] != ' ' && line[i] != '1')

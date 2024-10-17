@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_copy_map.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: azainabi <azainabi@student.42.fr>          +#+  +:+       +#+        */
+/*   By: sel-jett <sel-jett@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/12 00:07:48 by sel-jett          #+#    #+#             */
-/*   Updated: 2024/10/12 12:35:31 by azainabi         ###   ########.fr       */
+/*   Updated: 2024/10/17 01:09:46 by sel-jett         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,11 +49,11 @@ void	find_player(t_game **maps)
 		{
 			if ((*maps)->map[i][j] == 'N' || (*maps)->map[i][j] == 'W' || \
 				(*maps)->map[i][j] == 'S' || (*maps)->map[i][j] == 'E')
-				{
-					(*maps)->orientation = (*maps)->map[i][j];
-					(*maps)->player_posx = i;
-					(*maps)->player_posy = j;
-				}
+			{
+				(*maps)->orientation = (*maps)->map[i][j];
+				(*maps)->player_posx = i;
+				(*maps)->player_posy = j;
+			}
 			j++;
 		}
 		i++;
@@ -71,7 +71,6 @@ void	ft_copy_map(char *av, t_game *maps)
 	new_line = get_next_line(fd);
 	while (new_line)
 	{
-
 		if (check_firstline(new_line) == 1)
 		{
 			i = 0;

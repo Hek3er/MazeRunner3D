@@ -6,7 +6,7 @@
 /*   By: sel-jett <sel-jett@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/30 04:56:48 by azainabi          #+#    #+#             */
-/*   Updated: 2024/10/17 01:01:38 by sel-jett         ###   ########.fr       */
+/*   Updated: 2024/10/17 01:14:31 by sel-jett         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -152,11 +152,13 @@ typedef struct game
 }	t_game;
 
 //parcing
+void	ft_error_texture(void);
+char	*pt_txr(char *line);
+int		pt_ciel(char *line, char *texture_name);
 char	*ft_strchr(const char *s, int c);
 int		is_near_door(t_game *maps);
 void	ft_init_map(t_game *maps);
 int		ft_textures(t_game *maps, char *av);
-void	print_map(char **map);
 int		ft_isdigit(int c);
 char	*ft_strjoin_char(char const *s1, char s2);
 int		ft_atoi(const char *str);

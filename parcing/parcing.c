@@ -6,7 +6,7 @@
 /*   By: sel-jett <sel-jett@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/03 21:29:42 by sel-jett          #+#    #+#             */
-/*   Updated: 2024/10/17 01:06:10 by sel-jett         ###   ########.fr       */
+/*   Updated: 2024/10/17 01:16:40 by sel-jett         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,48 +36,6 @@ void	ft_init_map(t_game *mp)
 	mp->x = 0;
 }
 
-void	print_map(char **map)
-{
-	while (*map)
-	{
-		puts(*map);
-		map++;
-	}
-	puts("done");
-	my_malloc(0, 0);
-}
-
-void	ft_error_texture(void)
-{
-	write(2, "Invalid Textures !!\n", ft_strlen("Invalid Textures !!\n"));
-	my_malloc(0, 0);
-}
-
-char	*pt_txr(char *line)
-{
-	int	i;
-	int	check;
-	int	save_first_index;
-
-	check = 0;
-	i = 0;
-	save_first_index = 0;
-	while (line[i])
-	{
-		if (!check && line[i] >= 33)
-		{
-			save_first_index = i;
-			check++;
-		}
-		else if (line[i] >= 33)
-			check++;
-		else if (check && line[i] < 33)
-			return (ft_error_texture(), NULL);
-		i++;
-	}
-	return (line + save_first_index);
-}
-
 int	path_of_txr_nm(char *line, char *texture_name)
 {
 	int	i;
@@ -90,22 +48,6 @@ int	path_of_txr_nm(char *line, char *texture_name)
 	while (line[i] && line[i] < 33)
 		i++;
 	if (line[i] && !ft_strncmp(texture_name, (const char *)(line + i), 2))
-		return (i);
-	return (-1);
-}
-
-int	pt_ciel(char *line, char *texture_name)
-{
-	int	i;
-	int	save_first_index;
-	int	check;
-
-	check = 0;
-	save_first_index = 0;
-	i = 0;
-	while (line[i] && line[i] < 33)
-		i++;
-	if (line[i] && !ft_strncmp(texture_name, (const char *)(line + i), 1))
 		return (i);
 	return (-1);
 }
