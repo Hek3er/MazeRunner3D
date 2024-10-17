@@ -6,7 +6,7 @@
 /*   By: sel-jett <sel-jett@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/03 21:29:42 by sel-jett          #+#    #+#             */
-/*   Updated: 2024/10/17 01:03:39 by sel-jett         ###   ########.fr       */
+/*   Updated: 2024/10/17 01:06:10 by sel-jett         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -150,7 +150,7 @@ int	ft_textures(t_game *m, char *av)
 	while (m->ln)
 	{
 		if (path_of_txr_nm(m->ln, "NO") >= 0)
-			m->no_texture = path_txr(m->ln + path_of_txr_nm(m->ln, "NO") + 2);
+			m->no_texture = pt_txr(m->ln + path_of_txr_nm(m->ln, "NO") + 2);
 		else if (path_of_txr_nm(m->ln, "SO") >= 0)
 			m->so_texture = pt_txr(m->ln + path_of_txr_nm(m->ln, "SO") + 2);
 		else if (path_of_txr_nm(m->ln, "WE") >= 0)
