@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cube3d.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: sel-jett <sel-jett@student.42.fr>          +#+  +:+       +#+        */
+/*   By: azainabi <azainabi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/30 04:56:48 by azainabi          #+#    #+#             */
-/*   Updated: 2024/10/17 01:14:31 by sel-jett         ###   ########.fr       */
+/*   Updated: 2024/10/17 23:42:29 by azainabi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,9 +32,6 @@
 # define KEY_LEFT 123
 # define KEY_SPACE 49
 # define KEY_O 31
-# define KEY_C 8
-# define KEY_UP 126
-# define KEY_DOWN 125
 
 typedef struct vector2d
 {
@@ -135,14 +132,9 @@ typedef struct game
 	int			move_left;
 	int			space_hit;
 	int			key_o;
-	int			key_c;
-	int			key_up;
-	int			key_down;
 	int			doorx;
 	int			doory;
 	int			closed;
-	int			move_up;
-	int			move_down;
 	int			old_mouse_x;
 	t_mlx		mlx_t;
 	t_cast		cast;

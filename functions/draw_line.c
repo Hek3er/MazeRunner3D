@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   draw_line.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: sel-jett <sel-jett@student.42.fr>          +#+  +:+       +#+        */
+/*   By: azainabi <azainabi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/30 04:56:10 by azainabi          #+#    #+#             */
-/*   Updated: 2024/10/17 02:50:28 by sel-jett         ###   ########.fr       */
+/*   Updated: 2024/10/17 23:42:35 by azainabi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,7 @@ void	draw_cieling(t_game *game)
 	y = 0;
 	while (y < game->start_draw)
 	{
-		draw_pixel(game->x, y + game->move_up, game, game->ciel_color);
+		draw_pixel(game->x, y, game, game->ciel_color);
 		y++;
 	}
 }
@@ -46,7 +46,7 @@ void	draw_floor(t_game *game)
 	y = game->end_draw;
 	while (y < game->height)
 	{
-		draw_pixel(game->x, y + game->move_up, game, game->floor_color);
+		draw_pixel(game->x, y, game, game->floor_color);
 		y++;
 	}
 }
@@ -69,9 +69,9 @@ void	draw_vert_line(t_game *game)
 		game->cast.texpos += game->cast.step;
 		tex_color = extract_color(game, game->cast.tex_x, texy);
 		if (game->index == 1)
-			draw_pixel(game->x, y + game->move_up, game, tex_color);
+			draw_pixel(game->x, y, game, tex_color);
 		else
-			draw_pixel(game->x, y + game->move_up, game, tex_color);
+			draw_pixel(game->x, y, game, tex_color);
 		y++;
 		i++;
 	}

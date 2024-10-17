@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   init_hooks.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: sel-jett <sel-jett@student.42.fr>          +#+  +:+       +#+        */
+/*   By: azainabi <azainabi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/30 04:56:30 by azainabi          #+#    #+#             */
-/*   Updated: 2024/10/17 23:00:23 by sel-jett         ###   ########.fr       */
+/*   Updated: 2024/10/17 23:42:18 by azainabi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -108,12 +108,6 @@ void	move(t_game *game)
 		// 	game->map[game->doorx][game->doory] = '0';
 		// }
 	}
-	if (game->key_up) {
-		game->move_up-=4;
-	}
-	if (game->key_down) {
-		game->move_up+=4;
-	}
 }
 
 int	key_press(int key, t_game *game)
@@ -148,10 +142,6 @@ int	key_press(int key, t_game *game)
 		}
 		game->key_o = 1;
 	}
-	if (key == KEY_UP )
-		game->key_up = 1;
-	if (key == KEY_DOWN )
-		game->key_down = 1;
 	return 0;
 }
 
@@ -173,10 +163,6 @@ int	key_release(int key, t_game *game)
 		game->space_hit = 0;
 	if (key == KEY_O )
 		game->key_o = 0;
-	if (key == KEY_UP )
-		game->key_up = 0;
-	if (key == KEY_DOWN )
-		game->key_down = 0;
 	return 0;
 }
 

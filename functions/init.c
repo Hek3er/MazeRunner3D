@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   init.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: sel-jett <sel-jett@student.42.fr>          +#+  +:+       +#+        */
+/*   By: azainabi <azainabi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/30 04:56:00 by azainabi          #+#    #+#             */
-/*   Updated: 2024/10/17 23:34:31 by sel-jett         ###   ########.fr       */
+/*   Updated: 2024/10/17 23:42:40 by azainabi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -85,9 +85,6 @@ void	init_param(t_game *game, t_cast *cast)
 	game->index = 0;
 	game->closed = 1;
 	game->key_o = 0;
-	game->move_up = 0;
-	game->key_down = 0;
-	game->key_up = 0;
 	game->old_mouse_x = 0;
 	handle_directions(game);
 	init_mlx(game);
