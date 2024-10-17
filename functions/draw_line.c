@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   draw_line.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: azainabi <azainabi@student.42.fr>          +#+  +:+       +#+        */
+/*   By: sel-jett <sel-jett@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/30 04:56:10 by azainabi          #+#    #+#             */
-/*   Updated: 2024/10/12 12:35:31 by azainabi         ###   ########.fr       */
+/*   Updated: 2024/10/17 02:50:28 by sel-jett         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,7 +55,6 @@ void	draw_vert_line(t_game *game)
 {
 	int	i;
 	int	y;
-	int	tmp;
 	int	texy;
 	int	tex_color;
 

@@ -6,7 +6,7 @@
 /*   By: sel-jett <sel-jett@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/09 11:13:01 by sel-jett          #+#    #+#             */
-/*   Updated: 2024/10/17 01:01:38 by sel-jett         ###   ########.fr       */
+/*   Updated: 2024/10/17 23:05:48 by sel-jett         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,7 +50,7 @@ int	ft_ciel(char *char_color)
 			ciel_error();
 		i++;
 	}
-	if (int_counter != 2 || !ft_isdigit(char_color[i - 1]))
+	if (int_counter != 2 || !ft_isdigit(char_color[i - 1]) || !r || !g || !b)
 		ciel_error();
 	return (ft_atoi(r) << 16 | ft_atoi(g) << 8 | ft_atoi(b));
 }

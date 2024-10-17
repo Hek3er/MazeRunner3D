@@ -1,5 +1,5 @@
 CC = cc
-CFLAGS =  #-Wall -Werror -Wextra -g -fsanitize=address
+CFLAGS =  -Wall -Werror -Wextra -g -fsanitize=address
 MLXFLAGS = -framework OpenGL -framework AppKit -lmlx
 NAME = cub3D
 SRC = cube3d.c functions/ft_exit.c functions/ft_write.c functions/draw_pixel.c functions/ft_strchr.c functions/set_wall_t.c \

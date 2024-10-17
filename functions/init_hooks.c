@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   init_hooks.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: azainabi <azainabi@student.42.fr>          +#+  +:+       +#+        */
+/*   By: sel-jett <sel-jett@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/30 04:56:30 by azainabi          #+#    #+#             */
-/*   Updated: 2024/10/15 23:14:16 by azainabi         ###   ########.fr       */
+/*   Updated: 2024/10/17 23:00:23 by sel-jett         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -214,7 +214,7 @@ void draw_minimap(t_game *game)
     {
         for (int x = 10; x < 10 + 200; x++)
         {
-            draw_pixel(x, y, game, 0x222222); 
+            draw_pixel(x, y, game, 0x222222);
         }
     }
     int viewport_size = 20;
@@ -248,9 +248,11 @@ void draw_minimap(t_game *game)
     {
         for (int j = start_j; j < end_j; j++)
         {
+			if (!game->map[i][j])
+				break ;
             char cell = game->map[i][j];
 
-            if (cell == '1' || cell =='D' || cell == 'O')
+            if (cell && (cell == '1' || cell =='D' || cell == 'O'))
             {
                 double x = 10 + ((j - start_j) * scale_x);
                 double y = 10 + ((i - start_i) * scale_y);
@@ -343,10 +345,11 @@ void	update_game(t_game *game)
 }
 
 int	mouse_fn(int x, int y, t_game *game) {
+	(void)y;
 	if (game->old_mouse_x == 0) {
 		game->old_mouse_x = x;
 	}
-	
+
 	if (game->old_mouse_x < x) {
 		double oldDirX = game->cast.dirx;
 		game->cast.dirx = game->cast.dirx * cos(game->rotating_speed) - game->cast.diry * sin(game->rotating_speed);
@@ -364,7 +367,7 @@ int	mouse_fn(int x, int y, t_game *game) {
 		game->cast.planey = oldplaneX * sin(-game->rotating_speed) + game->cast.planey * cos(-game->rotating_speed);
 		game->old_mouse_x = x;
 	}
-	
+
 	return 0;
 }
 

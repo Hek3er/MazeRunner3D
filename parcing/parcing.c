@@ -6,7 +6,7 @@
 /*   By: sel-jett <sel-jett@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/03 21:29:42 by sel-jett          #+#    #+#             */
-/*   Updated: 2024/10/17 01:16:40 by sel-jett         ###   ########.fr       */
+/*   Updated: 2024/10/17 02:51:05 by sel-jett         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,7 +66,7 @@ int	ft_contain_map(char *line)
 	return (0);
 }
 
-int	ft_return_fd(t_game *mp, char *line)
+int	ft_return_fd(char *line)
 {
 	int	check;
 
@@ -106,7 +106,7 @@ int	ft_textures(t_game *m, char *av)
 		else if (m->no_texture && m->we_texture && m->ea_texture && \
 		m->so_texture && m->floor_color != -1 && m->ciel_color != -1)
 			return (m->fd = m->fd2, m->line = m->ln, m->fd2);
-		ft_return_fd(m, m->ln);
+		ft_return_fd(m->ln);
 		m->ln = get_next_line(m->fd2);
 	}
 	return (-1);
