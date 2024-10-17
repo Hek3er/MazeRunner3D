@@ -1,22 +1,31 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   set_wall_t.c                                       :+:      :+:    :+:   */
+/*   handle_mouse.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: azainabi <azainabi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/10/12 12:27:38 by azainabi          #+#    #+#             */
-/*   Updated: 2024/10/18 00:20:43 by azainabi         ###   ########.fr       */
+/*   Created: 2024/10/17 23:56:18 by azainabi          #+#    #+#             */
+/*   Updated: 2024/10/18 00:02:30 by azainabi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/cube3d.h"
 
-void	set_wall_t(t_game *game)
+int	mouse_fn(int x, int y, t_game *game)
 {
-	draw_wall_t(game, game->no_texture, 0);
-	draw_wall_t(game, "./textures/door.xpm", 1);
-	draw_wall_t(game, game->so_texture, 2);
-	draw_wall_t(game, game->we_texture, 3);
-	draw_wall_t(game, game->ea_texture, 4);
+	(void)y;
+	if (game->old_mouse_x == 0)
+		game->old_mouse_x = x;
+	if (game->old_mouse_x < x)
+	{
+		rotate_right(game);
+		game->old_mouse_x = x;
+	}
+	else if (game->old_mouse_x > x)
+	{
+		rotate_left(game);
+		game->old_mouse_x = x;
+	}
+	return (0);
 }

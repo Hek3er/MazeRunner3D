@@ -6,7 +6,7 @@
 /*   By: azainabi <azainabi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/30 04:56:48 by azainabi          #+#    #+#             */
-/*   Updated: 2024/10/17 23:42:29 by azainabi         ###   ########.fr       */
+/*   Updated: 2024/10/18 00:02:44 by azainabi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -196,5 +196,10 @@ void	draw_wall_t(t_game *game, char *path, int i);
 void	init_texture(t_game *game, t_cast *cast);
 void	get_d_cord(t_game *maps);
 void	set_wall_t(t_game *game);
+void	move(t_game *game);
+void	draw_minimap(t_game *game);
+void	rotate_right(t_game *game);
+void	rotate_left(t_game *game);
+int		mouse_fn(int x, int y, t_game *game);
 
 #endif
