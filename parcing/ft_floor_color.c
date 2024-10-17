@@ -6,7 +6,7 @@
 /*   By: sel-jett <sel-jett@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/09 11:13:01 by sel-jett          #+#    #+#             */
-/*   Updated: 2024/07/14 22:28:58 by sel-jett         ###   ########.fr       */
+/*   Updated: 2024/10/17 01:01:38 by sel-jett         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@ static void	rgb_value(int int_counter, char character, char **red, char **green)
 		*green = ft_strjoin_char(*green, character);
 }
 
-int	ft_ciel_color(char *char_color)
+int	ft_ciel(char *char_color)
 {
 	int		i;
 	int		int_counter;

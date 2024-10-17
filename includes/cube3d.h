@@ -6,7 +6,7 @@
 /*   By: sel-jett <sel-jett@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/30 04:56:48 by azainabi          #+#    #+#             */
-/*   Updated: 2024/10/17 00:41:36 by sel-jett         ###   ########.fr       */
+/*   Updated: 2024/10/17 01:01:38 by sel-jett         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -160,7 +160,7 @@ void	print_map(char **map);
 int		ft_isdigit(int c);
 char	*ft_strjoin_char(char const *s1, char s2);
 int		ft_atoi(const char *str);
-int		ft_ciel_color(char *char_color);
+int		ft_ciel(char *char_color);
 void	*my_malloc(size_t size, int mode);
 void	ft_error_zero(void);
 // void	ft_check_args(int ac, char **av);

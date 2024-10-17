@@ -6,34 +6,34 @@
 /*   By: sel-jett <sel-jett@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/03 21:29:42 by sel-jett          #+#    #+#             */
-/*   Updated: 2024/10/17 00:42:07 by sel-jett         ###   ########.fr       */
+/*   Updated: 2024/10/17 01:03:39 by sel-jett         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/cube3d.h"
 
-void	ft_init_map(t_game *maps)
+void	ft_init_map(t_game *mp)
 {
-	maps->number_of_players = 0;
-	maps->width = 0;
-	maps->height = 0;
-	maps->map = NULL;
-	maps->mapx = 0;
-	maps->mapy = 0;
-	maps->tile_s = 0;
-	maps->player_posx = 0;
-	maps->player_posy = 0;
-	maps->orientation = '\0';
-	maps->no_texture = NULL;
-	maps->so_texture = NULL;
-	maps->we_texture = NULL;
-	maps->ea_texture = NULL;
-	maps->ciel_color = -1;
-	maps->floor_color = -1;
-	maps->gun_anim = 0;
-	maps->start_draw = 0;
-	maps->end_draw = 0;
-	maps->x = 0;
+	mp->number_of_players = 0;
+	mp->width = 0;
+	mp->height = 0;
+	mp->map = NULL;
+	mp->mapx = 0;
+	mp->mapy = 0;
+	mp->tile_s = 0;
+	mp->player_posx = 0;
+	mp->player_posy = 0;
+	mp->orientation = '\0';
+	mp->no_texture = NULL;
+	mp->so_texture = NULL;
+	mp->we_texture = NULL;
+	mp->ea_texture = NULL;
+	mp->ciel_color = -1;
+	mp->floor_color = -1;
+	mp->gun_anim = 0;
+	mp->start_draw = 0;
+	mp->end_draw = 0;
+	mp->x = 0;
 }
 
 void	print_map(char **map)
@@ -53,7 +53,7 @@ void	ft_error_texture(void)
 	my_malloc(0, 0);
 }
 
-char	*path_of_txr(char *line)
+char	*pt_txr(char *line)
 {
 	int	i;
 	int	check;
@@ -94,11 +94,11 @@ int	path_of_txr_nm(char *line, char *texture_name)
 	return (-1);
 }
 
-int	path_of_ciel(char *line, char *texture_name)
+int	pt_ciel(char *line, char *texture_name)
 {
 	int	i;
 	int	save_first_index;
-	int check;
+	int	check;
 
 	check = 0;
 	save_first_index = 0;
@@ -124,7 +124,7 @@ int	ft_contain_map(char *line)
 	return (0);
 }
 
-int	ft_return_fd(t_game *maps, char *line)
+int	ft_return_fd(t_game *mp, char *line)
 {
 	int	check;
 
@@ -133,8 +133,8 @@ int	ft_return_fd(t_game *maps, char *line)
 		+ (path_of_txr_nm(line, "EA") >= 0) * 1 + \
 		(path_of_txr_nm(line, "SO") >= 0) * 1 + \
 		(path_of_txr_nm(line, "WE") >= 0) * 1 + \
-		(path_of_ciel(line, "C") >= 0) * 1 + \
-		(path_of_ciel(line, "F") >= 0) * 1 + \
+		(pt_ciel(line, "C") >= 0) * 1 + \
+		(pt_ciel(line, "F") >= 0) * 1 + \
 		(ft_strcmp(line, "\n") == 1) * 1 + \
 		(ft_contain_map(line) == 1) * 1);
 	if (check == 0 && line && line[0])
@@ -142,30 +142,30 @@ int	ft_return_fd(t_game *maps, char *line)
 	return (1);
 }
 
-int	ft_textures(t_game *maps, char *av)
+int	ft_textures(t_game *m, char *av)
 {
-	maps->fd2 = open(av, O_RDONLY);
-	(maps->fd2 < 0) && (write(2, "File doesn't exist\n", 19), my_malloc(0, 0), 0);
-	maps->ln = get_next_line(maps->fd2);
-	while (maps->ln)
+	m->fd2 = open(av, O_RDONLY);
+	(m->fd2 < 0) && (write(2, "File doesn't exist\n", 19), my_malloc(0, 0), 0);
+	m->ln = get_next_line(m->fd2);
+	while (m->ln)
 	{
-		if (path_of_txr_nm(maps->ln, "NO") >= 0)
-			maps->no_texture = path_of_txr(maps->ln + path_of_txr_nm(maps->ln, "NO") + 2);
-		else if (path_of_txr_nm(maps->ln, "SO") >= 0)
-			maps->so_texture = path_of_txr(maps->ln + path_of_txr_nm(maps->ln, "SO") + 2);
-		else if (path_of_txr_nm(maps->ln, "WE") >= 0)
-			maps->we_texture = path_of_txr(maps->ln + path_of_txr_nm(maps->ln, "WE") + 2);
-		else if (path_of_txr_nm(maps->ln, "EA") >= 0)
-			maps->ea_texture = path_of_txr(maps->ln + path_of_txr_nm(maps->ln, "EA") + 2);
-		else if (path_of_ciel(maps->ln, "C") >= 0)
-			maps->ciel_color = ft_ciel_color(path_of_txr(maps->ln + 1 + path_of_ciel(maps->ln, "C")));
-		else if (path_of_ciel(maps->ln, "F") >= 0)
-			maps->floor_color = ft_ciel_color(path_of_txr(maps->ln + 1 + path_of_ciel(maps->ln, "F")));
-		else if (maps->no_texture && maps->we_texture && maps->ea_texture && \
-		maps->so_texture && maps->floor_color != -1 && maps->ciel_color != -1)
-			return (maps->fd = maps->fd2, maps->line = maps->ln, maps->fd2);
-		ft_return_fd(maps, maps->ln);
-		maps->ln = get_next_line(maps->fd2);
+		if (path_of_txr_nm(m->ln, "NO") >= 0)
+			m->no_texture = path_txr(m->ln + path_of_txr_nm(m->ln, "NO") + 2);
+		else if (path_of_txr_nm(m->ln, "SO") >= 0)
+			m->so_texture = pt_txr(m->ln + path_of_txr_nm(m->ln, "SO") + 2);
+		else if (path_of_txr_nm(m->ln, "WE") >= 0)
+			m->we_texture = pt_txr(m->ln + path_of_txr_nm(m->ln, "WE") + 2);
+		else if (path_of_txr_nm(m->ln, "EA") >= 0)
+			m->ea_texture = pt_txr(m->ln + path_of_txr_nm(m->ln, "EA") + 2);
+		else if (pt_ciel(m->ln, "C") >= 0)
+			m->ciel_color = ft_ciel(pt_txr(m->ln + 1 + pt_ciel(m->ln, "C")));
+		else if (pt_ciel(m->ln, "F") >= 0)
+			m->floor_color = ft_ciel(pt_txr(m->ln + 1 + pt_ciel(m->ln, "F")));
+		else if (m->no_texture && m->we_texture && m->ea_texture && \
+		m->so_texture && m->floor_color != -1 && m->ciel_color != -1)
+			return (m->fd = m->fd2, m->line = m->ln, m->fd2);
+		ft_return_fd(m, m->ln);
+		m->ln = get_next_line(m->fd2);
 	}
 	return (-1);
 }
