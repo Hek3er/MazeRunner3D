@@ -6,7 +6,7 @@
 /*   By: sel-jett <sel-jett@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/03 21:29:42 by sel-jett          #+#    #+#             */
-/*   Updated: 2024/10/18 05:44:55 by sel-jett         ###   ########.fr       */
+/*   Updated: 2024/10/19 00:27:42 by sel-jett         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -107,7 +107,8 @@ int	ft_textures(t_game *m, char *av)
 		else if (pt_ciel(m->ln, "C") >= 0)
 			m->ciel_color = ft_ciel(pt_txr(m, m->ln + 1 + pt_ciel(m->ln, "C")));
 		else if (pt_ciel(m->ln, "F") >= 0)
-			m->floor_color = ft_ciel(pt_txr(m, m->ln + 1 + pt_ciel(m->ln, "F")));
+			m->floor_color = ft_ciel(pt_txr(m, m->ln + 1 + \
+			pt_ciel(m->ln, "F")));
 		else if (m->no_texture && m->we_texture && m->ea_texture && \
 		m->so_texture && m->floor_color != -1 && m->ciel_color != -1)
 			return (m->fd = m->fd2, m->line = m->ln, m->fd2);

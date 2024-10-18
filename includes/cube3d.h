@@ -6,7 +6,7 @@
 /*   By: sel-jett <sel-jett@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/30 04:56:48 by azainabi          #+#    #+#             */
-/*   Updated: 2024/10/18 05:48:06 by sel-jett         ###   ########.fr       */
+/*   Updated: 2024/10/19 00:25:13 by sel-jett         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -112,6 +112,18 @@ typedef struct game
 	int			F; // added by salah
 	char		*ln; // added by salah
 	char		*line; // added by salah
+	int			start_i; // added by salah
+	int			end_i; // added by salah
+	int			start_j; // added by salah
+	int			end_j; // added by salah
+	int			x_player; // added by salah
+	int			y_player; // added by salah
+	double		scale_x; // added by salah
+	double		scale_y; // added by salah
+	double		width_minimap; // added by salah
+	double		height_minimap; // added by salah
+	double		player_minimap_x;
+	double		player_minimap_y;
 	int			width;
 	int			height;
 	char		**map;
@@ -188,7 +200,8 @@ int		check_firstline(char *line);
 void	ft_check_zeros(char **map);
 
 //.Functions
-void	draw_rectangle(int init_posx, int init_poy, int dimensionsx, int dimensionsy, int color, t_game *game);
+void	draw_rectangle(int dimensionsx, int dimensionsy, int color, t_game *game);
+void	draw_rectangle_for_player(int dimensionsx, int dimensionsy, int color, t_game *game);
 int		convert_rgb_to_int(int r, int g, int b);
 double	get_fov(double angle);
 // int		ft_strlen(char *str);
