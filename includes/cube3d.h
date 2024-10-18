@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cube3d.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: azainabi <azainabi@student.42.fr>          +#+  +:+       +#+        */
+/*   By: sel-jett <sel-jett@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/30 04:56:48 by azainabi          #+#    #+#             */
-/*   Updated: 2024/10/18 00:02:44 by azainabi         ###   ########.fr       */
+/*   Updated: 2024/10/18 05:48:06 by sel-jett         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -92,11 +92,24 @@ typedef struct cast
 	double	distance_to_center;
 	int		lineheight;
 }				t_cast;
+
+typedef struct {
+	char	*name;
+	int		*field;
+	char	*error_msg;
+}	t_textures;
+
 typedef struct game
 {
 	int			index;
 	int			fd; // added by salah
 	int			fd2; // added by salah
+	int			NO; // added by salah
+	int			SO; // added by salah
+	int			WE; // added by salah
+	int			EA; // added by salah
+	int			C; // added by salah
+	int			F; // added by salah
 	char		*ln; // added by salah
 	char		*line; // added by salah
 	int			width;
@@ -144,8 +157,9 @@ typedef struct game
 }	t_game;
 
 //parcing
+int		path_of_txr_nm(char *line, char *texture_name);
 void	ft_error_texture(void);
-char	*pt_txr(char *line);
+char	*pt_txr(t_game *m, char *line);
 int		pt_ciel(char *line, char *texture_name);
 char	*ft_strchr(const char *s, int c);
 int		is_near_door(t_game *maps);

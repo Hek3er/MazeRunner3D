@@ -6,7 +6,7 @@
 /*   By: sel-jett <sel-jett@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/03 21:29:42 by sel-jett          #+#    #+#             */
-/*   Updated: 2024/10/17 02:51:05 by sel-jett         ###   ########.fr       */
+/*   Updated: 2024/10/18 05:44:55 by sel-jett         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,6 +34,11 @@ void	ft_init_map(t_game *mp)
 	mp->start_draw = 0;
 	mp->end_draw = 0;
 	mp->x = 0;
+	(1) && (mp->C = 0, mp->F = 0, 0);
+	mp->NO = 0;
+	mp->EA = 0;
+	mp->WE = 0;
+	mp->SO = 0;
 }
 
 int	path_of_txr_nm(char *line, char *texture_name)
@@ -92,17 +97,17 @@ int	ft_textures(t_game *m, char *av)
 	while (m->ln)
 	{
 		if (path_of_txr_nm(m->ln, "NO") >= 0)
-			m->no_texture = pt_txr(m->ln + path_of_txr_nm(m->ln, "NO") + 2);
+			m->no_texture = pt_txr(m, m->ln + path_of_txr_nm(m->ln, "NO") + 2);
 		else if (path_of_txr_nm(m->ln, "SO") >= 0)
-			m->so_texture = pt_txr(m->ln + path_of_txr_nm(m->ln, "SO") + 2);
+			m->so_texture = pt_txr(m, m->ln + path_of_txr_nm(m->ln, "SO") + 2);
 		else if (path_of_txr_nm(m->ln, "WE") >= 0)
-			m->we_texture = pt_txr(m->ln + path_of_txr_nm(m->ln, "WE") + 2);
+			m->we_texture = pt_txr(m, m->ln + path_of_txr_nm(m->ln, "WE") + 2);
 		else if (path_of_txr_nm(m->ln, "EA") >= 0)
-			m->ea_texture = pt_txr(m->ln + path_of_txr_nm(m->ln, "EA") + 2);
+			m->ea_texture = pt_txr(m, m->ln + path_of_txr_nm(m->ln, "EA") + 2);
 		else if (pt_ciel(m->ln, "C") >= 0)
-			m->ciel_color = ft_ciel(pt_txr(m->ln + 1 + pt_ciel(m->ln, "C")));
+			m->ciel_color = ft_ciel(pt_txr(m, m->ln + 1 + pt_ciel(m->ln, "C")));
 		else if (pt_ciel(m->ln, "F") >= 0)
-			m->floor_color = ft_ciel(pt_txr(m->ln + 1 + pt_ciel(m->ln, "F")));
+			m->floor_color = ft_ciel(pt_txr(m, m->ln + 1 + pt_ciel(m->ln, "F")));
 		else if (m->no_texture && m->we_texture && m->ea_texture && \
 		m->so_texture && m->floor_color != -1 && m->ciel_color != -1)
 			return (m->fd = m->fd2, m->line = m->ln, m->fd2);

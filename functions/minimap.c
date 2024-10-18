@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minimap.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: azainabi <azainabi@student.42.fr>          +#+  +:+       +#+        */
+/*   By: sel-jett <sel-jett@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/18 00:16:48 by azainabi          #+#    #+#             */
-/*   Updated: 2024/10/18 00:17:30 by azainabi         ###   ########.fr       */
+/*   Updated: 2024/10/18 00:33:53 by sel-jett         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,12 +42,19 @@ void draw_line(int x0, int y0, int x1, int y1, int color, t_game *game)
 
 void draw_minimap(t_game *game)
 {
-    for (int y = 10; y < 10 + 200; y++)
+    int x;
+    int y;
+
+    y = 10;
+    while (y < 210)
     {
-        for (int x = 10; x < 10 + 200; x++)
+        x = 10;
+        while (x < 210)
         {
             draw_pixel(x, y, game, 0x222222);
+            x++;
         }
+        y++;
     }
     int viewport_size = 20;
     int half_viewport = viewport_size / 2;
