@@ -6,7 +6,7 @@
 /*   By: sel-jett <sel-jett@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/12 00:07:48 by sel-jett          #+#    #+#             */
-/*   Updated: 2024/10/17 01:09:46 by sel-jett         ###   ########.fr       */
+/*   Updated: 2024/10/19 21:13:02 by sel-jett         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -85,5 +85,6 @@ void	ft_copy_map(char *av, t_game *maps)
 		}
 		new_line = get_next_line(fd);
 	}
+	close(fd);
 	return (find_player(&maps), ft_check_zeros(maps->map));
 }

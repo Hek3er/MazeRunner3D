@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parcing.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: azainabi <azainabi@student.42.fr>          +#+  +:+       +#+        */
+/*   By: sel-jett <sel-jett@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/03 21:29:42 by sel-jett          #+#    #+#             */
-/*   Updated: 2024/10/19 01:45:29 by azainabi         ###   ########.fr       */
+/*   Updated: 2024/10/19 21:15:33 by sel-jett         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,7 +70,7 @@ int	ft_contain_map(char *line)
 	return (0);
 }
 
-int	ft_return_fd(char *line)
+int	ft_return_fd(char *line, int fd)
 {
 	int	check;
 
@@ -84,7 +84,7 @@ int	ft_return_fd(char *line)
 		(ft_strcmp(line, "\n") == 1) * 1 + \
 		(ft_contain_map(line) == 1) * 1);
 	if (check == 0 && line && line[0])
-		ft_exit("Error Textures\n", 1);
+		return (ft_exit("Error Textures\n", 1), close(fd), 0);
 	return (1);
 }
 
@@ -111,8 +111,8 @@ int	ft_textures(t_game *m, char *av)
 		else if (m->no_texture && m->we_texture && m->ea_texture && \
 		m->so_texture && m->floor_color != -1 && m->ciel_color != -1)
 			return (m->fd = m->fd2, m->line = m->ln, m->fd2);
-		ft_return_fd(m->ln);
+		ft_return_fd(m->ln, m->fd2);
 		m->ln = get_next_line(m->fd2);
 	}
-	return (-1);
+	return (close(m->fd2), -1);
 }
