@@ -1,16 +1,16 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   update_game.c                                      :+:      :+:    :+:   */
+/*   update_game_bonus.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: azainabi <azainabi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/17 23:50:23 by azainabi          #+#    #+#             */
-/*   Updated: 2024/10/19 01:48:58 by azainabi         ###   ########.fr       */
+/*   Updated: 2024/10/19 21:28:05 by azainabi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../includes/cube3d.h"
+#include "../includes/cube3d_bonus.h"
 
 static void	handle_gun_animation(t_game *game)
 {

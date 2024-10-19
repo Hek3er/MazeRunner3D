@@ -1,16 +1,16 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   draw_rectangle.c                                   :+:      :+:    :+:   */
+/*   draw_rectangle_bonus.c                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: sel-jett <sel-jett@student.42.fr>          +#+  +:+       +#+        */
+/*   By: azainabi <azainabi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/30 04:56:18 by azainabi          #+#    #+#             */
-/*   Updated: 2024/10/19 00:26:33 by sel-jett         ###   ########.fr       */
+/*   Updated: 2024/10/19 21:28:05 by azainabi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../includes/cube3d.h"
+#include "../includes/cube3d_bonus.h"
 
 void	draw_rectangle(int dimensionsx, int dimensionsy, \
 int color, t_game *game)

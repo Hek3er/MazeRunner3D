@@ -6,11 +6,11 @@
 /*   By: sel-jett <sel-jett@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/09 11:13:01 by sel-jett          #+#    #+#             */
-/*   Updated: 2024/10/19 21:35:32 by sel-jett         ###   ########.fr       */
+/*   Updated: 2024/10/19 21:36:21 by sel-jett         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../includes/cube3d.h"
+#include "../includes/cube3d_bonus.h"
 
 static void	ciel_error(void)
 {

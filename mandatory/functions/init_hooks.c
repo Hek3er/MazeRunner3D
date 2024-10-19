@@ -6,7 +6,7 @@
 /*   By: azainabi <azainabi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/30 04:56:30 by azainabi          #+#    #+#             */
-/*   Updated: 2024/10/19 01:43:57 by azainabi         ###   ########.fr       */
+/*   Updated: 2024/10/19 21:31:08 by azainabi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,8 @@
 int	ft_close(t_game *game)
 {
 	mlx_destroy_window(game->mlx_t.mlx_ptr, game->mlx_t.mlx_window);
-	exit(0);
+	my_malloc(0, 0);
+	return (0);
 }
 
 int	key_press(int key, t_game *game)

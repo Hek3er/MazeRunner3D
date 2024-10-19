@@ -1,7 +1,7 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   cube3d.h                                           :+:      :+:    :+:   */
+/*   cube3d_bonus.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: azainabi <azainabi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
@@ -10,8 +10,8 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef CUBE3D_H
-# define CUBE3D_H
+#ifndef CUBE3D_BONUS_H
+# define CUBE3D_BONUS_H
 # include <stdio.h>
 # include <unistd.h>
 # include <stdlib.h>
@@ -19,7 +19,7 @@
 # include <time.h>
 # include <limits.h>
 # include "mlx.h"
-# include "get_next_line.h"
+# include "get_next_line_bonus.h"
 
 # define FOV 66
 
