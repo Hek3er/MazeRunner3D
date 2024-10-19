@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_floor_color.c                                   :+:      :+:    :+:   */
+/*   ft_floor_color_bonus.c                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: sel-jett <sel-jett@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/09 11:13:01 by sel-jett          #+#    #+#             */
-/*   Updated: 2024/10/17 23:05:48 by sel-jett         ###   ########.fr       */
+/*   Updated: 2024/10/19 21:35:32 by sel-jett         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,10 +34,10 @@ int	ft_ciel(char *char_color)
 	char	*g;
 	char	*b;
 
-	(1) && (int_counter = 0, r = NULL, g = NULL, b = NULL, i = 0);
+	(1) && (int_counter = 0, r = NULL, g = NULL, b = NULL, i = -1);
 	if (!char_color)
 		ciel_error();
-	while (char_color[i])
+	while (char_color[++i])
 	{
 		if (!ft_isdigit(char_color[i]) && char_color[i] != ',')
 			ciel_error();
@@ -48,9 +48,9 @@ int	ft_ciel(char *char_color)
 			(1) && (char_color = char_color + i, i = 0, int_counter++);
 		else if (i > 3 || int_counter > 2)
 			ciel_error();
-		i++;
 	}
-	if (int_counter != 2 || !ft_isdigit(char_color[i - 1]) || !r || !g || !b)
+	if (int_counter != 2 || !ft_isdigit(char_color[i - 1]) || !r || !g || !b \
+		|| ft_atoi(r) > 255 || ft_atoi(g) > 255 || ft_atoi(b) > 255)
 		ciel_error();
 	return (ft_atoi(r) << 16 | ft_atoi(g) << 8 | ft_atoi(b));
 }
