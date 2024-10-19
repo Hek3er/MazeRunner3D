@@ -6,7 +6,7 @@
 /*   By: azainabi <azainabi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/30 04:56:00 by azainabi          #+#    #+#             */
-/*   Updated: 2024/10/19 01:44:24 by azainabi         ###   ########.fr       */
+/*   Updated: 2024/10/19 22:06:35 by azainabi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,11 @@ void	draw_gun(t_game *game, char *path)
 	game->mlx_t.texture.img_data = \
 	mlx_get_data_addr(game->mlx_t.texture.mlx_img, &game->mlx_t.texture.bpp, \
 	&game->mlx_t.texture.len, &game->mlx_t.texture.endian);
+	if (!game->mlx_t.texture.img_data)
+	{
+		mlx_destroy_window(game->mlx_t.mlx_ptr, game->mlx_t.mlx_window);
+		ft_exit("mxl failed to init image\n", 1);
+	}
 	mlx_put_image_to_window(game->mlx_t.mlx_ptr, game->mlx_t.mlx_window, \
 	game->mlx_t.texture.mlx_img, game->width / 2 - game->mlx_t.texture.width \
 	/ 2, game->height - game->mlx_t.texture.height);
@@ -42,6 +47,11 @@ void	draw_wall_t(t_game *game, char *path, int i)
 	game->mlx_t.texture_wall[i].img_data = mlx_get_data_addr \
 	(game->mlx_t.texture_wall[i].mlx_img, &game->mlx_t.texture_wall[i].bpp, \
 	&game->mlx_t.texture_wall[i].len, &game->mlx_t.texture_wall[i].endian);
+	if (!game->mlx_t.texture_wall[i].img_data)
+	{
+		mlx_destroy_window(game->mlx_t.mlx_ptr, game->mlx_t.mlx_window);
+		ft_exit("mxl failed to init image\n", 1);
+	}
 }
 
 static void	init_mlx(t_game *game)
@@ -62,6 +72,11 @@ static void	init_mlx(t_game *game)
 	}
 	game->mlx_t.img.img_data = mlx_get_data_addr(game->mlx_t.img.mlx_img, \
 	&game->mlx_t.img.bpp, &game->mlx_t.img.len, &game->mlx_t.img.endian);
+	if (!game->mlx_t.img.img_data)
+	{
+		mlx_destroy_window(game->mlx_t.mlx_ptr, game->mlx_t.mlx_window);
+		ft_exit("mxl failed to init image\n", 1);
+	}
 }
 
 void	init_param(t_game *game, t_cast *cast)
