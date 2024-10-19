@@ -6,7 +6,7 @@
 /*   By: azainabi <azainabi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/01 02:29:20 by azainabi          #+#    #+#             */
-/*   Updated: 2024/10/19 17:03:50 by azainabi         ###   ########.fr       */
+/*   Updated: 2024/10/19 20:56:10 by azainabi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,14 +18,14 @@ static void	handle_north_south(t_game *game)
 	{
 		game->cast.dirx = 0;
 		game->cast.diry = -1;
-		game->cast.planex = -get_fov(FOV);
+		game->cast.planex = get_fov(FOV);
 		game->cast.planey = 0;
 	}
 	if (game->orientation == 'S')
 	{
 		game->cast.dirx = 0;
 		game->cast.diry = 1;
-		game->cast.planex = get_fov(FOV);
+		game->cast.planex = -get_fov(FOV);
 		game->cast.planey = 0;
 	}
 }
