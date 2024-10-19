@@ -1,0 +1,15 @@
+	EA      bonus/textures/east.xpm
+	NO              bonus/textures/north.xpm
+ SO        bonus/textures/south.xpm
+		WE                              bonus/textures/west.xpm
+
+F 210,180,140
+C 75,144,226
+
+11111111111111
+10010000010001
+10010000010001
+100D000N0D0001
+10010000010001
+10010000010001
+11111111111111
