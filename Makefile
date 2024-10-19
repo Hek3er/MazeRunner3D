@@ -1,5 +1,5 @@
 CC = cc
-CFLAGS =  -Wall -Werror -Wextra #-g -fsanitize=address
+CFLAGS =  -Wall -Werror -Wextra
 MLXFLAGS = -framework OpenGL -framework AppKit -lmlx
 NAME = cub3D
 NAMEB = cub3D_bonus
