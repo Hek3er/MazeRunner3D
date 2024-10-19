@@ -36,10 +36,10 @@ $(NAMEB) : $(OSRCB)
 	@echo "compiling.."
 	@$(CC) $(CFLAGS) $(MLXFLAGS) $(OSRCB) -o $(NAMEB)
 
-%.o: mandatory/%.c mandatory/includes/cube3d.h mandatory/includes/get_next_line.h
+mandatory/%.o: mandatory/%.c mandatory/includes/cube3d.h mandatory/includes/get_next_line.h
 	@$(CC) $(CFLAGS) -c $< -o $@
 
-%_bonus.o: bonus/%.c bonus/includes/cube3d_bonus.h bonus/includes/get_next_line_bonus.h
+bonus/%_bonus.o: bonus/%_bonus.c bonus/includes/cube3d_bonus.h bonus/includes/get_next_line_bonus.h
 	@$(CC) $(CFLAGS) -c $< -o $@
 
 clean:

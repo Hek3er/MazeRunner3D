@@ -6,13 +6,14 @@
 /*   By: azainabi <azainabi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/30 04:56:48 by azainabi          #+#    #+#             */
-/*   Updated: 2024/10/19 20:42:38 by azainabi         ###   ########.fr       */
+/*   Updated: 2024/10/19 22:51:40 by azainabi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef CUBE3D_H
 # define CUBE3D_H
 # include <stdio.h>
+
 # include <unistd.h>
 # include <stdlib.h>
 # include <math.h>
