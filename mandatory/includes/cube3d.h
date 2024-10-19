@@ -6,7 +6,7 @@
 /*   By: azainabi <azainabi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/30 04:56:48 by azainabi          #+#    #+#             */
-/*   Updated: 2024/10/19 01:44:30 by azainabi         ###   ########.fr       */
+/*   Updated: 2024/10/19 20:42:38 by azainabi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -220,7 +220,6 @@ void	init_texture(t_game *game, t_cast *cast);
 void	get_d_cord(t_game *maps);
 void	set_wall_t(t_game *game);
 void	move(t_game *game);
-void	draw_minimap(t_game *game);
 void	rotate_right(t_game *game);
 void	rotate_left(t_game *game);
 

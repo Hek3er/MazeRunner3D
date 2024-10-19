@@ -6,7 +6,7 @@ NAMEB = cub3D_bonus
 SRC = mandatory/cube3d.c mandatory/functions/ft_exit.c mandatory/functions/ft_write.c mandatory/functions/draw_pixel.c mandatory/functions/ft_strchr.c mandatory/functions/set_wall_t.c \
 	  mandatory/functions/init_vector.c mandatory/functions/convert_rgb_to_int.c mandatory/functions/init_hooks.c mandatory/functions/get_fov.c mandatory/functions/update_game.c \
 	  mandatory/functions/handle_directions.c mandatory/functions/init_texture.c mandatory/functions/casting.c\
-	  mandatory/functions/handle_rotation.c  mandatory/functions/move.c mandatory/functions/minimap.c \
+	  mandatory/functions/handle_rotation.c  mandatory/functions/move.c \
 	  mandatory/functions/draw_line.c  mandatory/functions/init.c mandatory/functions/draw_rectangle.c mandatory/parcing/ft_path_of_textures.c mandatory/parcing/get_next_line.c mandatory/parcing/get_next_line_utils.c mandatory/parcing/my_malloc.c \
 	  mandatory/parcing/parcing.c mandatory/parcing/utils.c mandatory/parcing/ft_split.c mandatory/parcing/ft_strlcpy.c mandatory/parcing/ft_strncpm.c \
 	  mandatory/parcing/ft_isdigit.c mandatory/parcing/ft_floor_color.c mandatory/parcing/ft_atoi.c mandatory/parcing/ft_strjoin_char.c \
