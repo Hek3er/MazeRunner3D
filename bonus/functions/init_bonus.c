@@ -6,7 +6,7 @@
 /*   By: azainabi <azainabi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/30 04:56:00 by azainabi          #+#    #+#             */
-/*   Updated: 2024/10/19 21:28:05 by azainabi         ###   ########.fr       */
+/*   Updated: 2024/10/19 21:45:24 by azainabi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,7 +77,8 @@ void	init_param(t_game *game, t_cast *cast)
 	game->move_left = 0;
 	game->space_hit = 0;
 	game->move_speed = 0.2;
-	game->rotating_speed = 0.07;
+	game->st_rotation_speed = 0.07;
+	game->ms_rotation_speed = 0.15;
 	game->wall_height = 0.7;
 	cast->hit = 0;
 	game->doorx = 0;

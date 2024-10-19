@@ -138,6 +138,8 @@ typedef struct s_game
 	double		player_posy; //player position in y relative to map (map[x][y])
 	double		move_speed;
 	double		rotating_speed;
+	double		ms_rotation_speed;
+	double		st_rotation_speed;
 	double		wall_height;
 	char		orientation;
 	char		*no_texture;

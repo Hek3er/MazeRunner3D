@@ -6,7 +6,7 @@
 /*   By: azainabi <azainabi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/18 00:05:25 by azainabi          #+#    #+#             */
-/*   Updated: 2024/10/19 21:28:05 by azainabi         ###   ########.fr       */
+/*   Updated: 2024/10/19 21:44:08 by azainabi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,10 +74,12 @@ void	move(t_game *game)
 	handle_a_d(game);
 	if (game->move_right)
 	{
+		game->rotating_speed = game->st_rotation_speed;
 		rotate_right(game);
 	}
 	if (game->move_left)
 	{
+		game->rotating_speed = game->st_rotation_speed;
 		rotate_left(game);
 	}
 	if (game->space_hit)
