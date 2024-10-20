@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cube3d_bonus.h                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: azainabi <azainabi@student.42.fr>          +#+  +:+       +#+        */
+/*   By: sel-jett <sel-jett@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/30 04:56:48 by azainabi          #+#    #+#             */
-/*   Updated: 2024/10/19 22:54:37 by azainabi         ###   ########.fr       */
+/*   Updated: 2024/10/20 01:44:39 by sel-jett         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,6 @@
 # include <limits.h>
 # include "mlx.h"
 # include "get_next_line_bonus.h"
-
 
 # define FOV 66
 
