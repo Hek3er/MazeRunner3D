@@ -6,7 +6,7 @@
 /*   By: sel-jett <sel-jett@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/30 04:56:46 by azainabi          #+#    #+#             */
-/*   Updated: 2024/10/19 21:00:23 by sel-jett         ###   ########.fr       */
+/*   Updated: 2024/10/22 08:43:34 by sel-jett         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,10 +42,16 @@ int	main_loop(t_game *game)
 	return (0);
 }
 
+void	f(void)
+{
+	system("lsof -c cub3D");
+}
+
 int	main(int ac, char **av)
 {
 	t_game	maps;
 
+	atexit(f);
 	ft_check_args(ac, av);
 	ft_init_map(&maps);
 	ft_textures(&maps, av[1]);

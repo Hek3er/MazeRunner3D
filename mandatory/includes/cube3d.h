@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cube3d.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: azainabi <azainabi@student.42.fr>          +#+  +:+       +#+        */
+/*   By: sel-jett <sel-jett@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/30 04:56:48 by azainabi          #+#    #+#             */
-/*   Updated: 2024/10/19 22:51:40 by azainabi         ###   ########.fr       */
+/*   Updated: 2024/10/22 08:41:23 by sel-jett         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -175,7 +175,7 @@ int		ft_textures(t_game *maps, char *av);
 int		ft_isdigit(int c);
 char	*ft_strjoin_char(char const *s1, char s2);
 int		ft_atoi(const char *str);
-int		ft_ciel(char *char_color);
+int		ft_ciel(char *char_color, int fd);
 void	*my_malloc(size_t size, int mode);
 void	ft_error_zero(void);
 // void	ft_check_args(int ac, char **av);

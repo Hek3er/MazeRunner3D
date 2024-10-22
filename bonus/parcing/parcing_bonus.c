@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parcing_bonus.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: azainabi <azainabi@student.42.fr>          +#+  +:+       +#+        */
+/*   By: sel-jett <sel-jett@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/03 21:29:42 by sel-jett          #+#    #+#             */
-/*   Updated: 2024/10/19 21:28:05 by azainabi         ###   ########.fr       */
+/*   Updated: 2024/10/22 09:00:24 by sel-jett         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -85,8 +85,26 @@ int	ft_return_fd(char *line, int fd)
 		(ft_strcmp(line, "\n") == 1) * 1 + \
 		(ft_contain_map(line) == 1) * 1);
 	if (check == 0 && line && line[0])
-		return (ft_exit("Error Textures\n", 1), close(fd), 0);
+		return (close(fd) ,ft_exit("Error map file\n", 1), 0);
 	return (1);
+}
+
+void	ft_check_files(t_game *m)
+{
+	int	fd;
+
+	fd = open(m->no_texture, O_RDONLY);
+	if (fd < 0)
+		ft_exit(ft_strjoin(m->no_texture, "error"), 1);
+	fd = open(m->so_texture, O_RDONLY);
+	if (fd < 0)
+		ft_exit(ft_strjoin(m->so_texture, "error"), 1);
+	fd = open(m->we_texture, O_RDONLY);
+	if (fd < 0)
+		ft_exit(ft_strjoin(m->we_texture, "error"), 1);
+	fd = open(m->ea_texture, O_RDONLY);
+	if (fd < 0)
+		ft_exit(ft_strjoin(m->ea_texture, "error"), 1);
 }
 
 int	ft_textures(t_game *m, char *av)
@@ -105,15 +123,15 @@ int	ft_textures(t_game *m, char *av)
 		else if (path_of_txr_nm(m->ln, "EA") >= 0)
 			m->ea_texture = pt_txr(m, m->ln + path_of_txr_nm(m->ln, "EA") + 2);
 		else if (pt_ciel(m->ln, "C") >= 0)
-			m->ciel_color = ft_ciel(pt_txr(m, m->ln + 1 + pt_ciel(m->ln, "C")));
+			m->ciel_color = ft_ciel(pt_txr(m, m->ln + 1 + pt_ciel(m->ln, "C")), m->fd2);
 		else if (pt_ciel(m->ln, "F") >= 0)
 			m->floor_color = ft_ciel(pt_txr(m, m->ln + 1 + \
-			pt_ciel(m->ln, "F")));
+			pt_ciel(m->ln, "F")), m->fd2);
 		else if (m->no_texture && m->we_texture && m->ea_texture && \
 		m->so_texture && m->floor_color != -1 && m->ciel_color != -1)
 			return (m->fd = m->fd2, m->line = m->ln, m->fd2);
 		ft_return_fd(m->ln, m->fd2);
 		m->ln = get_next_line(m->fd2);
 	}
-	return (close(m->fd2), -1);
+	return (close(m->fd2), ft_check_files(m), -1);
 }

@@ -6,7 +6,7 @@
 /*   By: sel-jett <sel-jett@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/10 09:44:21 by sel-jett          #+#    #+#             */
-/*   Updated: 2024/10/17 01:10:14 by sel-jett         ###   ########.fr       */
+/*   Updated: 2024/10/22 08:49:22 by sel-jett         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -85,7 +85,7 @@ int	ft_read_map(int fd, char *line, t_game *maps)
 		if (check == 1)
 			break ;
 		if (!line || check == 2)
-			(1) && (write(2, "map error\n", 10), my_malloc(0, 0));
+			(1) && (close(fd), write(2, "map error\n", 10), my_malloc(0, 0));
 	}
 	check = 1;
 	ex_line = NULL;
@@ -94,7 +94,7 @@ int	ft_read_map(int fd, char *line, t_game *maps)
 		if (check_lines_inside(line) == 1)
 			check++;
 		else
-			(1) && (write(2, "map error\n", 10), my_malloc(0, 0));
+			(1) && (close(fd),write(2, "map error\n", 10), my_malloc(0, 0));
 		ex_line = line;
 		line = get_next_line(fd);
 	}
