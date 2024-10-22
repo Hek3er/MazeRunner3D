@@ -6,7 +6,7 @@
 /*   By: sel-jett <sel-jett@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/03 21:31:52 by sel-jett          #+#    #+#             */
-/*   Updated: 2024/07/14 22:27:41 by sel-jett         ###   ########.fr       */
+/*   Updated: 2024/10/22 09:24:22 by sel-jett         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,4 +55,22 @@ int	ft_search(char *str)
 		i++;
 	}
 	return (0);
+}
+
+void	ft_check_files(t_game *m)
+{
+	int	fd;
+
+	fd = open(m->no_texture, O_RDONLY);
+	if (fd < 0)
+		ft_exit(ft_strjoin(m->no_texture, "error\n"), 1);
+	fd = open(m->so_texture, O_RDONLY);
+	if (fd < 0)
+		ft_exit(ft_strjoin(m->so_texture, "error\n"), 1);
+	fd = open(m->we_texture, O_RDONLY);
+	if (fd < 0)
+		ft_exit(ft_strjoin(m->we_texture, "error\n"), 1);
+	fd = open(m->ea_texture, O_RDONLY);
+	if (fd < 0)
+		ft_exit(ft_strjoin(m->ea_texture, "error\n"), 1);
 }

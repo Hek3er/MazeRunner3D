@@ -6,7 +6,7 @@
 /*   By: sel-jett <sel-jett@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/30 04:56:48 by azainabi          #+#    #+#             */
-/*   Updated: 2024/10/22 08:55:43 by sel-jett         ###   ########.fr       */
+/*   Updated: 2024/10/22 09:19:49 by sel-jett         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -172,6 +172,7 @@ typedef struct s_game
 }	t_game;
 
 //parcing
+void	ft_check_files(t_game *m);
 int		path_of_txr_nm(char *line, char *texture_name);
 void	ft_error_texture(void);
 char	*pt_txr(t_game *m, char *line);

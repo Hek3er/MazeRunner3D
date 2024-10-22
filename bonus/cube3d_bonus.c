@@ -6,7 +6,7 @@
 /*   By: sel-jett <sel-jett@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/30 04:56:46 by azainabi          #+#    #+#             */
-/*   Updated: 2024/10/22 08:55:02 by sel-jett         ###   ########.fr       */
+/*   Updated: 2024/10/22 09:20:13 by sel-jett         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,6 +41,7 @@ int	main_loop(t_game *game)
 	update_game(game);
 	return (0);
 }
+
 void	f(void)
 {
 	system("lsof -c cub3D");
