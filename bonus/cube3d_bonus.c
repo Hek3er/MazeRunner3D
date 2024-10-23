@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cube3d_bonus.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: sel-jett <sel-jett@student.42.fr>          +#+  +:+       +#+        */
+/*   By: azainabi <azainabi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/30 04:56:46 by azainabi          #+#    #+#             */
-/*   Updated: 2024/10/22 09:20:13 by sel-jett         ###   ########.fr       */
+/*   Updated: 2024/10/23 04:52:03 by azainabi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,16 +42,25 @@ int	main_loop(t_game *game)
 	return (0);
 }
 
-void	f(void)
+static void	check_gun_textures(t_game *game)
 {
-	system("lsof -c cub3D");
+	static char	*paths[] = {"./bonus/textures/gun/1.xpm", \
+	"./bonus/textures/gun/2.xpm", \
+	"./bonus/textures/gun/3.xpm"};
+	int			i;
+
+	i = 0;
+	while (i < 3)
+	{
+		draw_gun(game, paths[i]);
+		i++;
+	}
 }
 
 int	main(int ac, char **av)
 {
 	t_game	maps;
 
-	atexit(f);
 	ft_check_args(ac, av);
 	ft_init_map(&maps);
 	ft_textures(&maps, av[1]);
@@ -67,6 +76,7 @@ int	main(int ac, char **av)
 	maps.mapx1 = maps.height;
 	maps.mapy1 = get_longest_line_length(maps.map);
 	init_param(&maps, &maps.cast);
+	check_gun_textures(&maps);
 	casting(&maps, &maps.cast);
 	mlx_put_image_to_window(maps.mlx_t.mlx_ptr, \
 	maps.mlx_t.mlx_window, maps.mlx_t.img.mlx_img, 0, 0);
