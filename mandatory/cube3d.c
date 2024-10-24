@@ -42,16 +42,10 @@ int	main_loop(t_game *game)
 	return (0);
 }
 
-void	f(void)
-{
-	system("lsof -c cub3D");
-}
-
 int	main(int ac, char **av)
 {
 	t_game	maps;
 
-	atexit(f);
 	ft_check_args(ac, av);
 	ft_init_map(&maps);
 	ft_textures(&maps, av[1]);
