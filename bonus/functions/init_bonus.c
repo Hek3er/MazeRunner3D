@@ -60,7 +60,7 @@ static void	init_mlx(t_game *game)
 	if (!game->mlx_t.mlx_ptr)
 		ft_exit("mlx failed to init\n", 1);
 	game->mlx_t.mlx_window = mlx_new_window(game->mlx_t.mlx_ptr, \
-	game->width, game->height, "Cube3d");
+	game->width, game->height, "Cub3d");
 	if (!game->mlx_t.mlx_window)
 		ft_exit("mlx failed to init window\n", 1);
 	game->mlx_t.img.mlx_img = mlx_new_image(game->mlx_t.mlx_ptr, \
