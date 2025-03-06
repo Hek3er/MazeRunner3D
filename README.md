@@ -18,21 +18,25 @@ ing 3D environments from 2D maps.
 
 !! The map is formed by 1 and 0, 1 means there is a wall, and 0 means it's empty. The map should always have walls and no empty spaces are allowed if they are not surrounded by walls
 
-Each map should be a file of .cub extention and in this form:
+F is the color of the floor
 
+C is the color of the ceiling
+
+Each map should be a file of .cub extention and in this form:
+```
 EA <path to the texture>
 NO <path to the texture>
 SO <path to the texture>
 WE <path to the texture>
-
-
-F r,g,b
+ 
+ 
+F r,g,b 
 C r,g,b
-
+ 
 111
 101
 111
-
+```
 
 ## How To Run
 
