@@ -1,6 +1,6 @@
 CC = cc
 CFLAGS =  -Wall -Werror -Wextra
-MLXFLAGS = -framework OpenGL -framework AppKit -lmlx
+MLXFLAGS = -framework OpenGL -framework AppKit
 NAME = cub3D
 NAMEB = cub3D_bonus
 SRC = mandatory/cube3d.c mandatory/functions/ft_exit.c mandatory/functions/ft_write.c mandatory/functions/draw_pixel.c mandatory/functions/ft_strchr.c mandatory/functions/set_wall_t.c \
@@ -26,21 +26,25 @@ OSRCB = $(SRCB:.c=.o)
 
 all : $(NAME)
 
-$(NAME) : $(OSRC)
+minilibx:
+	@echo "Compiling minilibx..."
+	@make -C ./minilibx
+
+$(NAME) : minilibx $(OSRC)
 	@echo "compiling.."
-	@$(CC) $(CFLAGS) $(MLXFLAGS) $(OSRC) -o $(NAME)
+	@$(CC) $(CFLAGS) $(MLXFLAGS) $(OSRC) ./minilibx/libmlx.a -o $(NAME)
 
 bonus: $(NAMEB)
 
-$(NAMEB) : $(OSRCB)
+$(NAMEB) : minilibx $(OSRCB)
 	@echo "compiling.."
-	@$(CC) $(CFLAGS) $(MLXFLAGS) $(OSRCB) -o $(NAMEB)
+	@$(CC) $(CFLAGS) $(MLXFLAGS) $(OSRCB) ./minilibx/libmlx.a -o $(NAMEB)
 
 mandatory/%.o: mandatory/%.c mandatory/includes/cube3d.h mandatory/includes/get_next_line.h
-	@$(CC) $(CFLAGS) -c $< -o $@
+	@$(CC) $(CFLAGS) -I ./minilibx/ -c $< -o $@
 
 bonus/%_bonus.o: bonus/%_bonus.c bonus/includes/cube3d_bonus.h bonus/includes/get_next_line_bonus.h
-	@$(CC) $(CFLAGS) -c $< -o $@
+	@$(CC) $(CFLAGS) -I ./minilibx/ -c $< -o $@
 
 clean:
 	@echo "Removing Object files.."
@@ -48,8 +52,9 @@ clean:
 
 fclean: clean
 	@echo "Removing Exec"
+	@make clean -C minilibx
 	@rm -rf $(NAME) $(NAMEB)
 
 re: fclean all
 
-.PHONY: clean
+.PHONY: clean minilibx

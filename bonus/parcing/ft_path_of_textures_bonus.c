@@ -83,11 +83,7 @@ char	*pt_txr(t_game *m, char *line)
 int	pt_ciel(char *line, char *texture_name)
 {
 	int	i;
-	int	save_first_index;
-	int	check;
 
-	check = 0;
-	save_first_index = 0;
 	i = 0;
 	while (line[i] && line[i] < 33)
 		i++;

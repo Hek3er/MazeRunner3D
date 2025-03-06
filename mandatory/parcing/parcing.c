@@ -43,12 +43,8 @@ void	ft_init_map(t_game *mp)
 int	path_of_txr_nm(char *line, char *texture_name)
 {
 	int	i;
-	int	check;
-	int	save_first_index;
 
-	check = 0;
 	i = 0;
-	save_first_index = 0;
 	while (line[i] && line[i] < 33)
 		i++;
 	if (line[i] && !ft_strncmp(texture_name, (const char *)(line + i), 2))
