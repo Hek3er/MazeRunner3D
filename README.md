@@ -1,7 +1,6 @@
 # MazeRunner3D
 
-Recreating the Iconic Wolfenstein 3D game by implementing the raycasting technology wish enables render-
-ing 3D environments from 2D maps.
+Recreating the Iconic Wolfenstein 3D game by implementing the raycasting technology wish enables rendering 3D environments from 2D maps.
 
 ![MazeRunner3D](https://fmi4cg1yoq.ufs.sh/f/cVtZuJ9vUYxc9SFNW4svORFVz5YWksKl8DIZ7rgL2duh3Ajw)
 
